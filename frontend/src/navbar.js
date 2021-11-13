@@ -1,5 +1,7 @@
 import React from "react";
-
+/*
+We need to modify this Navbar such that it contains the new logo.
+ */
 function Navbar() {
   return (
     <nav
