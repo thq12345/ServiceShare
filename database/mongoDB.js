@@ -104,30 +104,37 @@ function myDB() {
     };
     const execute = await collection_info.findOne(query);
     if (execute == null) {
+      //When no appropriate user account can be found
       res.json({ status: false });
     } else {
       if (password == execute.password) {
+        //When username and password are correct
         username_global = username;
-        let query2;
-        if (username === "admin@admin") {
-          query2 = {};
-        } else {
-          query2 = { user: username };
-        }
+        res.json({ status: true });
+        // let query2;
+        // if (username === "admin@admin") {
+        //   query2 = {};
+        // } else {
+        //   query2 = { user: username };
+        // }
 
-        const comment_db = project_database.collection("Feedback Box");
-        let comment_json = [];
-
-        await comment_db.find(query2).forEach(function (doc) {
-          comment_json.push(doc);
-        });
-
-        // res.redirect("/feedback");
-
-        return comment_json;
+        //   const post_db = project_database.collection("posts");
+        //   let post_json = [];
+        //
+        //   await post_db.find(query2).forEach(function (doc) {
+        //     post_json.push(doc);
+        //   });
+        //
+        //   // res.redirect("/feedback");
+        //
+        //   return post_json;
+        // } else {
+        //   // res.redirect("/login-error");
+        //   return;
+        // }
       } else {
-        // res.redirect("/login-error");
-        return;
+        //When username is right but password is incorrect
+        res.json({ status: false });
       }
     }
   };

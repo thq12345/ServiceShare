@@ -37,7 +37,7 @@ function LoginForm() {
       >
         <img
           className="mt-4 mb-4"
-          src="../images/logo.png"
+          src="../../images/logo.png"
           alt="Service Share Logo"
         />
         <h1 className="h2 mb-3 font-weight normal">Please sign in</h1>

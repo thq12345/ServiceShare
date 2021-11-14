@@ -1,8 +1,8 @@
 import "./App.css";
-import Login from "./login_page.js";
+import Login from "./Account_Verification/login_page.js";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Form from "./post_form.js";
+import Form from "./Posts/post_form.js";
 
 //Router, basically you add components here.
 function App() {
