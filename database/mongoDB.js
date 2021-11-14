@@ -98,7 +98,7 @@ function myDB() {
   };
 
   myDB.process_username_password_input = async (username, password, res) => {
-    const collection_info = project_database.collection("Username_Password");
+    const collection_info = project_database.collection("username_password");
     const query = {
       username: username,
     };

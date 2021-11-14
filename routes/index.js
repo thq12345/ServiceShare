@@ -11,9 +11,9 @@ router.get("/", function (req, res, next) {
 });
 
 //Working example.
-router.post("/login-auth", async (req, res) => {
+router.post("/register", async (req, res) => {
   console.log("Received user-input account information...");
-  // Insert Login Code Here
+  // Insert account Code Here
   const username = req.body.username;
   const password = req.body.password;
   console.log("Username: " + username);
@@ -25,6 +25,18 @@ router.post("/login-auth", async (req, res) => {
   // } else {
   //   res.json({ status: false });
   // }
+});
+
+router.post("/login-auth", async (req, res) => {
+  console.log("Received user-input account information...");
+  // Insert Login Code Here
+  const username = req.body.username;
+  const password = req.body.password;
+  console.log("Username: " + username);
+  console.log("Password: " + password);
+  await myDB
+    .process_username_password_input(username, password, res)
+    .catch(console.dir);
 });
 
 module.exports = router;

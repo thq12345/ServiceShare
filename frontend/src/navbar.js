@@ -20,13 +20,13 @@ function Navbar() {
                 id="head_logo"
                 className="py-1"
                 alt="logo"
-                src="images/IDEA_logo_text.png"
+                src="images/logo.png"
               />
             </a>
           </li>
           <li className="nav-item dir">
             <a className="h4 nav-link text-light mt-2" href="index.html">
-              Report
+              Home
             </a>
           </li>
         </ul>

@@ -24,7 +24,7 @@ function LoginForm() {
       }),
     });
     result = await res.json();
-    set_status("Account Creation Status: " + result.status);
+    set_status(result.status);
     console.log("Status is: " + result.status);
   };
 
