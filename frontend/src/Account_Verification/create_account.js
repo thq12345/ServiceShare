@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
 
-function LoginForm() {
+function CreateAccount() {
   const [user, setUser] = useState({ username: "", password: "" });
   let result;
-  let [current_status, set_status] = useState("");
-  // const change_status = useRef("");
+  let [current_status, set_status] = useState(false);
 
   let usernameChange = (event) => {
     setUser({ username: event.target.value, password: user.password });
@@ -16,7 +14,7 @@ function LoginForm() {
 
   const handleAuth = async (event) => {
     event.preventDefault();
-    const res = await fetch("/login-auth", {
+    const res = await fetch("/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -25,14 +23,8 @@ function LoginForm() {
       }),
     });
     result = await res.json();
-    set_status("Current Login Status is: " + result.status);
-    console.log("Login Status is: " + result.status);
-    if (result.status) {
-      //Redirect to Post page
-      return <Navigate to="/login" />;
-    } else {
-      //Show error
-    }
+    set_status(result.status);
+    console.log("Registration Status is: " + current_status);
   };
 
   return (
@@ -47,7 +39,7 @@ function LoginForm() {
           src="../../images/logo.png"
           alt="Service Share Logo"
         />
-        <h1 className="h2 mb-3 font-weight normal">Please sign in</h1>
+        <h1 className="h2 mb-3 font-weight normal">Create an account</h1>
         <p>{current_status}</p>
         <label className="sr-only"> Email Address </label>
         <input
@@ -80,12 +72,13 @@ function LoginForm() {
             type="Submit"
             value="Submit"
           >
-            Sign in
+            Create Account
           </button>
         </div>
       </form>
+      <p>Already have an account? Please sign in</p>
     </div>
   );
 }
 
-export default LoginForm;
+export default CreateAccount;

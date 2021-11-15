@@ -54,7 +54,7 @@ function myDB() {
         .catch(console.dir);
       username_global = username;
       res.json({ status: "success" });
-      // res.redirect("/login");
+      res.redirect("/login");
     }
   };
 
@@ -111,6 +111,7 @@ function myDB() {
         //When username and password are correct
         username_global = username;
         res.json({ status: true });
+
         // let query2;
         // if (username === "admin@admin") {
         //   query2 = {};

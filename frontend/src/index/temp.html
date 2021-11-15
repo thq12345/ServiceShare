@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <!--    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />-->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+            name="description"
+            content="Web site created using create-react-app"
+    />
+    <title>Service Share</title>
+    <link rel="icon" type="images/x-ico" href="../images/favicon.ico"/>
+
+    <link href="styles/style.css" rel="stylesheet" />
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+            integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+            crossorigin="anonymous"
+    ></script>
+
+    <!-- Bootstrap -->
+    <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery-ui.js"></script>
+    <script type="text/javascript">$(function() {
+        $( "#slider-range" ).slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [ 100, 300 ],
+            slide: function( event, ui ) {
+                $( "#amount" ).html( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                $( "#amount1" ).val(ui.values[ 0 ]);
+                $( "#amount2" ).val(ui.values[ 1 ]);
+            }
+        });
+        $( "#amount" ).html( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+            " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+    });</script>
+
+</head>
+<body>
+<div id="root">
+
+    <main class="container-fluid">
+
+        <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+            <div class="container-fluid">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./index.html"
+                        >Home</a
+                        >
+                    </li>
+                </ul>
+                <button class="d-flex btn me-auto">
+                    <a class="text-dark" href="login.html" target="_blank"
+                    ><h3>Personal Profile</h3></a
+                    >
+                </button>
+
+            </div>
+        </nav>
+
+        <div id="outer-header">
+            <img class = "d-flex justify-content-center pb-0 mb-0" id="head_logo" class ="d-inline pr-2" src="../images/logo_text.png">
+            <div class = "tag">
+        <span>
+        <h2 class="d-inline"> I am a:</h2>
+          <button type="button" class="btn btn-lg d-inline">Helper</button>
+          <button type="button" class="btn btn-lg d-inline">Helper Seeker</button>
+          </span>
+                <Label>Enter your 5 digits ZIP Code</Label>
+                <div class="d-flex">
+                    <input class="d-inline-block" type="text" pattern="[0-9]{5}" title="Five digit zip code" />
+                    <button class="btn btn-secondary d-inline-block" type="submit" value="Submit">Go</button>
+                </div>
+            </div>
+            <img class = "mx-auto" id = "header-image" src="../images/bottom_header_image.png">
+        </div>
+
+        <div class = "pt-5 container-fluid" id="table">
+            <div class = "row">
+                <div class = "filter-section col-sm-2">
+
+                    <h2>Filter on the Criteria</h2>
+
+
+                    <div class="dropdown pt-3 pl-4">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Task Category
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">House Cleaning</a>
+                            <a class="dropdown-item" href="#">Pet Care</a>
+                            <a class="dropdown-item" href="#">Furniture Move</a>
+                        </div>
+                    </div>
+                    <div class="pt-3">
+                        <p>Minimum Ideal Price($):</p>
+                        <input type="number">
+                    </div>
+                    <div class="pt-3">
+                        <p>Maximum Ideal Price($):</p>
+                        <input type="number">
+                    </div>
+
+                    <div class="pt-3">
+                        <p>Date Range Available to work:</p>
+                        <div class="input-group input-daterange">
+                            <input type="text" class="form-control" value="2012-04-05">
+                            <div class="input-group-addon">to</div>
+                            <input type="text" class="form-control" value="2012-04-19">
+                        </div>
+                    </div>
+
+                </div>
+                <div class = "col-sm-9">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>Task Short Description</th>
+                            <th>Zip code</th>
+                            <th>Category</th>
+                            <th>Ideal Price/hr</th>
+                            <th>Date for task</th>
+                        </tr>
+                        <tr>
+                            <th>Looking for something to move my TV</th>
+                            <th>02118</th>
+                            <th>Furniture Moving</th>
+                            <th>25</th>
+                            <th>December 24th, 2021</th>
+                        </tr>
+                        <th>Cleaning my living room</th>
+                        <th>02138</th>
+                        <th>House Cleaning</th>
+                        <th>30</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <th>Dog Walking</th>
+                        <th>02138</th>
+                        <th>Pet Care</th>
+                        <th>20</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <tr>
+                            <th>Looking for something to move my TV</th>
+                            <th>02118</th>
+                            <th>Furniture Moving</th>
+                            <th>25</th>
+                            <th>December 24th, 2021</th>
+                        </tr>
+                        <th>Cleaning my living room</th>
+                        <th>02138</th>
+                        <th>House Cleaning</th>
+                        <th>30</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <th>Dog Walking</th>
+                        <th>02138</th>
+                        <th>Pet Care</th>
+                        <th>20</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <tr>
+                            <th>Looking for something to move my TV</th>
+                            <th>02118</th>
+                            <th>Furniture Moving</th>
+                            <th>25</th>
+                            <th>December 24th, 2021</th>
+                        </tr>
+                        <th>Cleaning my living room</th>
+                        <th>02138</th>
+                        <th>House Cleaning</th>
+                        <th>30</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <th>Dog Walking</th>
+                        <th>02138</th>
+                        <th>Pet Care</th>
+                        <th>20</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <tr>
+                            <th>Looking for something to move my TV</th>
+                            <th>02118</th>
+                            <th>Furniture Moving</th>
+                            <th>25</th>
+                            <th>December 24th, 2021</th>
+                        </tr>
+                        <th>Cleaning my living room</th>
+                        <th>02138</th>
+                        <th>House Cleaning</th>
+                        <th>30</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <th>Dog Walking</th>
+                        <th>02138</th>
+                        <th>Pet Care</th>
+                        <th>20</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <tr>
+                            <th>Looking for something to move my TV</th>
+                            <th>02118</th>
+                            <th>Furniture Moving</th>
+                            <th>25</th>
+                            <th>December 24th, 2021</th>
+                        </tr>
+                        <th>Cleaning my living room</th>
+                        <th>02138</th>
+                        <th>House Cleaning</th>
+                        <th>30</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <th>Dog Walking</th>
+                        <th>02138</th>
+                        <th>Pet Care</th>
+                        <th>20</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <tr>
+                            <th>Looking for something to move my TV</th>
+                            <th>02118</th>
+                            <th>Furniture Moving</th>
+                            <th>25</th>
+                            <th>December 24th, 2021</th>
+                        </tr>
+                        <th>Cleaning my living room</th>
+                        <th>02138</th>
+                        <th>House Cleaning</th>
+                        <th>30</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <th>Dog Walking</th>
+                        <th>02138</th>
+                        <th>Pet Care</th>
+                        <th>20</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <tr>
+                            <th>Looking for something to move my TV</th>
+                            <th>02118</th>
+                            <th>Furniture Moving</th>
+                            <th>25</th>
+                            <th>December 24th, 2021</th>
+                        </tr>
+                        <th>Cleaning my living room</th>
+                        <th>02138</th>
+                        <th>House Cleaning</th>
+                        <th>30</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <th>Dog Walking</th>
+                        <th>02138</th>
+                        <th>Pet Care</th>
+                        <th>20</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <tr>
+                            <th>Looking for something to move my TV</th>
+                            <th>02118</th>
+                            <th>Furniture Moving</th>
+                            <th>25</th>
+                            <th>December 24th, 2021</th>
+                        </tr>
+                        <th>Cleaning my living room</th>
+                        <th>02138</th>
+                        <th>House Cleaning</th>
+                        <th>30</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <th>Dog Walking</th>
+                        <th>02138</th>
+                        <th>Pet Care</th>
+                        <th>20</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <tr>
+                            <th>Looking for something to move my TV</th>
+                            <th>02118</th>
+                            <th>Furniture Moving</th>
+                            <th>25</th>
+                            <th>December 24th, 2021</th>
+                        </tr>
+                        <th>Cleaning my living room</th>
+                        <th>02138</th>
+                        <th>House Cleaning</th>
+                        <th>30</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <th>Dog Walking</th>
+                        <th>02138</th>
+                        <th>Pet Care</th>
+                        <th>20</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <tr>
+                            <th>Looking for something to move my TV</th>
+                            <th>02118</th>
+                            <th>Furniture Moving</th>
+                            <th>25</th>
+                            <th>December 24th, 2021</th>
+                        </tr>
+                        <th>Cleaning my living room</th>
+                        <th>02138</th>
+                        <th>House Cleaning</th>
+                        <th>30</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <th>Dog Walking</th>
+                        <th>02138</th>
+                        <th>Pet Care</th>
+                        <th>20</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <tr>
+                            <th>Looking for something to move my TV</th>
+                            <th>02118</th>
+                            <th>Furniture Moving</th>
+                            <th>25</th>
+                            <th>December 24th, 2021</th>
+                        </tr>
+                        <th>Cleaning my living room</th>
+                        <th>02138</th>
+                        <th>House Cleaning</th>
+                        <th>30</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        <th>Dog Walking</th>
+                        <th>02138</th>
+                        <th>Pet Care</th>
+                        <th>20</th>
+                        <th>November 30th, 2021</th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="./price_range_script.js"></script>
+</div>
+</body>
+</html>

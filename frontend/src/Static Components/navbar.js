@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 /*
 We need to modify this Navbar such that it contains the new logo.
  */
@@ -12,17 +13,14 @@ function Navbar() {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item active">
-            <a
-              className="navbar-brand order-1"
-              href="https://www.northeastern.edu/idea/"
-            >
+            <Link className="Logo" to="/">
               <img
                 id="head_logo"
                 className="py-1"
                 alt="logo"
                 src="images/logo.png"
               />
-            </a>
+            </Link>
           </li>
           <li className="nav-item dir">
             <a className="h4 nav-link text-light mt-2" href="index.html">
