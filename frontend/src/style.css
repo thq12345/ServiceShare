@@ -1,0 +1,71 @@
+html {
+    font-family: Helvetica, Sans-Serif;
+    background-color: #F5EFE8;
+    font-size:15px;
+}
+
+.navbar .dropdown-menu .form-control {
+    /*background-color: #3C7191;*/
+    height:100px;
+    /*color: white;*/
+    font-size:40px;
+}
+
+nav{
+    height:70px;
+    font-size:30px;
+}
+
+#outer-header {
+    background-image: url("images/header.png");
+    background-repeat: no-repeat;
+    height: 70vh;
+    width: 100%;
+    background-color: #f4eee9;
+    background-position: center;
+
+}
+
+#head_logo {
+    width:80%;
+    height:auto;
+    position: relative;
+    margin:auto;
+}
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    display: inline-block;
+}
+
+.tag {
+    padding-top: 450px;
+    padding-left: 100px;
+    margin: auto;
+    float: none;
+    width: 35vw;
+    position: relative;
+    color: black;
+    font-weight: bold;
+    font-size:30px;
+}
+
+.filter-section {
+    font-size:20px;
+    position: absolute;
+    float:left;
+}
+
+#header-image{
+    display: flex;
+    justify-content: center;
+    height: 30vh;
+}
+
+#table{
+    font-size:20px;
+    color: #282c34;
+}
