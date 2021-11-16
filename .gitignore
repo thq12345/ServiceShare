@@ -1,0 +1,5 @@
+**/node_modules
+
+touch .gitignore && echo "node_modules/" >> .gitignore && git rm -r --cached node_modules ; git status
+
+package-lock.json
