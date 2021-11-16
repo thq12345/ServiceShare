@@ -54,7 +54,7 @@ function myDB() {
         .catch(console.dir);
       username_global = username;
       res.json({ status: "success" });
-      res.redirect("/login");
+      // res.redirect("/login");
     }
   };
 

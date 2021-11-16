@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 function CreateAccount() {
   const [user, setUser] = useState({ username: "", password: "" });
+  //result means the value returned from back-end.
   let result;
-  let [current_status, set_status] = useState(false);
-
+  let [current_status, set_status] = useState("");
+  const navigate = useNavigate();
   let usernameChange = (event) => {
     setUser({ username: event.target.value, password: user.password });
   };
@@ -23,8 +24,12 @@ function CreateAccount() {
       }),
     });
     result = await res.json();
-    set_status(result.status);
-    console.log("Registration Status is: " + current_status);
+    await set_status("Account creation status is: " + result.status);
+    console.log("Registration Status is: " + result.status);
+    if (result.status === "success") {
+      //react-router-dom v6 way of redirecting pages
+      navigate("/login");
+    }
   };
 
   return (
