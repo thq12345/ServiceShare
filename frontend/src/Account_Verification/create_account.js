@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-
-function LoginForm() {
+import { useNavigate } from "react-router-dom";
+function CreateAccount() {
   const [user, setUser] = useState({ username: "", password: "" });
+  //result means the value returned from back-end.
   let result;
   let [current_status, set_status] = useState("");
-  // const change_status = useRef("");
-
+  const navigate = useNavigate();
   let usernameChange = (event) => {
     setUser({ username: event.target.value, password: user.password });
   };
@@ -15,7 +15,7 @@ function LoginForm() {
 
   const handleAuth = async (event) => {
     event.preventDefault();
-    const res = await fetch("/login-auth", {
+    const res = await fetch("/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -24,8 +24,12 @@ function LoginForm() {
       }),
     });
     result = await res.json();
-    set_status("Account Creation Status: " + result.status);
-    console.log("Status is: " + result.status);
+    await set_status("Account creation status is: " + result.status);
+    console.log("Registration Status is: " + result.status);
+    if (result.status === "success") {
+      //react-router-dom v6 way of redirecting pages
+      navigate("/login");
+    }
   };
 
   return (
@@ -37,10 +41,10 @@ function LoginForm() {
       >
         <img
           className="mt-4 mb-4"
-          src="../images/logo.png"
+          src="../../images/logo.png"
           alt="Service Share Logo"
         />
-        <h1 className="h2 mb-3 font-weight normal">Please sign in</h1>
+        <h1 className="h2 mb-3 font-weight normal">Create an account</h1>
         <p>{current_status}</p>
         <label className="sr-only"> Email Address </label>
         <input
@@ -73,12 +77,13 @@ function LoginForm() {
             type="Submit"
             value="Submit"
           >
-            Sign in
+            Create Account
           </button>
         </div>
       </form>
+      <p>Already have an account? Please sign in</p>
     </div>
   );
 }
 
-export default LoginForm;
+export default CreateAccount;
