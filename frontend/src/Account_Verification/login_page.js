@@ -16,7 +16,7 @@ function LoginForm() {
 
   const handleAuth = async (event) => {
     event.preventDefault();
-    const res = await fetch("/login-auth", {
+    const res = await fetch("/api/login-auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -25,8 +25,10 @@ function LoginForm() {
       }),
     });
     result = await res.json();
-    set_status("Account Creation Status: " + result.status);
-    console.log("Status is: " + result.status);
+    set_status("Log in Status: " + result.status);
+    if (result.status == true) {
+      navigate("/form2");
+    }
   };
 
   return (

@@ -26,15 +26,10 @@ function myDB() {
     }
   };
 
-  myDB.insert_post = async (subject, message, location) => {
-    const feedback_database = project_database.collection("Feedback Box");
-    const doc = {
-      user: username_global,
-      subject: subject,
-      comment: message,
-      address: location,
-    };
-    await feedback_database.insertOne(doc);
+  myDB.insert_post = async (req_json, res) => {
+    const feedback_database = project_database.collection("posts");
+    req_json["username"] = username_global;
+    await feedback_database.insertOne(req_json);
     console.log("Post Successfully Submitted!");
   };
 
@@ -98,7 +93,7 @@ function myDB() {
   };
 
   myDB.process_username_password_input = async (username, password, res) => {
-    const collection_info = project_database.collection("Username_Password");
+    const collection_info = project_database.collection("username_password");
     const query = {
       username: username,
     };
@@ -108,37 +103,27 @@ function myDB() {
     } else {
       if (password == execute.password) {
         username_global = username;
-        let query2;
-        if (username === "admin@admin") {
-          query2 = {};
-        } else {
-          query2 = { user: username };
-        }
-
-        const comment_db = project_database.collection("Feedback Box");
-        let comment_json = [];
-
-        await comment_db.find(query2).forEach(function (doc) {
-          comment_json.push(doc);
-        });
-
-        return comment_json;
+        res.json({ status: true });
       } else {
-        return;
+        res.json({ status: false });
       }
     }
   };
 
-  myDB.getComments = async () => {
+  myDB.getComments = async (res) => {
     console.log("Reload comment has been executed.");
     let query2;
+    console.log("Global username:", username_global);
     if (username_global === "admin@admin") {
       query2 = {};
     } else {
-      query2 = { user: username_global };
+      query2 = { username: username_global };
     }
-    const comment_db = project_database.collection("Feedback Box");
-    return comment_db.find(query2).toArray();
+    const comment_db = project_database.collection("posts");
+    const result = await comment_db.find(query2).toArray();
+    console.log(result);
+    res.send(result);
+    return result;
   };
 
   //get all the posts in the database.
@@ -147,7 +132,6 @@ function myDB() {
     const post_db = project_database.collection("posts");
     let find_all = {};
     let result = await post_db.find(find_all).toArray();
-    console.log(result);
     res.json(result);
     return result;
   };
