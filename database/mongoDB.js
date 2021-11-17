@@ -122,11 +122,8 @@ function myDB() {
           comment_json.push(doc);
         });
 
-        // res.redirect("/feedback");
-
         return comment_json;
       } else {
-        // res.redirect("/login-error");
         return;
       }
     }
@@ -140,9 +137,19 @@ function myDB() {
     } else {
       query2 = { user: username_global };
     }
-    // const query2 = { user: username_global };
     const comment_db = project_database.collection("Feedback Box");
     return comment_db.find(query2).toArray();
+  };
+
+  //get all the posts in the database.
+  myDB.getAllPosts = async (res) => {
+    console.log("Loading all posts from database.");
+    const post_db = project_database.collection("posts");
+    let find_all = {};
+    let result = await post_db.find(find_all).toArray();
+    console.log(result);
+    res.json(result);
+    return result;
   };
 
   //get counts from certain collections
