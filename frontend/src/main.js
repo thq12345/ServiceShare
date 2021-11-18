@@ -6,11 +6,10 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 function Main() {
   const [Posts, setPosts] = useState([]);
-  let Allposts = [];
   let [Category, setCategory] = useState([]);
-
-  let category_dropdown = useRef();
   let [Category_Select, SetCategory_Select] = useState("Select Category");
+  let [MinValue, setMinValue] = useState(0);
+  let [MaxValue, setMaxValue] = useState(10000);
   const navigate = useNavigate();
 
   function onSelectCategory(evt) {
@@ -18,13 +17,30 @@ function Main() {
     SetCategory_Select(evt.target.value);
   }
 
+  function onSelectedValueMin(evt) {
+    setMinValue(evt.target.value);
+  }
+
+  function onSelectedValueMax(evt) {
+    setMaxValue(evt.target.value);
+  }
+
   //For all filter standard, leave them here.
   function postFilterHelper(post) {
+    let filtered_post;
+    //Category Filter
     if (Category_Select === "Select Category") {
-      return post;
+      filtered_post = post;
     } else {
-      return post.filter((item) => item.Category === Category_Select);
+      filtered_post = post.filter((item) => item.Category === Category_Select);
     }
+
+    //Price Range Filter
+    filtered_post = filtered_post.filter(
+      (item) =>
+        item["Ideal Price"] <= MaxValue && item["Ideal Price"] >= MinValue
+    );
+    return filtered_post;
   }
 
   useEffect(async () => {
@@ -36,7 +52,6 @@ function Main() {
       categoryTemp.push(element.Category);
       postTemp.push(element);
     }
-    Allposts = postTemp;
 
     //remove duplicate category options.
     categoryTemp = categoryTemp.filter(function (item, pos) {
@@ -166,12 +181,19 @@ function Main() {
             </select>
             <div className="pt-3">
               <p>Minimum Ideal Price($):</p>
-              <input type="number"></input>
-            </div>
-            <div className="pt-3">
+              <input
+                type="number"
+                value={MinValue}
+                onChange={onSelectedValueMin}
+              ></input>
               <p>Maximum Ideal Price($):</p>
-              <input type="number"></input>
+              <input
+                type="number"
+                value={MaxValue}
+                onChange={onSelectedValueMax}
+              ></input>
             </div>
+
             <div className="pt-3">
               <p>Date Range Available to work:</p>
               <div className="input-group input-daterange">
