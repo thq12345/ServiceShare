@@ -18,6 +18,15 @@ function Main() {
     SetCategory_Select(evt.target.value);
   }
 
+  //For all filter standard, leave them here.
+  function postFilterHelper(post) {
+    if (Category_Select === "Select Category") {
+      return post;
+    } else {
+      return post.filter((item) => item.Category === Category_Select);
+    }
+  }
+
   useEffect(async () => {
     let raw = await fetch(`api/load-all-post?category=${Category_Select}`);
     let res = await raw.json();
@@ -35,21 +44,22 @@ function Main() {
     });
     //load all distinct category into the dropdown bar
     setCategory(categoryTemp);
-    console.log("Current Selection:", Category_Select);
-
-    //Filtering posts so that it only has the selected category.
-    if (Category_Select === "Select Category") {
-      //return everything when default choice
-      setPosts(postTemp);
-    } else {
-      let filtered_array = [];
-      for (const element of postTemp) {
-        if (element.Category === Category_Select) {
-          filtered_array.push(element);
-        }
-      }
-      setPosts(filtered_array);
-    }
+    setPosts(postTemp);
+    // console.log("Current Selection:", Category_Select);
+    //
+    // //Filtering posts so that it only has the selected category.
+    // if (Category_Select === "Select Category") {
+    //   //return everything when default choice
+    //   setPosts(postTemp);
+    // } else {
+    //   let filtered_array = [];
+    //   for (const element of postTemp) {
+    //     if (element.Category === Category_Select) {
+    //       filtered_array.push(element);
+    //     }
+    //   }
+    //   setPosts(filtered_array);
+    // }
 
     // fetch(`api/load-all-post?category=${Category}`)
     //   .then((res) => res.json())
@@ -73,7 +83,7 @@ function Main() {
     //     console.log("filtered post", filteredPosts);
     //     setPosts(filteredPosts);
     //   });
-  }, [Category_Select]);
+  }, []);
 
   console.log("Render ", Category);
   return (
@@ -182,7 +192,7 @@ function Main() {
                   <th>Date for task</th>
                   <th>Address</th>
                 </tr>
-                {Posts.map((p, i) => (
+                {postFilterHelper(Posts).map((p, i) => (
                   <tr key={i}>
                     <th>{p.Description}</th>
                     <th>{p["Zip Code"]}</th>
