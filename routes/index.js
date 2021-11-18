@@ -32,6 +32,7 @@ router.post("/login-auth", async (req, res) => {
 //Load all posts for index page regardless of username. (Useful for index page)
 router.get("/load-all-post", async (req, res) => {
   console.log("Retrieving all posts from back end databases... (Backend)");
+  console.log("query", req.query);
   await myDB.getAllPosts(res).catch(console.dir);
 });
 

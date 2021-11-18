@@ -6,50 +6,76 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 function Main() {
   const [Posts, setPosts] = useState([]);
-  let Categorytemp = [];
   let Allposts = [];
   let [Category, setCategory] = useState([]);
+
   let category_dropdown = useRef();
+  let [Category_Select, SetCategory_Select] = useState("Select Category");
   const navigate = useNavigate();
 
-  function onSelectCategory(full_list) {
-    let selection = category_dropdown.current.value;
-    if (selection === "Select Category") {
-      //return everything
-      return full_list;
+  function onSelectCategory(evt) {
+    console.log("onchange", evt.target.value);
+    SetCategory_Select(evt.target.value);
+  }
+
+  useEffect(async () => {
+    let raw = await fetch(`api/load-all-post?category=${Category_Select}`);
+    let res = await raw.json();
+    let categoryTemp = [];
+    let postTemp = [];
+    for (const element of res) {
+      categoryTemp.push(element.Category);
+      postTemp.push(element);
+    }
+    Allposts = postTemp;
+
+    //remove duplicate category options.
+    categoryTemp = categoryTemp.filter(function (item, pos) {
+      return categoryTemp.indexOf(item) === pos;
+    });
+    //load all distinct category into the dropdown bar
+    setCategory(categoryTemp);
+    console.log("Current Selection:", Category_Select);
+
+    //Filtering posts so that it only has the selected category.
+    if (Category_Select === "Select Category") {
+      //return everything when default choice
+      setPosts(postTemp);
     } else {
       let filtered_array = [];
-      for (const element of full_list) {
-        if (element.Category === selection) {
+      for (const element of postTemp) {
+        if (element.Category === Category_Select) {
           filtered_array.push(element);
         }
       }
-      return filtered_array;
+      setPosts(filtered_array);
     }
-  }
 
-  useEffect(() => {
-    fetch("api/load-all-post")
-      .then((res) => res.json())
-      .then((_post) => {
-        // console.log("Got post", _post);
-        setPosts(_post);
-        Allposts = _post;
-        for (const element of _post) {
-          Categorytemp.push(element.Category);
-        }
-        Categorytemp = Categorytemp.filter(function (item, pos) {
-          return Categorytemp.indexOf(item) === pos;
-        });
-        setCategory(Categorytemp);
-        // return Categorytemp;
-      });
-    // setPosts(onSelectCategory(Allposts));
-    // .then((allposts) => {
-    //   setPosts(onSelectCategory(allposts));
-    // });
-  }, []);
+    // fetch(`api/load-all-post?category=${Category}`)
+    //   .then((res) => res.json())
+    //   .then((post) => {
+    //     let categoryTemp = [];
+    //     // console.log("Got post", _post);
+    //     // setPosts(post);
+    //     Allposts = post;
+    //     for (const element of post) {
+    //       categoryTemp.push(element.Category);
+    //     }
+    //     categoryTemp = categoryTemp.filter(function (item, pos) {
+    //       return categoryTemp.indexOf(item) === pos;
+    //     });
+    //     setCategory(categoryTemp);
+    //     return Allposts;
+    //   })
+    //   .then((ap) => {
+    //     console.log("all posts", ap);
+    //     const filteredPosts = onSelectCategory(ap);
+    //     console.log("filtered post", filteredPosts);
+    //     setPosts(filteredPosts);
+    //   });
+  }, [Category_Select]);
 
+  console.log("Render ", Category);
   return (
     <main className="container-fluid">
       <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -116,10 +142,10 @@ function Main() {
           <Col sm={3}>
             <select
               id="category"
-              ref={category_dropdown}
+              value={Category_Select}
               onChange={onSelectCategory}
             >
-              <option key="all" value="all">
+              <option key="all" value="Select Category">
                 Select Category
               </option>
               {Category.map((p, i) => (
