@@ -36,6 +36,11 @@ router.get("/load-all-post", async (req, res) => {
   await myDB.getAllPosts(res).catch(console.dir);
 });
 
+router.get("/load-helpers", async (req, res) => {
+  console.log("Loading logged in helpers...");
+  await myDB.getAllHelpers(res).catch(console.dir);
+});
+
 router.post("/submit-form", async (req, res) => {
   console.log("Received user-submitted form!");
   await myDB.insert_post(req.body, res).catch(console.dir);
@@ -45,5 +50,7 @@ router.get("/load-user-posts", async (req, res) => {
   console.log("Loading logged in user's posts...");
   await myDB.getComments(res).catch(console.dir);
 });
+
+
 
 module.exports = router;

@@ -136,6 +136,17 @@ function myDB() {
     return result;
   };
 
+  //get all the helper in the database.
+  myDB.getAllHelpers = async (res) => {
+    console.log("Loading all posts from database.");
+    const post_db = project_database.collection("helper");
+    let find_all = {};
+    let result = await post_db.find(find_all).toArray();
+    res.json(result);
+    return result;
+  };
+
+
   //get counts from certain collections
   myDB.getCounts = async (col_name) => {
     const performance_db = project_database.collection(col_name);

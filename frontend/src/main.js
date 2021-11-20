@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col } from "react-bootstrap";
+import {Container, Row, Col, Tab} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 function Main() {
   const [Posts, setPosts] = useState([]);
+  const [Helpers, setHelpers] = useState([]);
   let [Category, setCategory] = useState([]);
   let [Category_Select, SetCategory_Select] = useState("Select Category");
   let [MinValue, setMinValue] = useState(0);
   let [MaxValue, setMaxValue] = useState(10000);
+  let[ShowHelper, setHelperPage] = useState(false);
+
   const navigate = useNavigate();
 
   function onSelectCategory(evt) {
@@ -37,11 +40,23 @@ function Main() {
 
     //Price Range Filter
     filtered_post = filtered_post.filter(
-      (item) =>
-        item["Ideal Price"] <= MaxValue && item["Ideal Price"] >= MinValue
+        (item) =>
+            item["Ideal Price"] <= MaxValue && item["Ideal Price"] >= MinValue
     );
     return filtered_post;
   }
+
+  useEffect(async () => {
+    let raw = await fetch(`api/load-helpers`);
+    let res = await raw.json();
+    // let categoryTemp = [];
+    let helper = [];
+    for (const element of res) {
+      // categoryTemp.push(element.Category);
+      helper.push(element);
+    }
+    setHelpers(helper);
+  }, []);
 
   useEffect(async () => {
     let raw = await fetch(`api/load-all-post?category=${Category_Select}`);
@@ -60,47 +75,102 @@ function Main() {
     //load all distinct category into the dropdown bar
     setCategory(categoryTemp);
     setPosts(postTemp);
-    // console.log("Current Selection:", Category_Select);
-    //
-    // //Filtering posts so that it only has the selected category.
-    // if (Category_Select === "Select Category") {
-    //   //return everything when default choice
-    //   setPosts(postTemp);
-    // } else {
-    //   let filtered_array = [];
-    //   for (const element of postTemp) {
-    //     if (element.Category === Category_Select) {
-    //       filtered_array.push(element);
-    //     }
-    //   }
-    //   setPosts(filtered_array);
-    // }
 
-    // fetch(`api/load-all-post?category=${Category}`)
-    //   .then((res) => res.json())
-    //   .then((post) => {
-    //     let categoryTemp = [];
-    //     // console.log("Got post", _post);
-    //     // setPosts(post);
-    //     Allposts = post;
-    //     for (const element of post) {
-    //       categoryTemp.push(element.Category);
-    //     }
-    //     categoryTemp = categoryTemp.filter(function (item, pos) {
-    //       return categoryTemp.indexOf(item) === pos;
-    //     });
-    //     setCategory(categoryTemp);
-    //     return Allposts;
-    //   })
-    //   .then((ap) => {
-    //     console.log("all posts", ap);
-    //     const filteredPosts = onSelectCategory(ap);
-    //     console.log("filtered post", filteredPosts);
-    //     setPosts(filteredPosts);
-    //   });
   }, []);
 
   console.log("Render ", Category);
+
+  function Helper_table() {
+    const rows = [...Array( Math.ceil(Helpers.length / 4) )];
+    const productRows = rows.map( (row, idx) => Helpers.slice(idx * 4, idx * 4 + 4) );
+    console.log(productRows[0]);
+    const content = productRows.map((row, idx) => (
+        <div className="row m-3" key={idx}>
+          { row.map((h, i) =>             <Col className="card">
+            <div className="card-body">
+              <h5 className="card-title">{h.Name}</h5>
+              <p className="card-text">{h.Description}</p>
+              <img src={h['Image']} className="card-img-top" alt="Image not showing"></img>
+              <a href="#" className="btn btn-primary">Go somewhere</a>
+            </div>
+          </Col> )}
+        </div> )
+    );
+    return (
+        <Container>
+          {content}
+        </Container>
+    );
+  }
+
+  let PostTable = () => <Container fluid className="pt-5 container-fluid mt-4" id="table">
+    <Row>
+      <Col sm={3}>
+        <select
+            id="category"
+            value={Category_Select}
+            onChange={onSelectCategory}
+        >
+          <option key="all" value="Select Category">
+            Select Category
+          </option>
+          {Category.map((p, i) => (
+              <option key={i} value={p}>
+                {p}
+              </option>
+          ))}
+        </select>
+        <div className="pt-3">
+          <p>Minimum Ideal Price($):</p>
+          <input
+              type="number"
+              value={MinValue}
+              onChange={onSelectedValueMin}
+          ></input>
+          <p>Maximum Ideal Price($):</p>
+          <input
+              type="number"
+              value={MaxValue}
+              onChange={onSelectedValueMax}
+          ></input>
+        </div>
+
+        <div className="pt-3">
+          <p>Date Range Available to work:</p>
+          <div className="input-group input-daterange">
+            <input type="text" className="form-control" />
+            <div className="input-group-addon">to</div>
+            <input type="text" className="form-control" />
+          </div>
+        </div>
+      </Col>
+      <Col sm={9}>
+        <table className="table">
+          <tbody>
+          <tr className={'thead-light'}>
+            <th>Task Short Description</th>
+            <th>Zip code</th>
+            <th>Category</th>
+            <th>Ideal Price/hr</th>
+            <th>Date for task</th>
+            <th>Address</th>
+          </tr>
+          {postFilterHelper(Posts).map((p, i) => (
+              <tr key={i}>
+                <th>{p.Description}</th>
+                <th>{p["Zip Code"]}</th>
+                <th>{p.Category}</th>
+                <th>{p["Ideal Price"]}</th>
+                <th>{p["Date for task"]}</th>
+                <th>{p.Address}</th>
+              </tr>
+          ))}
+          </tbody>
+        </table>
+      </Col>
+    </Row>
+  </Container>;
+
   return (
     <main className="container-fluid">
       <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -134,10 +204,10 @@ function Main() {
         <div className="tag">
           <span>
             <h2 className="d-inline"> I am a: </h2>
-            <Button type="button" className="btn btn-lg d-inline pl-3">
+            <Button type="button" onClick={() => setHelperPage(true)} className="btn btn-lg d-inline pl-3">
               Helper
             </Button>
-            <Button type="button" className="btn btn-lg d-inline pl-3 ml-2">
+            <Button type="button" onClick={() => setHelperPage(false)} className="btn btn-lg d-inline pl-3 ml-2">
               Helper Seeker
             </Button>
           </span>
@@ -162,73 +232,8 @@ function Main() {
         </div>
       </div>
 
-      <Container fluid className="pt-5 container-fluid mt-4" id="table">
-        <Row>
-          <Col sm={3}>
-            <select
-              id="category"
-              value={Category_Select}
-              onChange={onSelectCategory}
-            >
-              <option key="all" value="Select Category">
-                Select Category
-              </option>
-              {Category.map((p, i) => (
-                <option key={i} value={p}>
-                  {p}
-                </option>
-              ))}
-            </select>
-            <div className="pt-3">
-              <p>Minimum Ideal Price($):</p>
-              <input
-                type="number"
-                value={MinValue}
-                onChange={onSelectedValueMin}
-              ></input>
-              <p>Maximum Ideal Price($):</p>
-              <input
-                type="number"
-                value={MaxValue}
-                onChange={onSelectedValueMax}
-              ></input>
-            </div>
-
-            <div className="pt-3">
-              <p>Date Range Available to work:</p>
-              <div className="input-group input-daterange">
-                <input type="text" className="form-control" />
-                <div className="input-group-addon">to</div>
-                <input type="text" className="form-control" />
-              </div>
-            </div>
-          </Col>
-          <Col sm={9}>
-            <table className="table">
-              <tbody>
-                <tr>
-                  <th>Task Short Description</th>
-                  <th>Zip code</th>
-                  <th>Category</th>
-                  <th>Ideal Price/hr</th>
-                  <th>Date for task</th>
-                  <th>Address</th>
-                </tr>
-                {postFilterHelper(Posts).map((p, i) => (
-                  <tr key={i}>
-                    <th>{p.Description}</th>
-                    <th>{p["Zip Code"]}</th>
-                    <th>{p.Category}</th>
-                    <th>{p["Ideal Price"]}</th>
-                    <th>{p["Date for task"]}</th>
-                    <th>{p.Address}</th>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </Col>
-        </Row>
-      </Container>
+      {ShowHelper ? <PostTable />: null}
+      {!ShowHelper ? <Helper_table />: null}
 
       <hr></hr>
       <footer>Created by Tianhao Qu, Kaiwen Tian</footer>
