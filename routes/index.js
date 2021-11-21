@@ -5,11 +5,6 @@ const myDB = require("../database/mongoDB.js");
 //establish connection with cloud database
 myDB.establishConnection().catch(console.dir);
 
-/* GET home page. */
-// router.get("/", function (req, res, next) {
-//   res.render("index", { title: "Express" });
-// });
-
 //Working example.
 router.post("/register", async (req, res) => {
   console.log("Received user-input account information...");

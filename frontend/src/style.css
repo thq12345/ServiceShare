@@ -1,31 +1,24 @@
 html {
   font-family: Helvetica, Sans-Serif;
-  background-color: #f5efe8;
-  font-size: 15px;
+  background-color: #F5EFE8;
+  font-size:15px;
 }
-
-table,
-th,
-td {
+table, th, td {
   border: 1px solid black;
 }
-
-.App {
-  background-color: #f5efe8;
+.App{
+  background-color: #F5EFE8;
 }
-
 .navbar .dropdown-menu .form-control {
   /*background-color: #3C7191;*/
-  height: 100px;
+  height:100px;
   /*color: white;*/
-  font-size: 40px;
+  font-size:40px;
 }
-
-nav {
-  height: 70px;
-  font-size: 30px;
+nav{
+  height:70px;
+  font-size:30px;
 }
-
 #outer-header {
   background-image: url("images/header.png");
   background-repeat: no-repeat;
@@ -34,58 +27,47 @@ nav {
   background-color: #f4eee9;
   background-position: center;
 }
-
 #head_logo {
-  width: 80%;
-  height: auto;
+  width:80%;
+  height:auto;
   position: relative;
-  margin: auto;
+  margin:auto;
 }
 .center {
   position: absolute;
   top: 50%;
   left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
   display: inline-block;
 }
-
 .tag {
-  padding-top: 450px;
-  padding-left: 100px;
-  margin: auto;
-  float: none;
-  width: 35vw;
-  position: relative;
+  height: 30vh;
+  position: absolute;
+  bottom: 15vh;
   color: black;
   font-weight: bold;
-  font-size: 30px;
+  font-size:30px;
 }
-
-.login-container {
-  margin: auto;
+.login-container{
+  margin:auto;
   max-width: 300px;
-  height: 80vh;
-  background-color: #f5efe8;
-}
-
+  height:80vh;
+  background-color: #F5EFE8;}
 .logo-image {
   height: 30vh;
 }
-
 .filter-section {
-  font-size: 20px;
+  font-size:20px;
   position: absolute;
-  float: left;
+  float:left;
 }
-
-#header-image {
+#header-image{
   display: flex;
   justify-content: center;
   height: 30vh;
 }
-
-#table {
-  font-size: 20px;
+#table{
+  font-size:20px;
   color: #282c34;
 }

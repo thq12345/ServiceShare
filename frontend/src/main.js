@@ -5,7 +5,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import MoreDetails from "./Other Components/MoreDetailsMainPage.js";
-
 function Main() {
   const [Posts, setPosts] = useState([]);
   const [Helpers, setHelpers] = useState([]);
@@ -14,32 +13,39 @@ function Main() {
   let [MinValue, setMinValue] = useState(0);
   let [MaxValue, setMaxValue] = useState(10000);
   let [ShowHelper, setHelperPage] = useState(false);
-
+  let [Input_Zipcode, setZipCode] = useState("");
   const navigate = useNavigate();
+  function onChangeZip(evt) {
+    setZipCode(evt.target.value);
+  }
 
   function onSelectCategory(evt) {
     console.log("onchange", evt.target.value);
     SetCategory_Select(evt.target.value);
   }
-
   function onSelectedValueMin(evt) {
     setMinValue(evt.target.value);
   }
-
   function onSelectedValueMax(evt) {
     setMaxValue(evt.target.value);
   }
-
   //For all filter standard, leave them here.
   function postFilterHelper(post) {
-    let filtered_post;
+    let filtered_post = post;
     //Category Filter
-    if (Category_Select === "Select Category") {
+    if (Category_Select === "Select Category" && Input_Zipcode != null) {
       filtered_post = post;
-    } else {
-      filtered_post = post.filter((item) => item.Category === Category_Select);
     }
-
+    if (Input_Zipcode != "") {
+      filtered_post = filtered_post.filter((item) =>
+        item["Zip Code"].toString().includes(Input_Zipcode)
+      );
+    }
+    if (Category_Select != "Select Category") {
+      filtered_post = filtered_post.filter(
+        (item) => item.Category === Category_Select
+      );
+    }
     //Price Range Filter
     filtered_post = filtered_post.filter(
       (item) =>
@@ -47,7 +53,6 @@ function Main() {
     );
     return filtered_post;
   }
-
   useEffect(() => {
     async function runThis() {
       let raw = await fetch(`api/load-helpers`);
@@ -60,7 +65,6 @@ function Main() {
     }
     runThis().catch(console.dir);
   }, []);
-
   useEffect(() => {
     async function runThis() {
       let raw = await fetch(`api/load-all-post?category=${Category_Select}`);
@@ -71,7 +75,6 @@ function Main() {
         categoryTemp.push(element.Category);
         postTemp.push(element);
       }
-
       //remove duplicate category options.
       categoryTemp = categoryTemp.filter(function (item, pos) {
         return categoryTemp.indexOf(item) === pos;
@@ -82,7 +85,6 @@ function Main() {
     }
     runThis().catch(console.dir);
   }, [Category_Select]);
-
   console.log("Render ", Category);
 
   function HelperTable() {
@@ -110,7 +112,6 @@ function Main() {
     ));
     return <Container>{content}</Container>;
   }
-
   let PostTable = () => (
     <Container fluid className="pt-5 container-fluid mt-4" id="table">
       <Row>
@@ -143,15 +144,6 @@ function Main() {
               onChange={onSelectedValueMax}
             ></input>
           </div>
-
-          <div className="pt-3">
-            <p>Date Range Available to work:</p>
-            <div className="input-group input-daterange">
-              <input type="text" className="form-control" />
-              <div className="input-group-addon">to</div>
-              <input type="text" className="form-control" />
-            </div>
-          </div>
         </Col>
         <Col sm={9}>
           <table className="table">
@@ -160,7 +152,6 @@ function Main() {
                 <th>Category</th>
                 <th>Task Short Description</th>
                 <th>Zip code</th>
-
                 <th>Ideal Price/hr</th>
                 <th>Date for task</th>
                 <th>Address</th>
@@ -181,7 +172,6 @@ function Main() {
       </Row>
     </Container>
   );
-
   return (
     <main className="container-fluid">
       <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -210,8 +200,10 @@ function Main() {
           </ul>
         </div>
       </nav>
-
-      <div id="outer-header">
+      <div
+        className="d-flex justify-content-center align-content-end"
+        id="outer-header"
+      >
         <div className="tag">
           <span>
             <h2 className="d-inline"> I am here to... </h2>
@@ -238,6 +230,7 @@ function Main() {
               type="text"
               pattern="[0-9]{5}"
               title="Five digit zip code"
+              onChange={onChangeZip}
             />
             <Button
               variant="secondary"
@@ -250,14 +243,11 @@ function Main() {
           </div>
         </div>
       </div>
-
       {ShowHelper ? <PostTable /> : null}
       {!ShowHelper ? <HelperTable /> : null}
-
       <hr></hr>
       <footer>Created by Tianhao Qu, Kaiwen Tian</footer>
     </main>
   );
 }
-
 export default Main;
