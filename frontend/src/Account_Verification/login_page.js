@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from '../images/logo.png';
+import logo from "../images/logo.png";
 
 function LoginForm() {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -26,63 +26,69 @@ function LoginForm() {
       }),
     });
     result = await res.json();
-    set_status("Log in Status: " + result.status);
-    if (result.status == true) {
-      navigate("/form2");
+    if (result.status === false) {
+      set_status("Incorrect username/password! Please try again!");
+    }
+
+    if (result.status === true) {
+      navigate("/post");
     }
   };
 
   return (
-      <div className="container login-container text-center  h-100">
-        <img
-            className="mt-4 mb-4 logo-imagerow align-items-center h-100"
-            src={logo}
-            alt="Service Share Logo"
+    <div className="container login-container text-center  h-100">
+      <img
+        className="mt-4 mb-4 logo-imagerow align-items-center h-100"
+        src={logo}
+        alt="Service Share Logo"
+      />
+      <form
+        id="Login Form"
+        onSubmit={handleAuth}
+        className={"login-container  justify-content-center align-self-center"}
+      >
+        <h1 className="h2 mb-3 font-weight normal">Please sign in</h1>
+        <p>{current_status}</p>
+        <label className="sr-only"> Email Address </label>
+        <input
+          type="email"
+          id="emailAddress"
+          className="form-control"
+          placeholder="User Name"
+          name="username"
+          value={user.username}
+          onChange={usernameChange}
+          required
+          autoFocus
         />
-        <form
-            id="Login Form"
-            onSubmit={handleAuth}
-            className={"login-container  justify-content-center align-self-center"}
-        >
-
-          <h1 className="h2 mb-3 font-weight normal">Please sign in</h1>
-          <p>{current_status}</p>
-          <label className="sr-only"> Email Address </label>
-          <input
-              type="email"
-              id="emailAddress"
-              className="form-control"
-              placeholder="User Name"
-              name="username"
-              value={user.username}
-              onChange={usernameChange}
-              required
-              autoFocus
-          />
-          <label className="sr-only" htmlFor="password">
-            Password
-          </label>
-          <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              name="password"
-              value={user.password}
-              onChange={passwordChange}
-              className="form-control"
-          />
-          <div className="mt-3">
-            <button
-                id="Submit"
-                className="btn btn-lg btn-primary btn-block"
-                type="Submit"
-                value="Submit"
-            >
-              Sign in
-            </button>
-          </div>
-        </form>
-      </div>
+        <label className="sr-only" htmlFor="password">
+          Password
+        </label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          name="password"
+          value={user.password}
+          onChange={passwordChange}
+          className="form-control"
+        />
+        <div className="mt-3">
+          <button
+            id="Submit"
+            className="btn btn-lg btn-primary btn-block"
+            type="Submit"
+            value="Submit"
+          >
+            Sign in
+          </button>
+        </div>
+        <br />
+        <p>
+          Don't have an account? <a href="/create-account">Create Account</a>
+        </p>
+      </form>
+    </div>
   );
 }
 

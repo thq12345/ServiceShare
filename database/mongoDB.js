@@ -27,7 +27,14 @@ function myDB() {
   };
 
   myDB.insert_post = async (req_json, res) => {
-    const feedback_database = project_database.collection("posts");
+    let feedback_database;
+    console.log("Inserting:::", req_json);
+    if (req_json.Mode === "OfferHelp") {
+      feedback_database = project_database.collection("helper");
+    } else if (req_json.Mode === "SeekHelp") {
+      feedback_database = project_database.collection("posts");
+    }
+
     req_json["username"] = username_global;
     await feedback_database.insertOne(req_json);
     console.log("Post Successfully Submitted!");
@@ -53,30 +60,43 @@ function myDB() {
     }
   };
 
-  myDB.edit_feedback = async (originalId, editedText, editedSubject) => {
-    const feedback_database = project_database.collection("Feedback Box");
-    const query = { _id: ObjectId(originalId) };
-    const updateDoc = {
+  myDB.edit_post = async (json, res) => {
+    let target_database;
+    if (json.Mode === "SeekHelp") {
+      target_database = project_database.collection("posts");
+    } else if (json.Mode === "OfferHelp") {
+      target_database = project_database.collection("helper");
+    }
+    const edit = {
       $set: {
-        comment: editedText,
-        subject: editedSubject,
+        Description: json.Description,
+        Category: json.Category,
+        "Ideal Price": json["Ideal Price"],
+        "Date for task": json["Date for task"],
+        "Zip Code": json["Zip Code"],
+        Address: json.Address,
       },
     };
-    // const execute = await feedback_database.updateOne(query, updateDoc);
-    await feedback_database.updateOne(query, updateDoc);
+    const query = { _id: ObjectId(json._id) };
+    await target_database.updateOne(query, edit);
     console.log("Comment successfully edited!");
     //Attempt to reload comments.
-    myDB.getComments().catch(console.dir);
+    myDB.getComments(res).catch(console.dir);
   };
 
-  myDB.delete_feedback = async (originalId) => {
-    const feedback_database = project_database.collection("Feedback Box");
-    const query = { _id: ObjectId(originalId) };
-    console.log(query);
-    await feedback_database.deleteOne(query);
+  myDB.delete_post = async (json, res) => {
+    let target_database;
+    if (json.Mode === "SeekHelp") {
+      target_database = project_database.collection("posts");
+    } else if (json.Mode === "OfferHelp") {
+      target_database = project_database.collection("helper");
+    }
+
+    const query = { _id: ObjectId(json._id) };
+    await target_database.deleteOne(query);
     console.log("Entry successfully deleted!");
     //Attempt to reload comments.
-    myDB.getComments().catch(console.dir);
+    myDB.getComments(res).catch(console.dir);
   };
 
   myDB.insert_username_password = async (
@@ -113,15 +133,16 @@ function myDB() {
   myDB.getComments = async (res) => {
     console.log("Reload comment has been executed.");
     let query2;
-    console.log("Global username:", username_global);
     if (username_global === "admin@admin") {
       query2 = {};
     } else {
       query2 = { username: username_global };
     }
-    const comment_db = project_database.collection("posts");
-    const result = await comment_db.find(query2).toArray();
-    console.log(result);
+    const helpSeeker_db = project_database.collection("posts");
+    const result1 = await helpSeeker_db.find(query2).toArray();
+    const helpOffer_db = project_database.collection("helper");
+    const result2 = await helpOffer_db.find(query2).toArray();
+    let result = await result1.concat(result2);
     res.send(result);
     return result;
   };
@@ -145,7 +166,6 @@ function myDB() {
     res.json(result);
     return result;
   };
-
 
   //get counts from certain collections
   myDB.getCounts = async (col_name) => {

@@ -51,6 +51,14 @@ router.get("/load-user-posts", async (req, res) => {
   await myDB.getComments(res).catch(console.dir);
 });
 
+router.post("/edit-post", async (req, res) => {
+  console.log("Editing post request submitted!");
+  await myDB.edit_post(req.body, res).catch(console.dir);
+});
 
+router.post("/delete-post", async (req, res) => {
+  console.log("Deleting post request submitted!");
+  await myDB.delete_post(req.body, res).catch(console.dir);
+});
 
 module.exports = router;

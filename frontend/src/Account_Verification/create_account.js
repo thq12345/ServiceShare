@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../images/logo.png";
+
 function CreateAccount() {
   const [user, setUser] = useState({ username: "", password: "" });
   //result means the value returned from back-end.
@@ -24,8 +26,12 @@ function CreateAccount() {
       }),
     });
     result = await res.json();
-    await set_status("Account creation status is: " + result.status);
-    console.log("Registration Status is: " + result.status);
+    if (result.status === "account-exists") {
+      await set_status(
+        "The username you are trying to create already exists. Please try again!"
+      );
+    }
+
     if (result.status === "success") {
       //react-router-dom v6 way of redirecting pages
       navigate("/login");
@@ -33,17 +39,18 @@ function CreateAccount() {
   };
 
   return (
-    <div className="text-center">
+    <div className="container login-container text-center  h-100">
+      <img
+        className="mt-4 mb-4 logo-imagerow align-items-center h-100"
+        src={logo}
+        alt="Service Share Logo"
+      />
       <form
         // need to change this I guess (css)
         id="Login Form"
         onSubmit={handleAuth}
+        className={"login-container  justify-content-center align-self-center"}
       >
-        <img
-          className="mt-4 mb-4"
-          src="../../images/logo.png"
-          alt="Service Share Logo"
-        />
         <h1 className="h2 mb-3 font-weight normal">Create an account</h1>
         <p>{current_status}</p>
         <label className="sr-only"> Email Address </label>
@@ -80,8 +87,11 @@ function CreateAccount() {
             Create Account
           </button>
         </div>
+        <br />
+        <p>
+          Already have an account? <a href="/login">Log In</a>
+        </p>
       </form>
-      <p>Already have an account? Please sign in</p>
     </div>
   );
 }
