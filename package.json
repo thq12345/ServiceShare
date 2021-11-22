@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "yarn && yarn start",
     "test": "node ./bin/www",
     "heroku-build": "cd frontend && yarn && yarn run build"
   },
@@ -25,5 +25,8 @@
     "eslint-plugin-react": "^7.27.1",
     "prettier": "^2.4.1",
     "prettier-eslint": "^13.0.0"
+  },
+  "engines": {
+    "node": "14.18.0"
   }
 }
