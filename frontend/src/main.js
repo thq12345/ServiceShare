@@ -5,40 +5,22 @@ import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import MoreDetails from "./Other Components/MoreDetailsMainPage.js";
+
 function Main() {
-  const [Posts, setPosts] = useState([]);
-  const [Helpers, setHelpers] = useState([]);
+  let [Posts, setPosts] = useState([]);
   let [Category_request, setCategory_request] = useState([]);
+  let [Helpers, setHelpers] = useState([]);
   let [Category_help, setCategory_help] = useState([]);
-  let [Category_request_Select, SetCategory_request_Select] = useState("Select Category");
-  let [Category_help_Select,SetCategory_help_Select] = useState("Select Category");
   let [MinValue, setMinValue] = useState(0);
   let [MaxValue, setMaxValue] = useState(10000);
+  let [Category_help_Select,SetCategory_help_Select] = useState("Select Category");
+  let [Category_request_Select, SetCategory_request_Select] = useState("Select Category");
   let [ShowHelper, setHelperPage] = useState(false);
   let [Input_Zipcode, setZipCode] = useState("");
   const navigate = useNavigate();
 
-  function onChangeZip(evt) {
-    setZipCode(evt.target.value);
-  }
-
-  function onSelectCategory_request(evt) {
-    console.log("onchange", evt.target.value);
-    SetCategory_request_Select(evt.target.value);
-  }
-
-  function onSelectCategory_help(evt) {
-    SetCategory_help_Select(evt.target.value);
-  }
-
-  function onSelectedValueMin(evt) {
-    setMinValue(evt.target.value);
-  }
-  function onSelectedValueMax(evt) {
-    setMaxValue(evt.target.value);
-  }
-    //For all filter standard, leave them here.
-  function postFilterHelper(post,select) {
+    //filter on the posts board on the request and helper table
+  function filter_on_post(post,select) {
     let filtered_post = post;
     //Category Filter
     if (select === "Select Category" && Input_Zipcode != null) {
@@ -66,20 +48,7 @@ function Main() {
     return filtered_post;
   }
 
-
-  useEffect(() => {
-    async function runThis() {
-      let raw = await fetch(`api/load-helpers`);
-      let res = await raw.json();
-      let helper = [];
-      for (const element of res) {
-        helper.push(element);
-      }
-      setHelpers(helper);
-    }
-    runThis().catch(console.dir);
-  }, []);
-
+  //fetch all requests
   useEffect(() => {
     async function runThis() {
       let raw = await fetch(`api/load-all-post?category=${Category_request_Select}`);
@@ -101,6 +70,7 @@ function Main() {
     runThis().catch(console.dir);
   }, [Category_request_Select]);
 
+  //filter all the helpers offer
   useEffect(() => {
     async function runThis() {
       let raw = await fetch(`api/load-helpers`);
@@ -120,11 +90,12 @@ function Main() {
       setHelpers(postTemp);
     }
     runThis().catch(console.dir);
-  }, [Category_request_Select]);
+  }, [Category_help_Select]);
   console.log("Render ", Category_request);
 
+  //the helper tables with all the offers
   function HelperTable() {
-    let HelperFiltered = postFilterHelper(Helpers,Category_help_Select);
+    let HelperFiltered = filter_on_post(Helpers,Category_help_Select);
     console.log(HelperFiltered);
     const rows = [...Array(Math.ceil(HelperFiltered.length / 4))];
     const productRows = rows.map((row, idx) =>
@@ -156,7 +127,7 @@ function Main() {
             <select
                 id="category"
                 value={Category_help_Select}
-                onChange={onSelectCategory_help}
+                onChange={(e) => {SetCategory_help_Select(e.target.value)}}
             >
               <option key="all" value="Select Category">
                 Select Category
@@ -172,13 +143,13 @@ function Main() {
               <input
                   type="number"
                   value={MinValue}
-                  onChange={onSelectedValueMin}
+                  onChange={(e) => {setMinValue(e.target.value)}}
               ></input>
               <p>Maximum Ideal Price($):</p>
               <input
                   type="number"
                   value={MaxValue}
-                  onChange={onSelectedValueMax}
+                  onChange={(e) => {setMaxValue(e.target.value)}}
               ></input>
             </div>
           </Col>
@@ -188,6 +159,7 @@ function Main() {
     );
   }
 
+  //the seek request tables with all requests
   let PostTable = () => (
     <Container fluid className="pt-5 container-fluid mt-5 table">
       <Row>
@@ -195,7 +167,7 @@ function Main() {
           <select
               id="category"
               value={Category_request_Select}
-              onChange={onSelectCategory_request}
+              onChange={(e) => {SetCategory_request_Select(e.target.value)}}
           >
             <option key="all" value="Select Category">
               Select Category
@@ -211,13 +183,13 @@ function Main() {
             <input
                 type="number"
                 value={MinValue}
-                onChange={onSelectedValueMin}
+                onChange={(e) => {setMinValue(e.target.value)}}
             ></input>
             <p>Maximum Ideal Price($):</p>
             <input
                 type="number"
                 value={MaxValue}
-                onChange={onSelectedValueMax}
+                onChange={(e) => {setMaxValue(e.target.value)}}
             ></input>
           </div>
         </Col>
@@ -232,7 +204,7 @@ function Main() {
                 <th>Date for task</th>
                 <th>Address</th>
               </tr>
-              {postFilterHelper(Posts,Category_request_Select).map((p, i) => (
+              {filter_on_post(Posts,Category_request_Select).map((p, i) => (
                 <tr key={i}>
                   <th>{p.Category}</th>
                   <th>{p.Description}</th>
@@ -307,7 +279,7 @@ function Main() {
               type="text"
               pattern="[0-9]{5}"
               title="Five digit zip code"
-              onChange={onChangeZip}
+              onChange={(e) => {setZipCode(e.target.value)}}
             />
             <Button
               variant="secondary"
