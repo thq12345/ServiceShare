@@ -9,8 +9,7 @@ function myDB() {
 
   // MongoDB Connection URI
   // MAKE SURE TO DELETE CONNECTION STRING UPON COMPLETION
-  const uri =
-    "mongodb+srv://admin:n6KP16laOm9YkgRL@cs5610project3.kwjri.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  const uri = process.env.MONGO_DB;
 
   myDB.establishConnection = async () => {
     const client = new MongoClient(uri);
