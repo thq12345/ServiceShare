@@ -8,43 +8,55 @@ import MoreDetails from "./Other Components/MoreDetailsMainPage.js";
 function Main() {
   const [Posts, setPosts] = useState([]);
   const [Helpers, setHelpers] = useState([]);
-  let [Category, setCategory] = useState([]);
-  let [Category_Select, SetCategory_Select] = useState("Select Category");
+  let [Category_request, setCategory_request] = useState([]);
+  let [Category_help, setCategory_help] = useState([]);
+  let [Category_request_Select, SetCategory_request_Select] = useState("Select Category");
+  let [Category_help_Select,SetCategory_help_Select] = useState("Select Category");
   let [MinValue, setMinValue] = useState(0);
   let [MaxValue, setMaxValue] = useState(10000);
   let [ShowHelper, setHelperPage] = useState(false);
   let [Input_Zipcode, setZipCode] = useState("");
   const navigate = useNavigate();
+
   function onChangeZip(evt) {
     setZipCode(evt.target.value);
   }
 
-  function onSelectCategory(evt) {
+  function onSelectCategory_request(evt) {
     console.log("onchange", evt.target.value);
-    SetCategory_Select(evt.target.value);
+    SetCategory_request_Select(evt.target.value);
   }
+
+  function onSelectCategory_help(evt) {
+    SetCategory_help_Select(evt.target.value);
+  }
+
   function onSelectedValueMin(evt) {
     setMinValue(evt.target.value);
   }
   function onSelectedValueMax(evt) {
     setMaxValue(evt.target.value);
   }
-  //For all filter standard, leave them here.
-  function postFilterHelper(post) {
+    //For all filter standard, leave them here.
+  function postFilterHelper(post,select) {
     let filtered_post = post;
     //Category Filter
-    if (Category_Select === "Select Category" && Input_Zipcode != null) {
+    if (select === "Select Category" && Input_Zipcode != null) {
       filtered_post = post;
+      console.log(1);
     }
-    if (Input_Zipcode != "") {
+    if (Input_Zipcode !== "") {
       filtered_post = filtered_post.filter((item) =>
         item["Zip Code"].toString().includes(Input_Zipcode)
       );
+      console.log(2);
     }
-    if (Category_Select != "Select Category") {
+    if (select != "Select Category") {
       filtered_post = filtered_post.filter(
-        (item) => item.Category === Category_Select
+        (item) => item.Category === select
       );
+      console.log(select);
+      console.log(3);
     }
     //Price Range Filter
     filtered_post = filtered_post.filter(
@@ -53,6 +65,8 @@ function Main() {
     );
     return filtered_post;
   }
+
+
   useEffect(() => {
     async function runThis() {
       let raw = await fetch(`api/load-helpers`);
@@ -65,9 +79,10 @@ function Main() {
     }
     runThis().catch(console.dir);
   }, []);
+
   useEffect(() => {
     async function runThis() {
-      let raw = await fetch(`api/load-all-post?category=${Category_Select}`);
+      let raw = await fetch(`api/load-all-post?category=${Category_request_Select}`);
       let res = await raw.json();
       let categoryTemp = [];
       let postTemp = [];
@@ -80,17 +95,40 @@ function Main() {
         return categoryTemp.indexOf(item) === pos;
       });
       //load all distinct category into the dropdown bar
-      setCategory(categoryTemp);
+      setCategory_request(categoryTemp);
       setPosts(postTemp);
     }
     runThis().catch(console.dir);
-  }, [Category_Select]);
-  console.log("Render ", Category);
+  }, [Category_request_Select]);
+
+  useEffect(() => {
+    async function runThis() {
+      let raw = await fetch(`api/load-helpers`);
+      let res = await raw.json();
+      let categoryOffers = [];
+      let postTemp = [];
+      for (const element of res) {
+        categoryOffers.push(element.Category);
+        postTemp.push(element);
+      }
+      //remove duplicate category options.
+      categoryOffers = categoryOffers.filter(function (item, pos) {
+        return categoryOffers.indexOf(item) === pos;
+      });
+      //load all distinct category into the dropdown bar
+      setCategory_help(categoryOffers);
+      setHelpers(postTemp);
+    }
+    runThis().catch(console.dir);
+  }, [Category_request_Select]);
+  console.log("Render ", Category_request);
 
   function HelperTable() {
-    const rows = [...Array(Math.ceil(Helpers.length / 4))];
+    let HelperFiltered = postFilterHelper(Helpers,Category_help_Select);
+    console.log(HelperFiltered);
+    const rows = [...Array(Math.ceil(HelperFiltered.length / 4))];
     const productRows = rows.map((row, idx) =>
-      Helpers.slice(idx * 4, idx * 4 + 4)
+        HelperFiltered.slice(idx * 4, idx * 4 + 4)
     );
 
     const content = productRows.map((row, idx) => (
@@ -110,36 +148,37 @@ function Main() {
         ))}
       </div>
     ));
+
     return (
-      <Container>
+      <Container fluid className={"mt-5 table"}>
         <Row>
           <Col sm={3}>
             <select
-              id="category"
-              value={Category_Select}
-              onChange={onSelectCategory}
+                id="category"
+                value={Category_help_Select}
+                onChange={onSelectCategory_help}
             >
               <option key="all" value="Select Category">
                 Select Category
               </option>
-              {Category.map((p, i) => (
-                <option key={i} value={p}>
-                  {p}
-                </option>
+              {Category_help.map((p, i) => (
+                  <option key={i} value={p}>
+                    {p}
+                  </option>
               ))}
             </select>
             <div className="pt-3">
               <p>Minimum Ideal Price($):</p>
               <input
-                type="number"
-                value={MinValue}
-                onChange={onSelectedValueMin}
+                  type="number"
+                  value={MinValue}
+                  onChange={onSelectedValueMin}
               ></input>
               <p>Maximum Ideal Price($):</p>
               <input
-                type="number"
-                value={MaxValue}
-                onChange={onSelectedValueMax}
+                  type="number"
+                  value={MaxValue}
+                  onChange={onSelectedValueMax}
               ></input>
             </div>
           </Col>
@@ -148,40 +187,41 @@ function Main() {
       </Container>
     );
   }
+
   let PostTable = () => (
-    <Container fluid className="pt-5 container-fluid mt-4" id="table">
+    <Container fluid className="pt-5 container-fluid mt-5 table">
       <Row>
         <Col sm={3}>
           <select
-            id="category"
-            value={Category_Select}
-            onChange={onSelectCategory}
+              id="category"
+              value={Category_request_Select}
+              onChange={onSelectCategory_request}
           >
             <option key="all" value="Select Category">
               Select Category
             </option>
-            {Category.map((p, i) => (
-              <option key={i} value={p}>
-                {p}
-              </option>
+            {Category_request.map((p, i) => (
+                <option key={i} value={p}>
+                  {p}
+                </option>
             ))}
           </select>
           <div className="pt-3">
             <p>Minimum Ideal Price($):</p>
             <input
-              type="number"
-              value={MinValue}
-              onChange={onSelectedValueMin}
+                type="number"
+                value={MinValue}
+                onChange={onSelectedValueMin}
             ></input>
             <p>Maximum Ideal Price($):</p>
             <input
-              type="number"
-              value={MaxValue}
-              onChange={onSelectedValueMax}
+                type="number"
+                value={MaxValue}
+                onChange={onSelectedValueMax}
             ></input>
           </div>
         </Col>
-        <Col sm={9}>
+        <Col sm={8}>
           <table className="table">
             <tbody>
               <tr className={"thead-light"}>
@@ -192,7 +232,7 @@ function Main() {
                 <th>Date for task</th>
                 <th>Address</th>
               </tr>
-              {postFilterHelper(Posts).map((p, i) => (
+              {postFilterHelper(Posts,Category_request_Select).map((p, i) => (
                 <tr key={i}>
                   <th>{p.Category}</th>
                   <th>{p.Description}</th>
