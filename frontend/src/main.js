@@ -92,7 +92,7 @@ function Main() {
     const productRows = rows.map((row, idx) =>
       Helpers.slice(idx * 4, idx * 4 + 4)
     );
-    console.log(productRows[0]);
+
     const content = productRows.map((row, idx) => (
       <div className="row m-3e" key={idx}>
         {row.map((h, i) => (
@@ -110,7 +110,43 @@ function Main() {
         ))}
       </div>
     ));
-    return <Container>{content}</Container>;
+    return (
+      <Container>
+        <Row>
+          <Col sm={3}>
+            <select
+              id="category"
+              value={Category_Select}
+              onChange={onSelectCategory}
+            >
+              <option key="all" value="Select Category">
+                Select Category
+              </option>
+              {Category.map((p, i) => (
+                <option key={i} value={p}>
+                  {p}
+                </option>
+              ))}
+            </select>
+            <div className="pt-3">
+              <p>Minimum Ideal Price($):</p>
+              <input
+                type="number"
+                value={MinValue}
+                onChange={onSelectedValueMin}
+              ></input>
+              <p>Maximum Ideal Price($):</p>
+              <input
+                type="number"
+                value={MaxValue}
+                onChange={onSelectedValueMax}
+              ></input>
+            </div>
+          </Col>
+          <Col sm={9}>{content}</Col>
+        </Row>
+      </Container>
+    );
   }
   let PostTable = () => (
     <Container fluid className="pt-5 container-fluid mt-4" id="table">
@@ -172,6 +208,7 @@ function Main() {
       </Row>
     </Container>
   );
+
   return (
     <main className="container-fluid">
       <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
