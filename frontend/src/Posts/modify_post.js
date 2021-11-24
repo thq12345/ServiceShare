@@ -82,7 +82,7 @@ function ModifyPost(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="secondary" onClick={handleShow}>
         Edit or Delete Post
       </Button>
 

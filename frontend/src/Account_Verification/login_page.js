@@ -36,7 +36,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="container login-container text-center  h-100">
+    <div className="text-center  h-100">
       <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <div className="container-fluid">
           <ul className="navbar-nav me-auto">
