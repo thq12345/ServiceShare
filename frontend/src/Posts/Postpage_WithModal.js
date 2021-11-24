@@ -48,7 +48,7 @@ function PostForm2() {
       <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <div className="container-fluid">
           <ul className="navbar-nav me-auto">
-            <li><img src={logo} className="nav-item, nav_logo pr-3" alt="Service Share Logo"></img></li>
+            <li><img src={logo} className="nav-item, nav_logo" alt="Service Share Logo"></img></li>
             <li className="nav-item pt-2">
               <a
                   className="nav-link active"
