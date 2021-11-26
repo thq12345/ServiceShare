@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import SubmitForm from "./form.js";
-import ModifyPost from "./modify_post.js";
+import ModifyPost from "./modify_post.js"
+import { useNavigate } from "react-router-dom";
+import logo from "../images/logo.png";
 function PostForm2() {
   const [modalShow, setModalShow] = React.useState(false);
+  const navigate = useNavigate();
 
   //all posts that belongs to this user.
   const [Post, setPosts] = useState([]);
@@ -41,8 +44,35 @@ function PostForm2() {
   }
 
   return (
-    <main className="container">
-      <section className="mb-4">
+    <main>
+      <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
+        <div className="container-fluid">
+          <ul className="navbar-nav me-auto">
+            <li><img src={logo} className="nav-item, nav_logo" alt="Service Share Logo"></img></li>
+            <li className="nav-item pt-2">
+              <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="./"
+              >
+                Home
+              </a>
+            </li>
+          </ul>
+          <ul className="nav navbar-nav navbar-right">
+            <li>
+              <Button
+                  variant="secondary"
+                  className="d-flex btn me-auto"
+                  onClick={() => navigate("/login")}
+              >
+                <h3>Personal Profile</h3>
+              </Button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <section className="container mb-4">
         <h2 className="h1-responsive font-weight-bold text-center my-4">
           Welcome!
         </h2>
@@ -59,7 +89,7 @@ function PostForm2() {
         </div>
       </section>
 
-      <section className="pt-5">
+      <section className="pt-5 container">
         <table className="table">
           <thead>
             <tr>

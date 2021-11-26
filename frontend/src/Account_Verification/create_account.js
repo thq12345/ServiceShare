@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
+import Button from "react-bootstrap/Button";
 
 function CreateAccount() {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -39,7 +40,23 @@ function CreateAccount() {
   };
 
   return (
-    <div className="container login-container text-center  h-100">
+    <div className="text-center  h-100">
+      <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
+        <div className="container-fluid">
+          <ul className="navbar-nav me-auto">
+            <li><img src={logo} className="nav-item, nav_logo" alt="Service Share Logo"></img></li>
+            <li className="nav-item pt-2">
+              <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="./"
+              >
+                Home
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <img
         className="mt-4 mb-4 logo-imagerow align-items-center h-100"
         src={logo}

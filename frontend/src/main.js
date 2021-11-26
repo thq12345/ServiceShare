@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import MoreDetails from "./Other Components/MoreDetailsMainPage.js";
+import logo from "./images/logo.png";
 
 function Main() {
   let [Posts, setPosts] = useState([]);
@@ -238,11 +239,12 @@ function Main() {
       <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <div className="container-fluid">
           <ul className="navbar-nav me-auto">
-            <li className="nav-item">
+            <li><img src={logo} className="nav-item, nav_logo" alt="Service Share Logo"></img></li>
+            <li className="nav-item pt-2">
               <a
                 className="nav-link active"
                 aria-current="page"
-                href="./index.html"
+                href="./"
               >
                 Home
               </a>
@@ -267,6 +269,7 @@ function Main() {
       >
         <div className="tag">
           <span>
+
             <h2 className="d-inline"> I am here to... </h2>
             <Button
               type="button"
@@ -286,6 +289,7 @@ function Main() {
           {/*<Label>Enter your 5 digits ZIP Code</Label>*/}
           <h4 className="pt-3">Enter your 5 digits ZIP Code:</h4>
           <div>
+
             <input
               className="d-inline-block ml-5"
               type="text"
@@ -303,12 +307,14 @@ function Main() {
             >
               Go
             </Button>
+
           </div>
         </div>
       </div>
       {ShowHelper ? <PostTable /> : null}
       {!ShowHelper ? <HelperTable /> : null}
       <hr></hr>
+
       <footer>Created by Tianhao Qu, Kaiwen Tian</footer>
     </main>
   );
