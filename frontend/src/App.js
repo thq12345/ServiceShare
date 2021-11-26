@@ -5,6 +5,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Main from "./main.js";
 import Post from "./Posts/Postpage_WithModal.js";
+import Map from "./Other Components/map.js";
+import SearchBar from "./Other Components/autocomplete.js";
 
 //Router, basically you add components here.
 function App() {
@@ -16,6 +18,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Main />} />
           <Route path="/post" element={<Post />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/search" element={<SearchBar />} />
         </Routes>
       </Router>
     </div>

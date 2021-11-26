@@ -14,14 +14,16 @@ function Main() {
   let [Category_help, setCategory_help] = useState([]);
   let [MinValue, setMinValue] = useState(0);
   let [MaxValue, setMaxValue] = useState(10000);
-  let [Category_help_Select,SetCategory_help_Select] = useState("Select Category");
-  let [Category_request_Select, SetCategory_request_Select] = useState("Select Category");
+  let [Category_help_Select, SetCategory_help_Select] =
+    useState("Select Category");
+  let [Category_request_Select, SetCategory_request_Select] =
+    useState("Select Category");
   let [ShowHelper, setHelperPage] = useState(false);
   let [Input_Zipcode, setZipCode] = useState("");
   const navigate = useNavigate();
 
-    //filter on the posts board on the request and helper table
-  function filter_on_post(post,select) {
+  //filter on the posts board on the request and helper table
+  function filter_on_post(post, select) {
     let filtered_post = post;
     //Category Filter
     if (select === "Select Category" && Input_Zipcode != null) {
@@ -34,10 +36,8 @@ function Main() {
       );
       console.log(2);
     }
-    if (select != "Select Category") {
-      filtered_post = filtered_post.filter(
-        (item) => item.Category === select
-      );
+    if (select !== "Select Category") {
+      filtered_post = filtered_post.filter((item) => item.Category === select);
       console.log(select);
       console.log(3);
     }
@@ -52,7 +52,9 @@ function Main() {
   //fetch all requests
   useEffect(() => {
     async function runThis() {
-      let raw = await fetch(`api/load-all-post?category=${Category_request_Select}`);
+      let raw = await fetch(
+        `api/load-all-post?category=${Category_request_Select}`
+      );
       let res = await raw.json();
       let categoryTemp = [];
       let postTemp = [];
@@ -92,15 +94,13 @@ function Main() {
     }
     runThis().catch(console.dir);
   }, [Category_help_Select]);
-  console.log("Render ", Category_request);
 
   //the helper tables with all the offers
   function HelperTable() {
-    let HelperFiltered = filter_on_post(Helpers,Category_help_Select);
-    console.log(HelperFiltered);
+    let HelperFiltered = filter_on_post(Helpers, Category_help_Select);
     const rows = [...Array(Math.ceil(HelperFiltered.length / 4))];
     const productRows = rows.map((row, idx) =>
-        HelperFiltered.slice(idx * 4, idx * 4 + 4)
+      HelperFiltered.slice(idx * 4, idx * 4 + 4)
     );
 
     const content = productRows.map((row, idx) => (
@@ -126,31 +126,37 @@ function Main() {
         <Row>
           <Col sm={3}>
             <select
-                id="category"
-                value={Category_help_Select}
-                onChange={(e) => {SetCategory_help_Select(e.target.value)}}
+              id="category"
+              value={Category_help_Select}
+              onChange={(e) => {
+                SetCategory_help_Select(e.target.value);
+              }}
             >
               <option key="all" value="Select Category">
                 Select Category
               </option>
               {Category_help.map((p, i) => (
-                  <option key={i} value={p}>
-                    {p}
-                  </option>
+                <option key={i} value={p}>
+                  {p}
+                </option>
               ))}
             </select>
             <div className="pt-3">
               <p>Minimum Ideal Price($):</p>
               <input
-                  type="number"
-                  value={MinValue}
-                  onChange={(e) => {setMinValue(e.target.value)}}
+                type="number"
+                value={MinValue}
+                onChange={(e) => {
+                  setMinValue(e.target.value);
+                }}
               ></input>
               <p>Maximum Ideal Price($):</p>
               <input
-                  type="number"
-                  value={MaxValue}
-                  onChange={(e) => {setMaxValue(e.target.value)}}
+                type="number"
+                value={MaxValue}
+                onChange={(e) => {
+                  setMaxValue(e.target.value);
+                }}
               ></input>
             </div>
           </Col>
@@ -166,31 +172,37 @@ function Main() {
       <Row>
         <Col sm={3}>
           <select
-              id="category"
-              value={Category_request_Select}
-              onChange={(e) => {SetCategory_request_Select(e.target.value)}}
+            id="category"
+            value={Category_request_Select}
+            onChange={(e) => {
+              SetCategory_request_Select(e.target.value);
+            }}
           >
             <option key="all" value="Select Category">
               Select Category
             </option>
             {Category_request.map((p, i) => (
-                <option key={i} value={p}>
-                  {p}
-                </option>
+              <option key={i} value={p}>
+                {p}
+              </option>
             ))}
           </select>
           <div className="pt-3">
             <p>Minimum Ideal Price($):</p>
             <input
-                type="number"
-                value={MinValue}
-                onChange={(e) => {setMinValue(e.target.value)}}
+              type="number"
+              value={MinValue}
+              onChange={(e) => {
+                setMinValue(e.target.value);
+              }}
             ></input>
             <p>Maximum Ideal Price($):</p>
             <input
-                type="number"
-                value={MaxValue}
-                onChange={(e) => {setMaxValue(e.target.value)}}
+              type="number"
+              value={MaxValue}
+              onChange={(e) => {
+                setMaxValue(e.target.value);
+              }}
             ></input>
           </div>
         </Col>
@@ -205,7 +217,7 @@ function Main() {
                 <th>Date for task</th>
                 <th>Address</th>
               </tr>
-              {filter_on_post(Posts,Category_request_Select).map((p, i) => (
+              {filter_on_post(Posts, Category_request_Select).map((p, i) => (
                 <tr key={i}>
                   <th>{p.Category}</th>
                   <th>{p.Description}</th>
@@ -283,7 +295,9 @@ function Main() {
               type="text"
               pattern="[0-9]{5}"
               title="Five digit zip code"
-              onChange={(e) => {setZipCode(e.target.value)}}
+              onChange={(e) => {
+                setZipCode(e.target.value);
+              }}
             />
             <Button
               variant="secondary"

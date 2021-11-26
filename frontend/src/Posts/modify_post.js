@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import AddressAutoComplete from "../Other Components/autocomplete";
 
 function ModifyPost(props) {
   let [Subject, setSubject] = useState(props.information.Description);
@@ -7,7 +8,9 @@ function ModifyPost(props) {
   let [Price, setPrice] = useState(props.information["Ideal Price"]);
   let [Date, setDate] = useState(props.information["Date for task"]);
   let [Zipcode, setZipcode] = useState(props.information["Zip Code"]);
-  let [Address, setAddress] = useState(props.information.Address);
+  let [Address, setAddress] = useState(props.information["Address"]);
+  let [Latitude, setLatitude] = useState(props.information.Latitude);
+  let [Longitude, setLongitude] = useState(props.information.Longitude);
   //Change is not permitted between Seek Help and Offer Help.
   const Mode = props.information.Mode;
   const id = props.information._id;
@@ -47,6 +50,8 @@ function ModifyPost(props) {
         "Date for task": Date,
         "Zip Code": Zipcode,
         Address: Address,
+        Latitude: Latitude,
+        Longitude: Longitude,
       }),
     });
     setShow(false);
@@ -162,23 +167,29 @@ function ModifyPost(props) {
               </div>
             </div>
 
-            <div className="row">
-              <div className="col-md-12">
-                <div className="md-form mb-0">
-                  <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    className="form-control"
-                    value={Address}
-                    onChange={addressChange}
-                  />
-                  <label htmlFor="address" className="">
-                    Address
-                  </label>
-                </div>
-              </div>
-            </div>
+            <AddressAutoComplete
+              initialaddress={Address}
+              setaddress={setAddress}
+              setlatitude={setLatitude}
+              setlongitude={setLongitude}
+            />
+            {/*<div className="row">*/}
+            {/*  <div className="col-md-12">*/}
+            {/*    <div className="md-form mb-0">*/}
+            {/*      <input*/}
+            {/*        type="text"*/}
+            {/*        id="address"*/}
+            {/*        name="address"*/}
+            {/*        className="form-control"*/}
+            {/*        value={Address}*/}
+            {/*        onChange={addressChange}*/}
+            {/*      />*/}
+            {/*      <label htmlFor="address" className="">*/}
+            {/*        Address*/}
+            {/*      </label>*/}
+            {/*    </div>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
 
             <div className="row">
               <div className="col-md-12">
