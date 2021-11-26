@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const myDB = require("../database/mongoDB.js");
+const passport = require("passport");
 
 //establish connection with cloud database
 myDB.establishConnection().catch(console.dir);
@@ -14,14 +15,39 @@ router.post("/register", async (req, res) => {
   await myDB.create_account(username, password, res).catch(console.dir);
 });
 
-router.post("/login-auth", async (req, res) => {
-  console.log("Received user-input account information...");
-  // Insert Login Code Here
-  const username = req.body.username;
-  const password = req.body.password;
-  await myDB
-    .process_username_password_input(username, password, res)
-    .catch(console.dir);
+// router.post("/login-auth", async (req, res) => {
+//   console.log("Received user-input account information...");
+//   // Insert Login Code Here
+//   const username = req.body.username;
+//   const password = req.body.password;
+//   await myDB
+//     .process_username_password_input(username, password, res)
+//     .catch(console.dir);
+// });
+// router.post(
+//   "/login-auth",
+//   // passport.authenticate("local", {
+//   //   successRedirect: "/post",
+//   //   failureRedirect: "/login",
+//   //   failureMessage: true,
+//   // })
+// );
+
+router.post("/login-auth", function (req, res, next) {
+  passport.authenticate("local", function (err, user) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.send({ status: false });
+    }
+    req.logIn(user, function (err) {
+      if (err) {
+        return next(err);
+      }
+      return res.send({ status: true });
+    });
+  })(req, res, next);
 });
 
 //Load all posts for index page regardless of username. (Useful for index page)

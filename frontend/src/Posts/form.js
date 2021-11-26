@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import AddressAutoComplete from "../Other Components/autocomplete";
 function SubmitForm() {
   let [Subject, setSubject] = useState("");
   let [Category, setCategory] = useState([]);
@@ -8,6 +8,9 @@ function SubmitForm() {
   let [Zipcode, setZipcode] = useState(0);
   let [Address, setAddress] = useState("");
   let [Mode, setMode] = useState("OfferHelp");
+  let [AddressAuto, setAddressAuto] = useState("");
+  let [Latitude, setLatitude] = useState(0);
+  let [Longitude, setLongitude] = useState(0);
 
   //backend return status to frontend, should be displayed as message as user's feedback.
   let [Status, setStatus] = useState("");
@@ -48,7 +51,9 @@ function SubmitForm() {
         "Ideal Price": Price,
         "Date for task": Date,
         "Zip Code": Zipcode,
-        Address: Address,
+        Address: AddressAuto,
+        Latitude: Latitude,
+        Longitude: Longitude,
       }),
     });
     let result = await res.json();
@@ -144,23 +149,30 @@ function SubmitForm() {
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-md-12">
-          <div className="md-form mb-0">
-            <input
-              type="text"
-              id="address"
-              name="address"
-              className="form-control"
-              value={Address}
-              onChange={addressChange}
-            />
-            <label htmlFor="address" className="">
-              Address
-            </label>
-          </div>
-        </div>
-      </div>
+      {/*<div className="row">*/}
+      {/*  <div className="col-md-12">*/}
+      {/*    <div className="md-form mb-0">*/}
+      {/*      <input*/}
+      {/*        type="text"*/}
+      {/*        id="address"*/}
+      {/*        name="address"*/}
+      {/*        className="form-control"*/}
+      {/*        value={Address}*/}
+      {/*        onChange={addressChange}*/}
+      {/*      />*/}
+      {/*      <label htmlFor="address" className="">*/}
+      {/*        Address*/}
+      {/*      </label>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
+
+      <AddressAutoComplete
+        initialaddress=""
+        setaddress={setAddressAuto}
+        setlatitude={setLatitude}
+        setlongitude={setLongitude}
+      />
 
       <div className="row">
         <div className="col-md-12">

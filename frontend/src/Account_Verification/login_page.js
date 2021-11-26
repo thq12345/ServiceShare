@@ -17,6 +17,7 @@ function LoginForm() {
 
   const handleAuth = async (event) => {
     event.preventDefault();
+
     const res = await fetch("/api/login-auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -25,7 +26,9 @@ function LoginForm() {
         password: user.password,
       }),
     });
-    result = await res.json();
+
+    let result = await res.json();
+
     if (result.status === false) {
       set_status("Incorrect username/password! Please try again!");
     }
