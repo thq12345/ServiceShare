@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
+require("dotenv").config();
 
 const CenterRedCirclePinpoint = () => (
   <div
@@ -32,7 +33,7 @@ function Map(props) {
     // Important! Always set the container height explicitly
     <div style={{ height: "50vh", width: "48vh" }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyD-RXUr0q6940CAxa6V7U4dpS86hLKpPSg" }}
+        bootstrapURLKeys={{ key: process.env.GOOGLE_MAP_API }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >

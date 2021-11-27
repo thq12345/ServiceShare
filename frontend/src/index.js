@@ -3,10 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+require("dotenv").config();
+
+const APIlink =
+  "https://maps.googleapis.com/maps/api/js?key=" +
+  process.env.GOOGLE_MAP_API +
+  "&libraries=places";
 
 //DO NOT CHANGE ANYTHING IN THIS FILE!!!!!!
 ReactDOM.render(
   <React.StrictMode>
+    <script src={APIlink}></script>
     <App />
   </React.StrictMode>,
   document.getElementById("root")

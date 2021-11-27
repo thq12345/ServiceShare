@@ -10,8 +10,7 @@ function myDB() {
   // MongoDB Connection URI
   // MAKE SURE TO DELETE CONNECTION STRING UPON COMPLETION
   const uri =
-    process.env.MONGO_DB ||
-    "mongodb+srv://admin:n6KP16laOm9YkgRL@cs5610project3.kwjri.mongodb.net/test?authSource=admin&replicaSet=atlas-lwlb3r-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true";
+    process.env.MONGO_DB;
 
   myDB.establishConnection = async () => {
     const client = new MongoClient(uri);
