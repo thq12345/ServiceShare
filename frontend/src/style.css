@@ -57,6 +57,9 @@ nav{
 .logo-image {
   height: 30vh;
 }
+.nav_logo{
+  max-height: 70px;
+}
 .filter-section {
   font-size:20px;
   position: absolute;
