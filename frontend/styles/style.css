@@ -1,0 +1,58 @@
+html {
+  font-family: Helvetica, Sans-Serif;
+  background-color: #f5efe8;
+}
+
+.navbar .dropdown-menu .form-control {
+  /*background-color: #3C7191;*/
+  height: 100px;
+  /*color: white;*/
+  font-size: 40px;
+}
+
+nav {
+  height: 70px;
+  font-size: 30px;
+}
+
+#outer-header {
+  height: 73vh;
+  width: 100%;
+  background-color: #d1c8be;
+}
+
+#head_logo {
+  width: 40%;
+  height: auto;
+  position: relative;
+  margin: auto;
+}
+
+.tag {
+  padding: 10px;
+  margin: auto;
+  float: none;
+  width: 20vw;
+  position: relative;
+  /*background-color: #97CDE4;*/
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.filter-section {
+  font-size: 20px;
+  position: absolute;
+  float: left;
+}
+
+#header-image {
+  display: flex;
+  justify-content: center;
+  height: 30vh;
+}
+
+#table {
+  font-size: 20px;
+  color: #282c34;
+}
