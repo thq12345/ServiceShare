@@ -1,27 +1,37 @@
-# Service Share Website
+# Service Share
 
 ### Author: [Tianhao Qu](https://thq12345.github.io/PersonalHomepage/), [Kaitlyn(Kaiwen) Tian](https://kaitlyntian.github.io/homepage/index.html)
 
 ### Demo
 
 Please use this link:
-https://helpfinder-v1.herokuapp.com/
+https://helpfinder-v2.herokuapp.com/
 
 ### Objective
 
 This website is to build a platform for people to offer and seek freelance work for litterally everything! You can post and read your work requests, as well as offer your flexibility and expertise on where you can help the others.
 
-## Instruction to build:
+### Instruction to build:
 
 - Download this project as zip file or clone to your own gits
 - Install [node.js](https://nodejs.org/en/) to your machine
 - Unzip this project on your local machine and cd to this folder location
 
-1. npm install
-2. npm start
-3. cd frontend => yarn install
-4. cd frontend => yarn start
-5. ou then can find this project running on the your **http://localhost:3000/**
+1. yarn install
+2. yarn start
+3. cd frontend => yarn install => yarn start
+5. you then can find this project running on the your **http://localhost:3000/**
+
+### Technologies we used:
+- Node+Express
+- React
+- Bootstrap 
+- HTML+CSS+Javascript
+- MongoDB
+- Passport.js (login authentication)
+- Google Map Javascript API (showing pinpoints on map & autocomplete user place input)
+- Google Map Geocoding API (parsing address into GPS coordinates)
+
 
 ### Youtube Video
 
@@ -31,14 +41,14 @@ https://www.youtube.com/watch?v=d8gvWh5A04U&ab_channel=kaitlyntian
 
 ![Main Page](https://github.com/thq12345/Project3/blob/development/frontend/src/images/ServiceShareScreenshot.PNG?raw=true)
 
-### Google slide
+### Slides
 
 https://docs.google.com/presentation/d/1mxConZM5o330nVFRe7r0Qh7vZmKilQDqG0ZpRg0K_r0/edit?usp=sharing
 
-### Who did what
+### Work Distribution
 
-- Tianhao: help seeker page, category, price filter, login page
-- Kaiwen(Kaitlyn): helper page, zip code filter
+- Tianhao: login page, help seeker page, category filter, passport.js & google map
+- Kaiwen(Kaitlyn): helper page, zip code filter, UI design enhancements, price filter
 
 ### MIT License
 
