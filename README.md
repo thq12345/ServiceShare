@@ -36,7 +36,7 @@ and read your work requests, as well as offer your flexibility and expertise on 
 
 ### Youtube Video
 
-https://www.youtube.com/watch?v=d8gvWh5A04U&ab_channel=kaitlyntian
+https://youtu.be/RLrrcD0vEOE
 
 ### Sample images
 
@@ -44,7 +44,7 @@ https://www.youtube.com/watch?v=d8gvWh5A04U&ab_channel=kaitlyntian
 
 ### Slides
 
-https://docs.google.com/presentation/d/1mxConZM5o330nVFRe7r0Qh7vZmKilQDqG0ZpRg0K_r0/edit?usp=sharing
+https://docs.google.com/presentation/d/1vtvEWsHSOthV0CzSdZ6w8Ft_ErwHLXUKlRoOhvNSyiI/edit#slide=id.g102d26d02ac_0_0
 
 ### Work Distribution
 
