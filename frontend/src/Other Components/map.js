@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
+import PropTypes from "prop-types";
 require("dotenv").config();
 
 const CenterRedCirclePinpoint = () => (
@@ -43,4 +44,8 @@ function Map(props) {
   );
 }
 
+Map.propTypes = {
+  longitude: PropTypes.number,
+  latitude: PropTypes.number,
+};
 export default Map;

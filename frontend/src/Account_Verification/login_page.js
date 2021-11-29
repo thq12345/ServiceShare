@@ -4,7 +4,6 @@ import logo from "../images/logo.png";
 
 function LoginForm() {
   const [user, setUser] = useState({ username: "", password: "" });
-  let result;
   let [current_status, set_status] = useState("");
   let navigate = useNavigate();
 
@@ -43,13 +42,15 @@ function LoginForm() {
       <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <div className="container-fluid">
           <ul className="navbar-nav me-auto">
-            <li><img src={logo} className="nav-item, nav_logo" alt="Service Share Logo"></img></li>
+            <li>
+              <img
+                src={logo}
+                className="nav-item, nav_logo"
+                alt="Service Share Logo"
+              ></img>
+            </li>
             <li className="nav-item pt-2">
-              <a
-                  className="nav-link active"
-                  aria-current="page"
-                  href="./"
-              >
+              <a className="nav-link active" aria-current="page" href="./">
                 Home
               </a>
             </li>

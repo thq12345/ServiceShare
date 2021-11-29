@@ -6,7 +6,6 @@ function SubmitForm() {
   let [Price, setPrice] = useState(0);
   let [Date, setDate] = useState("");
   let [Zipcode, setZipcode] = useState(0);
-  let [Address, setAddress] = useState("");
   let [Mode, setMode] = useState("OfferHelp");
   let [AddressAuto, setAddressAuto] = useState("");
   let [Latitude, setLatitude] = useState(0);
@@ -30,15 +29,13 @@ function SubmitForm() {
   let zipcodeChange = (event) => {
     setZipcode(event.target.value);
   };
-  let addressChange = (event) => {
-    setAddress(event.target.value);
-  };
+
   let modeChange = (event) => {
     setMode(event.target.value);
   };
 
   //when the user hit the submit button of the form
-  const handleSubmit = async (event) => {
+  const handleSubmit = async () => {
     //we also need to add a type checker to ensure numbers are numbers, strings are strings etc.
     // event.preventDefault();
     const res = await fetch("/api/submit-form", {

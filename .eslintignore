@@ -1,0 +1,5 @@
+**/*.png
+yarn.lock
+**/*.ico
+**/*.css
+package.json

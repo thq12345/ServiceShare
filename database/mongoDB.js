@@ -9,8 +9,7 @@ function myDB() {
 
   // MongoDB Connection URI
   // MAKE SURE TO DELETE CONNECTION STRING UPON COMPLETION
-  const uri =
-    process.env.MONGO_DB;
+  const uri = process.env.MONGO_DB;
 
   myDB.establishConnection = async () => {
     const client = new MongoClient(uri);
@@ -26,7 +25,7 @@ function myDB() {
     }
   };
 
-  myDB.insert_post = async (req_json, res) => {
+  myDB.insert_post = async (req_json) => {
     let feedback_database;
     console.log("Inserting:::", req_json);
     if (req_json.Mode === "OfferHelp") {

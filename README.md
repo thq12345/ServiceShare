@@ -20,18 +20,18 @@ This website is to build a platform for people to offer and seek freelance work 
 1. yarn install
 2. yarn start
 3. cd frontend => yarn install => yarn start
-5. you then can find this project running on the your **http://localhost:3000/**
+4. you then can find this project running on the your **http://localhost:3000/**
 
 ### Technologies we used:
+
 - Node+Express
 - React
-- Bootstrap 
+- Bootstrap
 - HTML+CSS+Javascript
 - MongoDB
 - Passport.js (login authentication)
 - Google Map Javascript API (showing pinpoints on map & autocomplete user place input)
 - Google Map Geocoding API (parsing address into GPS coordinates)
-
 
 ### Youtube Video
 

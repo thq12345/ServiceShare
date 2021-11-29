@@ -6,7 +6,7 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 import React from "react";
-
+import PropTypes from "prop-types";
 function AddressAutoComplete(props) {
   const {
     ready,
@@ -61,7 +61,7 @@ function AddressAutoComplete(props) {
   const renderSuggestions = () =>
     data.map((suggestion, i) => {
       const {
-        id,
+        // id,
         structured_formatting: { main_text, secondary_text },
       } = suggestion;
 
@@ -100,4 +100,11 @@ function AddressAutoComplete(props) {
     </div>
   );
 }
+
+AddressAutoComplete.propTypes = {
+  initialaddress: PropTypes.string,
+  setaddress: PropTypes.func,
+  setlatitude: PropTypes.func,
+  setlongitude: PropTypes.func,
+};
 export default AddressAutoComplete;

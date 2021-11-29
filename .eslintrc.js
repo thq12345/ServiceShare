@@ -15,10 +15,11 @@ module.exports = {
     "package-lock.json",
     "yarn-error.log",
     "yarn.lock",
+    "**/*.png",
   ],
   rules: {
     indent: ["error", 2, { SwitchCase: 1 }],
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": 0,
     quotes: ["error", "double"],
     semi: ["error", "always"],
     "no-console": 0,

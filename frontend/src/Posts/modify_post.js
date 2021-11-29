@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AddressAutoComplete from "../Other Components/autocomplete";
-
+import PropTypes from "prop-types";
 function ModifyPost(props) {
   let [Subject, setSubject] = useState(props.information.Description);
   let [Category, setCategory] = useState(props.information.Category);
@@ -29,9 +29,6 @@ function ModifyPost(props) {
   };
   let zipcodeChange = (event) => {
     setZipcode(event.target.value);
-  };
-  let addressChange = (event) => {
-    setAddress(event.target.value);
   };
 
   //when the user hit the submit button of the form
@@ -221,4 +218,8 @@ function ModifyPost(props) {
     </>
   );
 }
+
+ModifyPost.propTypes = {
+  information: PropTypes.object,
+};
 export default ModifyPost;

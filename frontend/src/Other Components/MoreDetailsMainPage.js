@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import Map from "./map.js";
+import PropTypes from "prop-types";
 function MoreDetails(props) {
   const [show, setShow] = useState(false);
 
@@ -36,5 +37,9 @@ function MoreDetails(props) {
     </>
   );
 }
+
+MoreDetails.propTypes = {
+  json: PropTypes.object,
+};
 
 export default MoreDetails;
