@@ -113,24 +113,24 @@ function myDB() {
     console.log("A Username Password Pair has been inserted successfully.");
   };
 
-  myDB.process_username_password_input = async (username, password, res) => {
-    const collection_info = project_database.collection("username_password");
-
-    const query = {
-      username: username,
-    };
-    const execute = await collection_info.findOne(query);
-    if (execute == null) {
-      res.json({ status: false });
-    } else {
-      if (password == execute.password) {
-        username_global = username;
-        res.json({ status: true });
-      } else {
-        res.json({ status: false });
-      }
-    }
-  };
+  // myDB.process_username_password_input = async (username, password, res) => {
+  //   const collection_info = project_database.collection("username_password");
+  //
+  //   const query = {
+  //     username: username,
+  //   };
+  //   const execute = await collection_info.findOne(query);
+  //   if (execute == null) {
+  //     res.json({ status: false });
+  //   } else {
+  //     if (password == execute.password) {
+  //       username_global = username;
+  //       res.json({ status: true });
+  //     } else {
+  //       res.json({ status: false });
+  //     }
+  //   }
+  // };
 
   myDB.getComments = async (res) => {
     console.log("Reload comment has been executed.");

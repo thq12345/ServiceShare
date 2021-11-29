@@ -31,7 +31,6 @@ function Map(props) {
   };
 
   return (
-    // Important! Always set the container height explicitly
     <div style={{ height: "50vh", width: "48vh" }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API }}

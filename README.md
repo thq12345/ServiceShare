@@ -9,7 +9,8 @@ https://helpfinder-v2.herokuapp.com/
 
 ### Objective
 
-This website is to build a platform for people to offer and seek freelance work for litterally everything! You can post and read your work requests, as well as offer your flexibility and expertise on where you can help the others.
+This website is to build a platform for people to offer and seek freelance work for litterally everything! You can post
+and read your work requests, as well as offer your flexibility and expertise on where you can help the others.
 
 ### Instruction to build:
 
@@ -20,12 +21,12 @@ This website is to build a platform for people to offer and seek freelance work 
 1. yarn install
 2. yarn start
 3. cd frontend => yarn install => yarn start
-4. you then can find this project running on the your **http://localhost:3000/**
+4. you then can find this project running on **http://localhost:3000/**
 
 ### Technologies we used:
 
 - Node+Express
-- React
+- React & React Router
 - Bootstrap
 - HTML+CSS+Javascript
 - MongoDB
@@ -47,30 +48,30 @@ https://docs.google.com/presentation/d/1mxConZM5o330nVFRe7r0Qh7vZmKilQDqG0ZpRg0K
 
 ### Work Distribution
 
-- Tianhao: login page, help seeker page, category filter, passport.js & google map
+- Tianhao: login/create account page, help seeker page, category filter, passport.js & google map
 - Kaiwen(Kaitlyn): helper page, zip code filter, UI design enhancements, price filter
+
+### Notes
+
+We prefilled the data randomly, therefore some of the address data might not match what the map shows, please ignore. We
+tried many times that user submitted information through our form will be accurate (that map location will match the address).
 
 ### MIT License
 
 Copyright (c) 2021 Tianhao Qu & Kaiwen Tian
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
+persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-All the knowledge we have learnt building this project came from [Northeastern CS 5610 Web Development
-Northeastern University Bay Area] (https://johnguerra.co/classes/webDevelopment_fall_2021/)
+All the knowledge we have learnt building this project came
+from [Northeastern CS 5610 Web Development Northeastern University Bay Area] (https://johnguerra.co/classes/webDevelopment_fall_2021/)

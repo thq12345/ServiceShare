@@ -24,7 +24,7 @@ function Main() {
   let textMinInput = useRef(0);
   let textMaxInput = useRef(100000);
 
-  let onClickHandler = (e) => {
+  let onClickHandler = () => {
     setMinValue(parseInt(textMinInput.current.value));
     setMaxValue(parseInt(textMaxInput.current.value));
     if (!textMinInput.current.value) {
@@ -167,7 +167,7 @@ function Main() {
             </div>
             <div className="pt-3">
               <Button type="button" onClick={onClickHandler}>
-                Submit
+                Apply Price Filter
               </Button>
             </div>
           </Col>
@@ -215,7 +215,7 @@ function Main() {
           </div>
           <div className="pt-3">
             <Button type="button" onClick={onClickHandler}>
-              Submit
+              Apply Price Filter
             </Button>
           </div>
         </Col>

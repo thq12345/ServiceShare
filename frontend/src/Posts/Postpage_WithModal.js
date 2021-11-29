@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button } from "react-bootstrap";
-import SubmitForm from "./form.js";
+import { Button } from "react-bootstrap";
 import ModifyPost from "./modify_post.js";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
-import PropTypes from "prop-types";
+import MyVerticallyCenteredModal from "./VerticallyCenteredModal.js";
 
-function MyVerticallyCenteredModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Submit a New Post
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <SubmitForm />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
+// function MyVerticallyCenteredModal(props) {
+//   return (
+//     <Modal
+//       {...props}
+//       size="lg"
+//       aria-labelledby="contained-modal-title-vcenter"
+//       centered
+//     >
+//       <Modal.Header closeButton>
+//         <Modal.Title id="contained-modal-title-vcenter">
+//           Submit a New Post
+//         </Modal.Title>
+//       </Modal.Header>
+//       <Modal.Body>
+//         <SubmitForm />
+//       </Modal.Body>
+//       <Modal.Footer>
+//         <Button onClick={props.onHide}>Close</Button>
+//       </Modal.Footer>
+//     </Modal>
+//   );
+// }
 
 function PostForm2() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -133,9 +132,9 @@ function PostForm2() {
   );
 }
 
-MyVerticallyCenteredModal.propTypes = {
-  onHide: PropTypes.func,
-  show: PropTypes.bool,
-};
+// MyVerticallyCenteredModal.propTypes = {
+//   onHide: PropTypes.func,
+//   show: PropTypes.bool,
+// };
 
 export default PostForm2;

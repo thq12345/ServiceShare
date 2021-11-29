@@ -1,5 +1,3 @@
-//Code below is edited from the official documentation of use-places-autocomplete package.
-//It leverages google API for address autocomplete/prediction
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
