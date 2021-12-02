@@ -7,7 +7,8 @@ function MoreDetails(props) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  
+  // Xuejia Yang: The map api component exceeds the window component's boundary.
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
