@@ -22,6 +22,7 @@ function MoreDetails(props) {
           <p>Email: {props.json.username}</p>
           <p>Price: {props.json["Ideal Price"]}</p>
           <p>Address: {props.json.Address}</p>
+          <p>Scale: {window.devicePixelRatio}</p>
           <p>Location on Map:</p>
           <Map
             longitude={props.json.Longitude}
