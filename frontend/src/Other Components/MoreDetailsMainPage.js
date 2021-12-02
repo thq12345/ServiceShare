@@ -8,6 +8,7 @@ function MoreDetails(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+   // Xuejia Yang: Please add a dollar sign before price!
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
