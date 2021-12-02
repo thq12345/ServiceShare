@@ -76,6 +76,11 @@ function SubmitForm() {
         </div>
       </div>
       <br />
+                
+      // Code Review (by Shushu Chen): It took me a few seconds to 
+      // realize which label describes which input box. Maybe you
+      // could put label above the input area or put them in different columns.
+                
       <div className="row">
         <div className="col-md-12">
           <div className="md-form">
