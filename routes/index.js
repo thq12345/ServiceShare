@@ -15,6 +15,7 @@ router.post("/register", async (req, res) => {
   await myDB.create_account(username, password, res).catch(console.dir);
 });
 
+// Xuejia Yang: It would be better if you could delete unuse codes.
 // router.post("/login-auth", async (req, res) => {
 //   console.log("Received user-input account information...");
 //   // Insert Login Code Here
