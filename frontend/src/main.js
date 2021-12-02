@@ -112,6 +112,7 @@ function Main() {
     const productRows = rows.map((row, idx) =>
       HelperFiltered.slice(idx * 4, idx * 4 + 4)
     );
+    // Xuejia Yang: The card size is not fixed, maybe fix it to 4 cards each line?
     const content = productRows.map((row, idx) => (
       <div className="row m-3e" key={idx}>
         {row.map((h, i) => (
