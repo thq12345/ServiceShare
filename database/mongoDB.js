@@ -28,6 +28,10 @@ function myDB() {
   myDB.insert_post = async (req_json) => {
     let feedback_database;
     console.log("Inserting:::", req_json);
+    
+    // Code Review (by Shushu Chen): I like how you are using an attribute
+    // to decide which collection to use and save code
+    
     if (req_json.Mode === "OfferHelp") {
       feedback_database = project_database.collection("helper");
     } else if (req_json.Mode === "SeekHelp") {
@@ -50,6 +54,8 @@ function myDB() {
       // res.redirect("/account-already-exists");
       res.json({ status: "account-exists" });
     } else {
+      // Code Review (by Shushu Chen): nice use of function inside
+      // the myDB to ensure only valid data is inserted
       myDB
         .insert_username_password(username, password, collection_info)
         .catch(console.dir);
