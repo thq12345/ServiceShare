@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AddressAutoComplete from "../Other Components/autocomplete";
-import PropTypes from "prop-types";
-function ModifyPost(props) {
-  let [Subject, setSubject] = useState(props.information.Description);
-  let [Category, setCategory] = useState(props.information.Category);
-  let [Price, setPrice] = useState(props.information["Ideal Price"]);
-  let [Date, setDate] = useState(props.information["Date for task"]);
-  let [Zipcode, setZipcode] = useState(props.information["Zip Code"]);
-  let [Address, setAddress] = useState(props.information["Address"]);
-  let [Latitude, setLatitude] = useState(props.information.Latitude);
-  let [Longitude, setLongitude] = useState(props.information.Longitude);
-  //Change is not permitted between Seek Help and Offer Help.
-  const Mode = props.information.Mode;
-  const id = props.information._id;
 
+function SubmitForm() {
+  let [Subject, setSubject] = useState("");
+  let [Category, setCategory] = useState("");
+  let [Price, setPrice] = useState(0);
+  let [Date, setDate] = useState("");
+  let [Zipcode, setZipcode] = useState("");
+  let [Address, setAddress] = useState("");
+  let [Latitude, setLatitude] = useState(0);
+  let [Longitude, setLongitude] = useState(0);
+  let [Mode, setMode] = useState("OfferHelp");
+  let [show, setShow] = useState(false);
   let subjectChange = (event) => {
     setSubject(event.target.value);
   };
@@ -31,15 +29,17 @@ function ModifyPost(props) {
     setZipcode(event.target.value);
   };
 
+  let modeChange = (event) => {
+    setMode(event.target.value);
+  };
+
   //when the user hit the submit button of the form
-  const handleEdit = async (event) => {
+  const handleSubmit = async () => {
     //we also need to add a type checker to ensure numbers are numbers, strings are strings etc.
-    // event.preventDefault();
-    await fetch("/api/edit-post", {
+    await fetch("/api/submit-form", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        _id: id,
         Mode: Mode,
         Description: Subject,
         Category: Category,
@@ -55,48 +55,44 @@ function ModifyPost(props) {
     window.location.reload(true);
   };
 
-  //when the user hit the submit button of the form
-  const handleDelete = async (event) => {
-    //we also need to add a type checker to ensure numbers are numbers, strings are strings etc.
-    // event.preventDefault();
-    await fetch("/api/delete-post", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        _id: id,
-        Mode: Mode,
-        Description: Subject,
-        Category: Category,
-        "Ideal Price": Price,
-        "Date for task": Date,
-        "Zip Code": Zipcode,
-        Address: Address,
-      }),
-    });
-    setShow(false);
-    window.location.reload(true);
-  };
-
-  const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   return (
     <>
       <Button variant="secondary" onClick={handleShow}>
-        Edit or Delete Post
+        Submit a New Post
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit or Delete Post</Modal.Title>
+          <Modal.Title>Submit a New Post</Modal.Title>
         </Modal.Header>
         <form id="contact-form" name="contact-form">
           <Modal.Body>
             <div className="row">
               <div className="col-md-12">
                 <div className="md-form">
+                  <div className="md-form mb-0">
+                    I am posting to...
+                    <select
+                      id="categorySelect"
+                      aria-label="categorySelect"
+                      value={Mode}
+                      onChange={modeChange}
+                    >
+                      <option
+                        key="offer"
+                        value="OfferHelp"
+                        onChange={modeChange}
+                      >
+                        OfferHelp
+                      </option>
+                      <option key="seek" value="SeekHelp" onChange={modeChange}>
+                        SeekHelp
+                      </option>
+                    </select>
+                  </div>
                   <label htmlFor="category">Category</label>
                   <input
                     type="text"
@@ -114,9 +110,7 @@ function ModifyPost(props) {
             <div className="row">
               <div className="col-md-12">
                 <div className="md-form mb-0">
-                  <label htmlFor="subject" className="">
-                    Description
-                  </label>
+                  <label htmlFor="subject">Description</label>
                   <input
                     type="text"
                     id="subject"
@@ -150,9 +144,7 @@ function ModifyPost(props) {
             <div className="row">
               <div className="col-md-12">
                 <div className="md-form mb-0">
-                  <label htmlFor="date" className="">
-                    Date for Subject
-                  </label>
+                  <label htmlFor="date">Date for Subject</label>
                   <input
                     type="text"
                     id="date"
@@ -172,29 +164,12 @@ function ModifyPost(props) {
               setlatitude={setLatitude}
               setlongitude={setLongitude}
             />
-            {/*<div className="row">*/}
-            {/*  <div className="col-md-12">*/}
-            {/*    <div className="md-form mb-0">*/}
-            {/*      <input*/}
-            {/*        type="text"*/}
-            {/*        id="address"*/}
-            {/*        name="address"*/}
-            {/*        className="form-control"*/}
-            {/*        value={Address}*/}
-            {/*        onChange={addressChange}*/}
-            {/*      />*/}
-            {/*      <label htmlFor="address" className="">*/}
-            {/*        Address*/}
-            {/*      </label>*/}
-            {/*    </div>*/}
-            {/*  </div>*/}
-            {/*</div>*/}
 
             <div className="row">
               <div className="col-md-12">
                 <div className="md-form">
                   <label htmlFor="zipcode">Zip Code</label>
-                  <textarea
+                  <input
                     type="text"
                     id="zipcode"
                     name="zipcode"
@@ -202,18 +177,14 @@ function ModifyPost(props) {
                     value={Zipcode}
                     onChange={zipcodeChange}
                     className="form-control md-textarea"
-                  ></textarea>
-                  <br />
+                  />
                 </div>
               </div>
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleEdit}>
-              Edit
-            </Button>
-            <Button variant="primary" onClick={handleDelete}>
-              Delete
+            <Button variant="secondary" onClick={handleSubmit}>
+              Submit
             </Button>
           </Modal.Footer>
         </form>
@@ -222,7 +193,4 @@ function ModifyPost(props) {
   );
 }
 
-ModifyPost.propTypes = {
-  information: PropTypes.object,
-};
-export default ModifyPost;
+export default SubmitForm;

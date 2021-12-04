@@ -77,3 +77,29 @@ nav {
   font-size: 20px;
   color: #282c34;
 }
+
+.table-header {
+  background-color: #97CDE4;
+  color: #F5EFE8;
+}
+
+.page-item{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.stands-out-button{
+  background-color: #3C7191;
+  font-size: 20px;
+  color: #F5EFE8;
+  border-radius: 12px;
+  padding: 10px 20px;
+  margin: 5px;
+}
+
+#category{
+  font-size: 15px;
+  font-weight: bold;
+  color: #F5EFE8;
+  background-color: #3C7191;
+}

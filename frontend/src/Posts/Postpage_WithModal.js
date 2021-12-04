@@ -3,33 +3,9 @@ import { Button } from "react-bootstrap";
 import ModifyPost from "./modify_post.js";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
-import MyVerticallyCenteredModal from "./VerticallyCenteredModal.js";
-
-// function MyVerticallyCenteredModal(props) {
-//   return (
-//     <Modal
-//       {...props}
-//       size="lg"
-//       aria-labelledby="contained-modal-title-vcenter"
-//       centered
-//     >
-//       <Modal.Header closeButton>
-//         <Modal.Title id="contained-modal-title-vcenter">
-//           Submit a New Post
-//         </Modal.Title>
-//       </Modal.Header>
-//       <Modal.Body>
-//         <SubmitForm />
-//       </Modal.Body>
-//       <Modal.Footer>
-//         <Button onClick={props.onHide}>Close</Button>
-//       </Modal.Footer>
-//     </Modal>
-//   );
-// }
+import SubmitForm from "./submitform";
 
 function PostForm2() {
-  const [modalShow, setModalShow] = React.useState(false);
   const navigate = useNavigate();
 
   //all posts that belongs to this user.
@@ -45,7 +21,7 @@ function PostForm2() {
   }, []);
 
   return (
-    <main>
+    <>
       <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <div className="container-fluid">
           <ul className="navbar-nav me-auto">
@@ -76,20 +52,21 @@ function PostForm2() {
         </div>
       </nav>
       <section className="container mb-4">
-        <h2 className="h1-responsive font-weight-bold text-center my-4">
+        <h1 className="h1-responsive font-weight-bold text-center my-4">
           Welcome!
-        </h2>
+        </h1>
+        <SubmitForm />
 
-        <div>
-          <Button variant="secondary" onClick={() => setModalShow(true)}>
-            Submit a New Post
-          </Button>
+        {/*  <div>*/}
+        {/*    <Button variant="secondary" onClick={() => setModalShow(true)}>*/}
+        {/*      Submit a New Post*/}
+        {/*    </Button>*/}
 
-          <MyVerticallyCenteredModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-        </div>
+        {/*    <MyVerticallyCenteredModal*/}
+        {/*      show={modalShow}*/}
+        {/*      onHide={() => setModalShow(false)}*/}
+        {/*    />*/}
+        {/*  </div>*/}
       </section>
 
       <section className="pt-5 container">
@@ -128,7 +105,7 @@ function PostForm2() {
           </tbody>
         </table>
       </section>
-    </main>
+    </>
   );
 }
 

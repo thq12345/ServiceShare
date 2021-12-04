@@ -4,8 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
-import MoreDetails from "./Other Components/MoreDetailsMainPage.js";
 import logo from "./images/logo.png";
+import SeekHelpTable from "./Other Components/SeekHelpTable.js";
+import OfferHelpTable from "./Other Components/OfferHelpTable.js";
+import { data } from "express-session/session/cookie";
+
 function Main() {
   let [Posts, setPosts] = useState([]);
   let [Category_request, setCategory_request] = useState([]);
@@ -127,6 +130,7 @@ function Main() {
       <Col sm={3}>
         <select
           id="category"
+          aria-label="category"
           value={Category_request_Select}
           onChange={(e) => {
             SetCategory_request_Select(e.target.value);
@@ -143,27 +147,36 @@ function Main() {
         </select>
 
         <div className="pt-3">
-          <p>Zip Code:</p>
+          {/*<p>Zip Code:</p>*/}
+          <label htmlFor="zipinput">Zip Code: </label>
+          <br />
           <input
             type="text"
+            id="zipinput"
             ref={zipInput}
             placeholder={zipInput.current.value}
           />
-          <p>Minimum Ideal Price($):</p>
+          <br />
+          <label htmlFor="textmininput">Minimum Ideal Price($):</label>
+          <br />
+          {/*<p>Minimum Ideal Price($):</p>*/}
           <input
             type="number"
+            id="textmininput"
             ref={textMinInput}
             placeholder={textMinInput.current.value}
           />
-        </div>
-        <div className={"pt-1"}>
-          <p>Maximum Ideal Price($):</p>
+          <br />
+          <label htmlFor="textmaxinput">Maximum Ideal Price($):</label>
+          <br />
           <input
             type="number"
+            id="textmaxinput"
             ref={textMaxInput}
             placeholder={textMaxInput.current.value}
           />
         </div>
+
         <div className="pt-3">
           <Button type="button" onClick={onClickHandler}>
             Apply
@@ -177,6 +190,7 @@ function Main() {
       <Col sm={3}>
         <select
           id="category"
+          aria-label="category"
           value={Category_help_Select}
           onChange={(e) => {
             SetCategory_help_Select(e.target.value);
@@ -192,26 +206,33 @@ function Main() {
           ))}
         </select>
         <div className="pt-3">
-          <p>Zip Code:</p>
+          <label htmlFor="zipinputhelper">Zip Code: </label>
+          <br />
           <input
             type="text"
+            id={"zipinputhelper"}
             ref={zipInput}
             placeholder={zipInput.current.value}
           />
-          <p>Minimum Ideal Price($):</p>
+          <br />
+          <label htmlFor={"minidealpricehelper"}>Minimum Ideal Price($)</label>
+          <br />
           <input
             type="number"
+            id={"minidealpricehelper"}
             ref={textMinInput}
             placeholder={textMinInput.current.value}
           />
-        </div>
-        <div className={"pt-1"}>
-          <p>Maximum Ideal Price($):</p>
+          <br />
+          <label htmlFor={"maxidealpricehelper"}>Maximum Ideal Price($)</label>
+          <br />
           <input
             type="number"
+            id={"maxidealpricehelper"}
             ref={textMaxInput}
             placeholder={textMaxInput.current.value}
           />
+          <br />
         </div>
         <div className="pt-3">
           <Button type="button" onClick={onClickHandler}>
@@ -223,71 +244,38 @@ function Main() {
   }
 
   //the helper tables with all the offers (Offer help)
-  function HelperTable() {
-    let HelperFiltered = filter_on_post(Helpers, Category_help_Select);
-    const rows = [...Array(Math.ceil(HelperFiltered.length / 4))];
-    const productRows = rows.map((row, idx) =>
-      HelperFiltered.slice(idx * 4, idx * 4 + 4)
+  function HelperTableMain() {
+    let HelperFiltered = filter_on_post(Helpers, Category_help_Select).slice(
+      0,
+      250
     );
-    const content = productRows.map((row, idx) => (
-      <div className="row m-3e" key={idx}>
-        {row.map((h, i) => (
-          <Col key={"card" + i} className="card">
-            <div key={"card-body" + i} className="card-body">
-              <h5 key={"card-title" + i} className="card-title">
-                {h.Category}
-              </h5>
-              <p key={"card-text" + i} className="card-text">
-                {h.Description}
-              </p>
-              <MoreDetails json={h} />
-            </div>
-          </Col>
-        ))}
-      </div>
-    ));
+
     return (
       <Container fluid className={"mt-5 table"}>
         <Row>
           <FilterComponentHelperTable />
-          <Col sm={9}>{content}</Col>
+          <Col sm={9}>
+            <OfferHelpTable
+              data={HelperFiltered}
+              totalPosts={HelperFiltered.length}
+            />
+          </Col>
         </Row>
       </Container>
     );
   }
 
   //the seek request tables with all requests (Seek Help)
-  function SeekHelpTable() {
+  function SeekHelpTableMain() {
+    let datatemp = filter_on_post(Posts, Category_request_Select).slice(0, 250);
+    console.log("datatemp is: ", datatemp);
     return (
-      <Container fluid className="pt-5 container-fluid mt-5 table">
+      <Container fluid className="mt-5 table">
         <Row>
           <FilterComponentSeekHelp />
+          {console.log("Filter components loaded")}
           <Col sm={8}>
-            <table className="table">
-              <tbody>
-                <tr className={"thead-light"}>
-                  <th>Category</th>
-                  <th>Task Short Description</th>
-                  <th>Ideal Price/hr</th>
-                  <th>Date for task</th>
-                  {/*<th>Address</th>*/}
-                  <th>More details</th>
-                </tr>
-                {filter_on_post(Posts, Category_request_Select).map((p, i) => (
-                  <tr key={i}>
-                    <th>{p.Category}</th>
-                    <th>{p.Description}</th>
-                    {/*<th>{p["Zip Code"]}</th>*/}
-                    <th>{p["Ideal Price"]}</th>
-                    <th>{p["Date for task"]}</th>
-                    {/*<th>{p.Address}</th>*/}
-                    <td>
-                      <MoreDetails json={p} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <SeekHelpTable data={datatemp} totalPosts={datatemp.length} />
           </Col>
         </Row>
       </Container>
@@ -295,83 +283,96 @@ function Main() {
   }
 
   return (
-    <main className="container-fluid">
-      <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
-        <div className="container-fluid">
-          <ul className="navbar-nav me-auto">
-            <li>
-              <img
-                src={logo}
-                className="nav-item, nav_logo"
-                alt="Service Share Logo"
+    <>
+      <div className="container-fluid">
+        <nav
+          className="navbar navbar-expand-md navbar-light bg-light sticky-top"
+          aria-label={"navbar"}
+        >
+          <div className="container-fluid">
+            <ul className="navbar-nav me-auto">
+              <li>
+                <img
+                  src={logo}
+                  className="nav-item, nav_logo"
+                  alt="Service Share Logo"
+                />
+              </li>
+              <li className="nav-item pt-2">
+                <a className="nav-link active" aria-current="page" href="./">
+                  Home
+                </a>
+              </li>
+            </ul>
+            <ul className="nav navbar-nav navbar-right">
+              <li>
+                <Button
+                  variant="secondary"
+                  className="d-flex btn me-auto"
+                  onClick={() => navigate("/login")}
+                >
+                  <h3>Personal Profile</h3>
+                </Button>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div
+          className="d-flex justify-content-center align-content-end"
+          id="outer-header"
+        >
+          <div className="tag">
+            <span>
+              <h1 className="d-inline" style={{ fontSize: "30px" }}>
+                {" "}
+                I am here to...{" "}
+              </h1>
+              <Button
+                type="button"
+                onClick={() => setHelperPage(true)}
+                className="btn btn-lg d-inline pl-3"
+              >
+                Seek Help
+              </Button>
+              <Button
+                type="button"
+                onClick={() => setHelperPage(false)}
+                className="btn btn-lg d-inline pl-3 ml-2"
+              >
+                Offer Help
+              </Button>
+            </span>
+            {/*<Label>Enter your 5 digits ZIP Code</Label>*/}
+            {/*<h4 className="pt-3">Search here</h4>*/}
+            <div>
+              {/*<input className="d-inline-block ml-5" title="Search Bar" />*/}
+              <label htmlFor={"searchbar"} className={"pt-3"}>
+                Search Bar
+              </label>
+              <br />
+              <input
+                className="d-inline-block ml-5"
+                type="text"
+                title="Search Bar"
+                id={"searchbar"}
+                ref={searchInput}
+                placeholder={searchInput.current.value}
               />
-            </li>
-            <li className="nav-item pt-2">
-              <a className="nav-link active" aria-current="page" href="./">
-                Home
-              </a>
-            </li>
-          </ul>
-          <ul className="nav navbar-nav navbar-right">
-            <li>
               <Button
                 variant="secondary"
-                className="d-flex btn me-auto"
-                onClick={() => navigate("/login")}
+                className="btn btn-secondary d-inline-block ml-2"
+                onClick={onSearchHandler}
               >
-                <h3>Personal Profile</h3>
+                Search
               </Button>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <div
-        className="d-flex justify-content-center align-content-end"
-        id="outer-header"
-      >
-        <div className="tag">
-          <span>
-            <h2 className="d-inline"> I am here to... </h2>
-            <Button
-              type="button"
-              onClick={() => setHelperPage(true)}
-              className="btn btn-lg d-inline pl-3"
-            >
-              Seek Help
-            </Button>
-            <Button
-              type="button"
-              onClick={() => setHelperPage(false)}
-              className="btn btn-lg d-inline pl-3 ml-2"
-            >
-              Offer Help
-            </Button>
-          </span>
-          {/*<Label>Enter your 5 digits ZIP Code</Label>*/}
-          <h4 className="pt-3">Search here</h4>
-          <div>
-            {/*<input className="d-inline-block ml-5" title="Search Bar" />*/}
-            <input
-              className="d-inline-block ml-5"
-              type="text"
-              title="Search Bar"
-              ref={searchInput}
-              placeholder={searchInput.current.value}
-            />
-            <Button
-              variant="secondary"
-              className="btn btn-secondary d-inline-block ml-2"
-              onClick={onSearchHandler}
-            >
-              Search
-            </Button>
+            </div>
           </div>
         </div>
+        {ShowHelper ? <SeekHelpTableMain /> : null}
+        {!ShowHelper ? <HelperTableMain /> : null}
       </div>
-      {ShowHelper ? <SeekHelpTable /> : null}
-      {!ShowHelper ? <HelperTable /> : null}
-      <footer>Created by Tianhao Qu, Kaiwen Tian</footer>
-    </main>
+      {/*<footer>Created by Tianhao Qu, Kaiwen Tian</footer>*/}
+    </>
   );
 }
 export default Main;

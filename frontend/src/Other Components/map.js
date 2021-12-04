@@ -36,6 +36,7 @@ function Map(props) {
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
+        role="map"
       >
         <CenterRedCirclePinpoint lat={props.latitude} lng={props.longitude} />
       </GoogleMapReact>

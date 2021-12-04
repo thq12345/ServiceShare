@@ -25,7 +25,7 @@ function myDB() {
     }
   };
 
-  myDB.insert_post = async (req_json) => {
+  myDB.insert_post = async (req_json, res) => {
     let feedback_database;
     console.log("Inserting:::", req_json);
     if (req_json.Mode === "OfferHelp") {
@@ -37,6 +37,7 @@ function myDB() {
     req_json["username"] = username_global;
     await feedback_database.insertOne(req_json);
     console.log("Post Successfully Submitted!");
+    res.json({ status: true });
   };
 
   myDB.create_account = async (username, password, res) => {
