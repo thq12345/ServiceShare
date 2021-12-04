@@ -62,9 +62,9 @@ router.get("/load-helpers", async (req, res) => {
   await myDB.getAllHelpers(res).catch(console.dir);
 });
 
-router.post("/submit-form", async (req) => {
+router.post("/submit-form", async (req, res) => {
   console.log("Received user-submitted form!");
-  await myDB.insert_post(req.body).catch(console.dir);
+  await myDB.insert_post(req.body, res).catch(console.dir);
 });
 
 router.get("/load-user-posts", async (req, res) => {

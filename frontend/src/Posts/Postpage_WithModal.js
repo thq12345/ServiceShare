@@ -3,33 +3,9 @@ import { Button } from "react-bootstrap";
 import ModifyPost from "./modify_post.js";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
-import MyVerticallyCenteredModal from "./VerticallyCenteredModal.js";
-
-// function MyVerticallyCenteredModal(props) {
-//   return (
-//     <Modal
-//       {...props}
-//       size="lg"
-//       aria-labelledby="contained-modal-title-vcenter"
-//       centered
-//     >
-//       <Modal.Header closeButton>
-//         <Modal.Title id="contained-modal-title-vcenter">
-//           Submit a New Post
-//         </Modal.Title>
-//       </Modal.Header>
-//       <Modal.Body>
-//         <SubmitForm />
-//       </Modal.Body>
-//       <Modal.Footer>
-//         <Button onClick={props.onHide}>Close</Button>
-//       </Modal.Footer>
-//     </Modal>
-//   );
-// }
+import SubmitForm from "./submitform";
 
 function PostForm2() {
-  const [modalShow, setModalShow] = React.useState(false);
   const navigate = useNavigate();
 
   //all posts that belongs to this user.
@@ -54,7 +30,7 @@ function PostForm2() {
                 src={logo}
                 className="nav-item, nav_logo"
                 alt="Service Share Logo"
-              ></img>
+              />
             </li>
             <li className="nav-item pt-2">
               <a className="nav-link active" aria-current="page" href="./">
@@ -81,14 +57,7 @@ function PostForm2() {
         </h2>
 
         <div>
-          <Button variant="secondary" onClick={() => setModalShow(true)}>
-            Submit a New Post
-          </Button>
-
-          <MyVerticallyCenteredModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
+          <SubmitForm />
         </div>
       </section>
 
