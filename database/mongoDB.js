@@ -151,22 +151,25 @@ function myDB() {
   };
 
   //get all the posts in the database.
-  myDB.getAllPosts = async (res) => {
+  myDB.getAllHelpOfferPosts = async (bol,res) => {
     console.log("Loading all posts from database.");
+    console.log(bol);
     const post_db = project_database.collection("posts");
-    let find_all = {};
-    let result = await post_db.find(find_all).toArray();
+    let result = await post_db.find({}).sort({"Ideal Price":bol}).toArray();
     res.json(result);
+    console.log("loaded");
+    result=result.slice(0,250);
     return result;
   };
 
   //get all the helper in the database.
-  myDB.getAllHelpers = async (res) => {
-    console.log("Loading all posts from database.");
+  myDB.getAllSeekPosts = async (bol,res) => {
+    console.log("Loading all helper posts from database.");
+    console.log(bol);
     const post_db = project_database.collection("helper");
-    let find_all = {};
-    let result = await post_db.find(find_all).toArray();
+    let result = await post_db.find({}).sort({"Ideal Price":bol}).toArray();
     res.json(result);
+    result=result.slice(0,250);
     return result;
   };
 

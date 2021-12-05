@@ -51,14 +51,17 @@ router.post("/login-auth", function (req, res, next) {
 });
 
 //Load all posts for index page regardless of username. (Useful for index page)
-router.get("/load-all-post", async (req, res) => {
+router.post("/load-all-helpers", async (req, res) => {
   console.log("Retrieving all posts from back end databases... (Backend)");
-  await myDB.getAllPosts(res).catch(console.dir);
+  const bol = req.body.bol;
+  console.log("hi");
+  await myDB.getAllHelpOfferPosts(bol,res).catch(console.dir);
 });
 
-router.get("/load-helpers", async (req, res) => {
+router.post("/load-seeks", async (req, res) => {
   console.log("Loading logged in helpers...");
-  await myDB.getAllHelpers(res).catch(console.dir);
+  const bol = req.body.bol;
+  await myDB.getAllSeekPosts(bol,res).catch(console.dir);
 });
 
 router.post("/submit-form", async (req, res) => {

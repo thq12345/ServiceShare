@@ -11,11 +11,8 @@ function SeekHelpTable({ data, totalPosts }) {
 
   // Get Current posts
   const indexOfLastPost = currentPage * postsPerPage;
-  console.log("index of last post is:", indexOfLastPost);
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  console.log("index of first post is:", indexOfFirstPost);
   const currentPost = data.slice(indexOfFirstPost, indexOfLastPost);
-  console.log("currentPost is:", currentPost);
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }

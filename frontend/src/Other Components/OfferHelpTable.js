@@ -34,6 +34,12 @@ function OfferHelpTable({ data, totalPosts }) {
             <p key={"card-text" + i} className="card-text">
               {h.Description}
             </p>
+            <p key={"card-text" + i} className="card-text">
+              $ {h['Ideal Price']}
+            </p>
+            <p key={"card-text" + i} className="card-text">
+              {h['Address']}
+            </p>
             <MoreDetails json={h} />
           </div>
         </Col>
@@ -45,7 +51,6 @@ function OfferHelpTable({ data, totalPosts }) {
     <>
       {content}
       <nav>
-        {console.log(pageNumbers)}
         <ul className={"pagination"}>
           {pageNumbers.map((number) => (
             <li key={number} className={"page-item"}>
