@@ -4,6 +4,7 @@ import logo from "../images/logo.png";
 
 function LoginForm() {
   const [user, setUser] = useState({ username: "", password: "" });
+  const [showcreate, setshowcreate] = useState(false);
   let [current_status, set_status] = useState("");
   let navigate = useNavigate();
 
@@ -105,7 +106,7 @@ function LoginForm() {
         </div>
         <br />
         <p>
-          Don't have an account? <a href="/create-account">Create Account</a>
+          Don't have an account? <button>Create Account</button>
         </p>
       </form>
     </div>

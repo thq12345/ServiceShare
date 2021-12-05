@@ -51,12 +51,18 @@ nav {
   font-weight: bold;
   font-size: 30px;
 }
+
+.logo-modal{
+  height:200px;
+  width:auto;
+}
+
 .login-container {
   margin: auto;
   max-width: 300px;
-  height: 80vh;
-  background-color: #f5efe8;
+  height: 35vh;
 }
+
 .logo-image {
   height: 30vh;
 }

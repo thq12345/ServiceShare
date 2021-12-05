@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
 import SubmitForm from "./submitform";
 
+
 function PostForm2() {
   const navigate = useNavigate();
 
@@ -38,23 +39,26 @@ function PostForm2() {
               </a>
             </li>
           </ul>
-          <ul className="nav navbar-nav navbar-right">
-            <li>
-              <Button
-                variant="secondary"
-                className="d-flex btn me-auto"
-                onClick={() => navigate("/login")}
-              >
-                <h3>Personal Profile</h3>
-              </Button>
-            </li>
-          </ul>
+          {/*<ul className="nav navbar-nav navbar-right">*/}
+          {/*  <li>*/}
+          {/*    <Button*/}
+          {/*      variant="secondary"*/}
+          {/*      className="d-flex btn me-auto"*/}
+          {/*      onClick={() => navigate("/login")}*/}
+          {/*    >*/}
+          {/*      <h3>Personal Profile</h3>*/}
+          {/*    </Button>*/}
+          {/*  </li>*/}
+          {/*</ul>*/}
         </div>
       </nav>
       <section className="container mb-4">
         <h1 className="h1-responsive font-weight-bold text-center my-4">
           Welcome!
         </h1>
+        <div>
+
+        </div>
         <SubmitForm />
 
         {/*  <div>*/}

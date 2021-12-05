@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AddressAutoComplete from "../Other Components/autocomplete";
+import Categories from "../Other Components/Category_request.js"
 
 function SubmitForm() {
+
   let [Subject, setSubject] = useState("");
-  let [Category, setCategory] = useState("");
+  let [Category, setCategory] = useState("Select Category");
   let [Price, setPrice] = useState(0);
   let [Date, setDate] = useState("");
   let [Zipcode, setZipcode] = useState("");
@@ -16,9 +18,9 @@ function SubmitForm() {
   let subjectChange = (event) => {
     setSubject(event.target.value);
   };
-  let categoryChange = (event) => {
-    setCategory(event.target.value);
-  };
+  // let categoryChange = (event) => {
+  //   setCategory(event.target.value);
+  // };
   let priceChange = (event) => {
     setPrice(event.target.value);
   };
@@ -93,16 +95,17 @@ function SubmitForm() {
                       </option>
                     </select>
                   </div>
-                  <label htmlFor="category">Category</label>
-                  <input
-                    type="text"
-                    id="category"
-                    name="category"
-                    rows="1"
-                    value={Category}
-                    onChange={categoryChange}
-                    className="form-control md-textarea"
-                  />
+                  <select
+                      id="category"
+                      aria-label="category"
+                      value={Category}
+                      onChange={(e) => {
+                        setCategory(e.target.value);
+                      }}
+                  >
+                  <Categories></Categories>
+                  </select>
+
                   <br />
                 </div>
               </div>

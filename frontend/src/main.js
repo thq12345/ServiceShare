@@ -8,10 +8,11 @@ import logo from "./images/logo.png";
 import SeekHelpTable from "./Other Components/SeekHelpTable.js";
 import OfferHelpTable from "./Other Components/OfferHelpTable.js";
 import { data } from "express-session/session/cookie";
-
+import Login_modal from "./Account_Verification/loginmodal.js";
 export const category_selects = React.createContext(null);
 function Main() {
 
+  let [Seeks, setSeeks] = useState([]);
   let [Posts, setPosts] = useState([]);
   let [Category_request, setCategory_request] = useState([]);
   let [Helpers, setHelpers] = useState([]);
@@ -121,6 +122,7 @@ function Main() {
     }
     runThis().catch(console.dir);
   }, [Category_request_Select,SortPostAsc]);
+
   //fetch data (Offer Help)
   useEffect(() => {
     async function runThis() {
@@ -131,7 +133,6 @@ function Main() {
           bol: SortHelperAsc,
         }),
       });
-
       let res = await raw.json();
       let categoryOffers = [];
       let postTemp = [];
@@ -146,6 +147,7 @@ function Main() {
       //load all distinct category into the dropdown bar
       setCategory_help(categoryOffers);
       setHelpers(postTemp);
+      setSeeks(postTemp);
     }
     runThis().catch(console.dir);
   }, [Category_help_Select,SortHelperAsc]);
@@ -281,8 +283,7 @@ function Main() {
 
   //the helper tables with all the offers (Offer help)
   function HelperTableMain() {
-    let HelperFiltered = filter_on_post(Helpers, Category_help_Select);
-
+    let HelperFiltered = filter_on_post(Helpers, Category_help_Select).slice(0,250);
     return (
       <Container fluid className={"mt-5 table"}>
         <Row>
@@ -300,7 +301,11 @@ function Main() {
 
   //the seek request tables with all requests (Seek Help)
   function SeekHelpTableMain() {
-    let datatemp = filter_on_post(Posts, Category_request_Select);
+
+    let datatemp = filter_on_post(Seeks, Category_request_Select).slice(0,250);
+    console.log('posting seeks');
+    console.log(datatemp);
+
     return (
       <Container fluid className="mt-5 table">
         <Row>
@@ -337,6 +342,10 @@ function Main() {
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li>
+                <Login_modal></Login_modal>
+              </li>
+              <li>
+
                 <Button
                   variant="secondary"
                   className="d-flex btn me-auto"
@@ -375,12 +384,12 @@ function Main() {
             </span>
             {/*<Label>Enter your 5 digits ZIP Code</Label>*/}
             {/*<h4 className="pt-3">Search here</h4>*/}
+
             <div>
               {/*<input className="d-inline-block ml-5" title="Search Bar" />*/}
-              <label htmlFor={"searchbar"} className={"pt-3"}>
+              <label htmlFor={"searchbar"} className={"pt-3 d-inline-block"}>
                 Search Bar
               </label>
-              <br />
               <input
                 className="d-inline-block ml-5"
                 type="text"
@@ -397,12 +406,12 @@ function Main() {
                 Search
               </Button>
             </div>
-          </div>
+            </div>
         </div>
         {!ShowHelper ? <SeekHelpTableMain /> : null}
         {ShowHelper ? <HelperTableMain /> : null}
       </div>
-      {/*<footer>Created by Tianhao Qu, Kaiwen Tian</footer>*/}
+      <footer>Created by Tianhao Qu, Kaiwen Tian</footer>
     </>
   );
 }
