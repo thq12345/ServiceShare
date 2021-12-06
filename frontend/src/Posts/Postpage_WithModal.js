@@ -39,17 +39,6 @@ function PostForm2() {
               </a>
             </li>
           </ul>
-          {/*<ul className="nav navbar-nav navbar-right">*/}
-          {/*  <li>*/}
-          {/*    <Button*/}
-          {/*      variant="secondary"*/}
-          {/*      className="d-flex btn me-auto"*/}
-          {/*      onClick={() => navigate("/login")}*/}
-          {/*    >*/}
-          {/*      <h3>Personal Profile</h3>*/}
-          {/*    </Button>*/}
-          {/*  </li>*/}
-          {/*</ul>*/}
         </div>
       </nav>
       <section className="container mb-4">

@@ -28,17 +28,17 @@ function OfferHelpTable({ data, totalPosts }) {
       {row.map((h, i) => (
         <Col key={"card" + i} className="card">
           <div key={"card-body" + i} className="card-body">
-            <h5 key={"card-title" + i} className="card-title">
+            <h5 key={"card-title" + i} className="posts card-title">
               {h.Category}
             </h5>
-            <p key={"card-text" + i} className="card-text">
+            <p key={"card-text" + i} className="posts card-text">
               {h.Description}
             </p>
-            <p key={"card-text" + i} className="card-text">
+            <p key={"card-text" + i} className="posts card-text">
               $ {h['Ideal Price']}
             </p>
-            <p key={"card-text" + i} className="card-text">
-              {h['Address']}
+            <p key={"card-text" + i} className="posts card-text">
+              {h['State']}
             </p>
             <MoreDetails json={h} />
           </div>

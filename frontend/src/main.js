@@ -9,18 +9,23 @@ import SeekHelpTable from "./Other Components/SeekHelpTable.js";
 import OfferHelpTable from "./Other Components/OfferHelpTable.js";
 import { data } from "express-session/session/cookie";
 import Login_modal from "./Account_Verification/loginmodal.js";
-export const category_selects = React.createContext(null);
+import Categories from "./Other Components/Category_request.js";
+
 function Main() {
 
   let [Seeks, setSeeks] = useState([]);
   let [Posts, setPosts] = useState([]);
-  let [Category_request, setCategory_request] = useState([]);
-  let [Helpers, setHelpers] = useState([]);
-  let [Category_help, setCategory_help] = useState([]);
+  // let [Category_request, setCategory_request] = useState([]);
+  // let [Helpers, setHelpers] = useState([]);
+  // let [Category_help, setCategory_help] = useState([]);
   let [MinValue, setMinValue] = useState(0);
   let [MaxValue, setMaxValue] = useState(10000);
   let [Category_help_Select, SetCategory_help_Select] =
     useState("Select Category");
+
+  let [State_selected, setState_selected] =
+      useState("Select States");
+
   let [Category_request_Select, SetCategory_request_Select] =
     useState("Select Category");
   let [ShowHelper, setHelperPage] = useState(false);
@@ -29,11 +34,22 @@ function Main() {
   const navigate = useNavigate();
   let [SortPostAsc, setPostSortAsc] = useState(1);
   let [SortHelperAsc, setHelperAsc] = useState(1);
-
   let textMinInput = useRef(0);
   let textMaxInput = useRef(100000);
   let zipInput = useRef("");
   let searchInput = useRef("");
+
+  const States=['Alabama','Alaska','American Samoa',
+    'Arizona','Arkansas','California','Colorado','Connecticut',
+    'Delaware','District of Columbia','Federated States of Micronesia',
+    'Florida','Georgia','Guam','Hawaii','Idaho','Illinois','Indiana','Iowa',
+    'Kansas','Kentucky','Louisiana','Maine','Marshall Islands','Maryland','Massachusetts',
+    'Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada',
+    'New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota',
+    'Northern Mariana Islands','Ohio','Oklahoma','Oregon','Palau','Pennsylvania',
+    'Puerto Rico','Rhode Island','South Carolina','South Dakota','Tennessee',
+    'Texas','Utah','Vermont','Virgin Island','Virginia','Washington',
+    'West Virginia','Wisconsin','Wyoming'];
 
   let onClickHandler = () => {
     setMinValue(parseInt(textMinInput.current.value));
@@ -49,17 +65,17 @@ function Main() {
       setZipCode("");
     }
   };
-
-  let onClickPriceHandler = (e) => {
-    setMinValue(parseInt(textMinInput.current.value));
-    setMaxValue(parseInt(textMaxInput.current.value));
-    if(!textMinInput.current.value) {
-      setMinValue(0);
-    }
-    if(!textMaxInput.current.value){
-      setMaxValue(10000000);
-    }
-  };
+  //
+  // let onClickPriceHandler = (e) => {
+  //   setMinValue(parseInt(textMinInput.current.value));
+  //   setMaxValue(parseInt(textMaxInput.current.value));
+  //   if(!textMinInput.current.value) {
+  //     setMinValue(0);
+  //   }
+  //   if(!textMaxInput.current.value){
+  //     setMaxValue(10000000);
+  //   }
+  // };
 
   let onSearchHandler = () => {
     setSearchItem(searchInput.current.value);
@@ -88,13 +104,20 @@ function Main() {
     if (select !== "Select Category") {
       filtered_post = filtered_post.filter((item) => item.Category === select);
     }
+
+    if (State_selected != "Select States"){
+      filtered_post = filtered_post.filter((item) => item.State === State_selected);
+    }
+
     //Price Range Filter
     filtered_post = filtered_post.filter(
       (item) =>
         item["Ideal Price"] <= MaxValue && item["Ideal Price"] >= MinValue
     );
+
     return filtered_post;
   }
+
   //fetch data (Seek Help)
   useEffect(() => {
     async function runThis() {
@@ -112,12 +135,12 @@ function Main() {
         categoryTemp.push(element.Category);
         postTemp.push(element);
       }
-      //remove duplicate category options.
-      categoryTemp = categoryTemp.filter(function (item, pos) {
-        return categoryTemp.indexOf(item) === pos;
-      });
-      //load all distinct category into the dropdown bar
-      setCategory_request(categoryTemp);
+      // //remove duplicate category options.
+      // categoryTemp = categoryTemp.filter(function (item, pos) {
+      //   return categoryTemp.indexOf(item) === pos;
+      // });
+      // //load all distinct category into the dropdown bar
+      // setCategory_request(categoryTemp);
       setPosts(postTemp.slice(0, 250));
     }
     runThis().catch(console.dir);
@@ -137,16 +160,16 @@ function Main() {
       let categoryOffers = [];
       let postTemp = [];
       for (const element of res) {
-        categoryOffers.push(element.Category);
+        // categoryOffers.push(element.Category);
         postTemp.push(element);
       }
-      //remove duplicate category options.
-      categoryOffers = categoryOffers.filter(function (item, pos) {
-        return categoryOffers.indexOf(item) === pos;
-      });
-      //load all distinct category into the dropdown bar
-      setCategory_help(categoryOffers);
-      setHelpers(postTemp);
+      // //remove duplicate category options.
+      // categoryOffers = categoryOffers.filter(function (item, pos) {
+      //   return categoryOffers.indexOf(item) === pos;
+      // });
+      // //load all distinct category into the dropdown bar
+      // setCategory_help(categoryOffers);
+      // setHelpers(postTemp);
       setSeeks(postTemp);
     }
     runThis().catch(console.dir);
@@ -157,33 +180,42 @@ function Main() {
     return (
       <Col sm={3}>
         <select
-          id="category"
-          aria-label="category"
-          value={Category_request_Select}
-          onChange={(e) => {
-            SetCategory_request_Select(e.target.value);
-          }}
+            id="category"
+            aria-label="category"
+            value={Category_request_Select}
+            onChange={(e) => {
+              SetCategory_request_Select(e.target.value);
+            }}
         >
-          <option key="all" value="Select Category">
-            Select Category
+          <Categories></Categories>
+        </select>
+        <br/>
+        <select
+            className="category mt-2"
+            value={States}
+            onChange={(e) => {
+              setState_selected(e.target.value);
+            }}
+        >
+          <option key="all" value="Select States">
+            Select States
           </option>
-          {Category_request.map((p, i) => (
-            <option key={i} value={p}>
-              {p}
-            </option>
+          {States.map((p, i) => (
+              <option key={i} value={p}>
+                {p}
+              </option>
           ))}
         </select>
-
-        <div className="pt-3">
-          {/*<p>Zip Code:</p>*/}
-          <label htmlFor="zipinput">Zip Code: </label>
-          <br />
-          <input
-            type="text"
-            id="zipinput"
-            ref={zipInput}
-            placeholder={zipInput.current.value}
-          />
+        {/*<div className="pt-3">*/}
+        {/*  /!*<p>Zip Code:</p>*!/*/}
+        {/*  <label htmlFor="zipinput">Zip Code: </label>*/}
+        {/*  <br />*/}
+        {/*  <input*/}
+        {/*    type="text"*/}
+        {/*    id="zipinput"*/}
+        {/*    ref={zipInput}*/}
+        {/*    placeholder={zipInput.current.value}*/}
+        {/*  />*/}
           <br />
           <label htmlFor="textmininput">Minimum Ideal Price($):</label>
           <br />
@@ -192,6 +224,7 @@ function Main() {
             type="number"
             id="textmininput"
             ref={textMinInput}
+            type="number"
             placeholder={textMinInput.current.value}
           />
           <br />
@@ -201,9 +234,9 @@ function Main() {
             type="number"
             id="textmaxinput"
             ref={textMaxInput}
+            type="number"
             placeholder={textMaxInput.current.value}
           />
-        </div>
 
         <div className="pt-1">
           <Button type="button" onClick={onClickHandler}>
@@ -219,35 +252,36 @@ function Main() {
       </Col>
     );
   }
-  function FilterComponentHelperTable() {
+  function FilterComponentOfferTable() {
     return (
       <Col sm={3}>
         <select
-          id="category"
-          aria-label="category"
-          value={Category_help_Select}
-          onChange={(e) => {
-            SetCategory_help_Select(e.target.value);
-          }}
+            id="category"
+            aria-label="category"
+            value={Category_help_Select}
+            onChange={(e) => {
+              SetCategory_help_Select(e.target.value);
+            }}
         >
-          <option key="all" value="Select Category">
-            Select Category
+          <Categories></Categories>
+        </select>
+
+        <select
+            value={States}
+            className="category mt-2"
+            onChange={(e) => {
+              setState_selected(e.target.value);
+            }}
+        >
+          <option key="all" value="Select States">
+            Select States
           </option>
-          {Category_help.map((p, i) => (
-            <option key={i} value={p}>
-              {p}
-            </option>
+          {States.map((p, i) => (
+              <option key={i} value={p}>
+                {p}
+              </option>
           ))}
         </select>
-        <div className="pt-3">
-          <label htmlFor="zipinputhelper">Zip Code: </label>
-          <br />
-          <input
-            type="text"
-            id={"zipinputhelper"}
-            ref={zipInput}
-            placeholder={zipInput.current.value}
-          />
           <br />
           <label htmlFor={"minidealpricehelper"}>Minimum Ideal Price($)</label>
           <br />
@@ -267,10 +301,9 @@ function Main() {
             placeholder={textMaxInput.current.value}
           />
           <br />
-        </div>
         <div className="pt-1">
           <Button type="button" onClick={onClickHandler}>
-            Apply Price Filter
+            Apply Price Range
           </Button>
         </div>
         <div className="pt-3">
@@ -282,12 +315,12 @@ function Main() {
   }
 
   //the helper tables with all the offers (Offer help)
-  function HelperTableMain() {
-    let HelperFiltered = filter_on_post(Helpers, Category_help_Select).slice(0,250);
+  function OfferTableMain() {
+    let HelperFiltered = filter_on_post(Seeks, Category_help_Select).slice(0,250);
     return (
       <Container fluid className={"mt-5 table"}>
         <Row>
-          <FilterComponentHelperTable />
+          <FilterComponentOfferTable />
           <Col sm={9}>
             <OfferHelpTable
               data={HelperFiltered}
@@ -382,8 +415,6 @@ function Main() {
                 Offer Help
               </button>
             </span>
-            {/*<Label>Enter your 5 digits ZIP Code</Label>*/}
-            {/*<h4 className="pt-3">Search here</h4>*/}
 
             <div>
               {/*<input className="d-inline-block ml-5" title="Search Bar" />*/}
@@ -409,7 +440,7 @@ function Main() {
             </div>
         </div>
         {!ShowHelper ? <SeekHelpTableMain /> : null}
-        {ShowHelper ? <HelperTableMain /> : null}
+        {ShowHelper ? <OfferTableMain /> : null}
       </div>
       <footer>Created by Tianhao Qu, Kaiwen Tian</footer>
     </>

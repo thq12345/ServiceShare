@@ -12,6 +12,7 @@ function SubmitForm() {
   let [Zipcode, setZipcode] = useState("");
   let [Address, setAddress] = useState("");
   let [Latitude, setLatitude] = useState(0);
+  let [State, setState] = useState("");
   let [Longitude, setLongitude] = useState(0);
   let [Mode, setMode] = useState("OfferHelp");
   let [show, setShow] = useState(false);
@@ -51,6 +52,7 @@ function SubmitForm() {
         Address: Address,
         Latitude: Latitude,
         Longitude: Longitude,
+        State:State
       }),
     });
     setShow(false);
@@ -94,7 +96,11 @@ function SubmitForm() {
                         SeekHelp
                       </option>
                     </select>
-                  </div>
+            </div>
+                </div>
+
+                  <div className="row mt-2 mb-2">
+
                   <select
                       id="category"
                       aria-label="category"
@@ -103,13 +109,14 @@ function SubmitForm() {
                         setCategory(e.target.value);
                       }}
                   >
-                  <Categories></Categories>
+                    <Categories></Categories>
                   </select>
 
                   <br />
                 </div>
               </div>
-            </div>
+                  </div>
+
             <div className="row">
               <div className="col-md-12">
                 <div className="md-form mb-0">
@@ -149,9 +156,9 @@ function SubmitForm() {
                 <div className="md-form mb-0">
                   <label htmlFor="date">Date for Subject</label>
                   <input
-                    type="text"
                     id="date"
                     name="date"
+                    type="date"
                     className="form-control"
                     value={Date}
                     onChange={dateChange}
@@ -166,24 +173,26 @@ function SubmitForm() {
               setaddress={setAddress}
               setlatitude={setLatitude}
               setlongitude={setLongitude}
+              setGeoState={setState}
+              setZip={setZipcode}
             />
 
-            <div className="row">
-              <div className="col-md-12">
-                <div className="md-form">
-                  <label htmlFor="zipcode">Zip Code</label>
-                  <input
-                    type="text"
-                    id="zipcode"
-                    name="zipcode"
-                    rows="1"
-                    value={Zipcode}
-                    onChange={zipcodeChange}
-                    className="form-control md-textarea"
-                  />
-                </div>
-              </div>
-            </div>
+            {/*<div className="row">*/}
+            {/*  <div className="col-md-12">*/}
+            {/*    <div className="md-form">*/}
+            {/*      <label htmlFor="zipcode">Zip Code</label>*/}
+            {/*      <input*/}
+            {/*        type="text"*/}
+            {/*        id="zipcode"*/}
+            {/*        name="zipcode"*/}
+            {/*        rows="1"*/}
+            {/*        value={Zipcode}*/}
+            {/*        onChange={zipcodeChange}*/}
+            {/*        className="form-control md-textarea"*/}
+            {/*      />*/}
+            {/*    </div>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleSubmit}>

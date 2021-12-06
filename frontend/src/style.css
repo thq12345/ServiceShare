@@ -89,6 +89,10 @@ nav {
   color: #F5EFE8;
 }
 
+.posts{
+  font-weight: bold;
+}
+
 .page-item{
   font-size: 15px;
   font-weight: bold;

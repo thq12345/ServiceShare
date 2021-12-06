@@ -23,7 +23,6 @@ function Login_modal(){
 
     const handleAuth = async (event) => {
         event.preventDefault();
-
         const res = await fetch("/api/login-auth", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -40,6 +39,7 @@ function Login_modal(){
         }
 
         if (result.status === true) {
+
             navigate("/post");
         }
     };

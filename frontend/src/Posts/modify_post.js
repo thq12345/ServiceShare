@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AddressAutoComplete from "../Other Components/autocomplete";
 import PropTypes from "prop-types";
+import Categories from "../Other Components/Category_request";
 function ModifyPost(props) {
   let [Subject, setSubject] = useState(props.information.Description);
   let [Category, setCategory] = useState(props.information.Category);
@@ -10,6 +11,7 @@ function ModifyPost(props) {
   let [Zipcode, setZipcode] = useState(props.information["Zip Code"]);
   let [Address, setAddress] = useState(props.information["Address"]);
   let [Latitude, setLatitude] = useState(props.information.Latitude);
+  let [GeoState,setGeoState] = useState(props.information["State"]);
   let [Longitude, setLongitude] = useState(props.information.Longitude);
   //Change is not permitted between Seek Help and Offer Help.
   const Mode = props.information.Mode;
@@ -49,6 +51,7 @@ function ModifyPost(props) {
         Address: Address,
         Latitude: Latitude,
         Longitude: Longitude,
+        State:GeoState
       }),
     });
     setShow(false);
@@ -94,23 +97,19 @@ function ModifyPost(props) {
         </Modal.Header>
         <form id="contact-form" name="contact-form">
           <Modal.Body>
-            <div className="row">
-              <div className="col-md-12">
-                <div className="md-form">
-                  <label htmlFor="category">Category</label>
-                  <input
-                    type="text"
-                    id="category"
-                    name="category"
-                    rows="1"
-                    value={Category}
-                    onChange={categoryChange}
-                    className="form-control md-textarea"
-                  />
-                  <br />
-                </div>
+            <div className="row mb-2">
+              <select
+                  id="category"
+                  aria-label="category"
+                  value={Category}
+                  onChange={(e) => {
+                    setCategory(e.target.value);
+                  }}
+              >
+                <Categories></Categories>
+              </select>
               </div>
-            </div>
+
             <div className="row">
               <div className="col-md-12">
                 <div className="md-form mb-0">
@@ -135,7 +134,7 @@ function ModifyPost(props) {
                 <div className="md-form mb-0">
                   <label htmlFor="price">Price (USD per hour/item/job)</label>
                   <input
-                    type="text"
+                      type="number"
                     id="price"
                     name="price"
                     className="form-control"
@@ -154,7 +153,7 @@ function ModifyPost(props) {
                     Date for Subject
                   </label>
                   <input
-                    type="text"
+                      type="date"
                     id="date"
                     name="date"
                     className="form-control"
@@ -171,6 +170,8 @@ function ModifyPost(props) {
               setaddress={setAddress}
               setlatitude={setLatitude}
               setlongitude={setLongitude}
+              setGeoState={setGeoState}
+              setZip={setZipcode}
             />
             {/*<div className="row">*/}
             {/*  <div className="col-md-12">*/}
@@ -190,30 +191,30 @@ function ModifyPost(props) {
             {/*  </div>*/}
             {/*</div>*/}
 
-            <div className="row">
-              <div className="col-md-12">
-                <div className="md-form">
-                  <label htmlFor="zipcode">Zip Code</label>
-                  <textarea
-                    type="text"
-                    id="zipcode"
-                    name="zipcode"
-                    rows="1"
-                    value={Zipcode}
-                    onChange={zipcodeChange}
-                    className="form-control md-textarea"
-                  ></textarea>
-                  <br />
-                </div>
-              </div>
-            </div>
+            {/*<div className="row">*/}
+            {/*  <div className="col-md-12">*/}
+            {/*    <div className="md-form">*/}
+            {/*      <label htmlFor="zipcode">Zip Code</label>*/}
+            {/*      <textarea*/}
+            {/*        type="text"*/}
+            {/*        id="zipcode"*/}
+            {/*        name="zipcode"*/}
+            {/*        rows="1"*/}
+            {/*        value={Zipcode}*/}
+            {/*        onChange={zipcodeChange}*/}
+            {/*        className="form-control md-textarea"*/}
+            {/*      ></textarea>*/}
+            {/*      <br />*/}
+            {/*    </div>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleEdit}>
-              Edit
+              Confirm Edit
             </Button>
             <Button variant="primary" onClick={handleDelete}>
-              Delete
+              Confirm Delete
             </Button>
           </Modal.Footer>
         </form>

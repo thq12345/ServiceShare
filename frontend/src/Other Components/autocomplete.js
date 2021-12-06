@@ -5,6 +5,8 @@ import usePlacesAutocomplete, {
 import useOnclickOutside from "react-cool-onclickoutside";
 import React from "react";
 import PropTypes from "prop-types";
+import { propTypes } from "react-bootstrap/esm/Image";
+
 function AddressAutoComplete(props) {
   const {
     ready,
@@ -46,7 +48,7 @@ function AddressAutoComplete(props) {
       getGeocode({ address: description })
         .then((results) => getLatLng(results[0]))
         .then(({ lat, lng }) => {
-          // console.log("Coordinates: ", { lat, lng });
+
           props.setaddress(description);
           props.setlatitude(lat);
           props.setlongitude(lng);
@@ -54,6 +56,25 @@ function AddressAutoComplete(props) {
         .catch((error) => {
           console.log("Error: ", error);
         });
+
+         getGeocode({ address: description })
+      .then((results) => {
+          console.log(results[0]);
+        for (var i=0; i<results[0].address_components.length; i++) {
+          for (var b=0;b<results[0].address_components[i].types.length;b++) {
+          //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+              if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                  //this is the object you are looking for
+                  const state= results[0].address_components[i].long_name;
+                  props.setGeoState(state);
+              }
+              else if(results[0].address_components[i].types[b] == "postal_code"){
+                  const zip = results[0].address_components[i].long_name;
+                  console.log(zip);
+                  props.setZip(zip);
+              }
+          }
+        }});
     };
 
   const renderSuggestions = () =>
@@ -100,9 +121,12 @@ function AddressAutoComplete(props) {
 }
 
 AddressAutoComplete.propTypes = {
+    setGeoState: PropTypes.string,
+    setZip:PropTypes.string,
   initialaddress: PropTypes.string,
   setaddress: PropTypes.func,
   setlatitude: PropTypes.func,
   setlongitude: PropTypes.func,
+
 };
 export default AddressAutoComplete;

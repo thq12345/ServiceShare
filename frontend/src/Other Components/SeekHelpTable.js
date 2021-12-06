@@ -19,14 +19,16 @@ function SeekHelpTable({ data, totalPosts }) {
 
   return (
     <>
-      <table className="table">
+      <table className="posts">
         <tbody>
           <tr className={"thead-light"}>
             <th>Category</th>
             <th>Task Short Description</th>
             <th>Ideal Price/hr</th>
             <th>Date for task</th>
+            <th>State</th>
             <th>More details</th>
+
           </tr>
           {currentPost.map((p, i) => (
             <tr key={i}>
@@ -34,6 +36,7 @@ function SeekHelpTable({ data, totalPosts }) {
               <th>{p.Description}</th>
               <th>{p["Ideal Price"]}</th>
               <th>{p["Date for task"]}</th>
+              <th>{p["State"]}</th>
               <td>
                 <MoreDetails json={p} />
               </td>
