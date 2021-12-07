@@ -54,14 +54,13 @@ router.post("/login-auth", function (req, res, next) {
 router.post("/load-all-helpers", async (req, res) => {
   console.log("Retrieving all posts from back end databases... (Backend)");
   const bol = req.body.bol;
-  console.log("hi");
-  await myDB.getAllHelpOfferPosts(bol,res).catch(console.dir);
+  await myDB.getAllHelpOfferPosts(bol, res).catch(console.dir);
 });
 
 router.post("/load-seeks", async (req, res) => {
   console.log("Loading logged in helpers...");
   const bol = req.body.bol;
-  await myDB.getAllSeekPosts(bol,res).catch(console.dir);
+  await myDB.getAllSeekPosts(bol, res).catch(console.dir);
 });
 
 router.post("/submit-form", async (req, res) => {

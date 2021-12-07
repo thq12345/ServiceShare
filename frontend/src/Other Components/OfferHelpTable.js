@@ -35,10 +35,10 @@ function OfferHelpTable({ data, totalPosts }) {
               {h.Description}
             </p>
             <p key={"card-text" + i} className="posts card-text">
-              $ {h['Ideal Price']}
+              $ {h["Ideal Price"]}
             </p>
             <p key={"card-text" + i} className="posts card-text">
-              {h['State']}
+              {h["State"]}
             </p>
             <MoreDetails json={h} />
           </div>

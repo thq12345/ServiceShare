@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AddressAutoComplete from "../Other Components/autocomplete";
-import Categories from "../Other Components/Category_request.js"
+import Categories from "../Other Components/Categories.js";
 
 function SubmitForm() {
-
   let [Subject, setSubject] = useState("");
   let [Category, setCategory] = useState("Select Category");
   let [Price, setPrice] = useState(0);
@@ -23,7 +22,7 @@ function SubmitForm() {
   //   setCategory(event.target.value);
   // };
   let priceChange = (event) => {
-    setPrice(event.target.value);
+    setPrice(parseInt(event.target.value));
   };
   let dateChange = (event) => {
     setDate(event.target.value);
@@ -52,7 +51,7 @@ function SubmitForm() {
         Address: Address,
         Latitude: Latitude,
         Longitude: Longitude,
-        State:State
+        State: State,
       }),
     });
     setShow(false);
@@ -96,18 +95,17 @@ function SubmitForm() {
                         SeekHelp
                       </option>
                     </select>
-            </div>
+                  </div>
                 </div>
 
-                  <div className="row mt-2 mb-2">
-
+                <div className="row mt-2 mb-2">
                   <select
-                      id="category"
-                      aria-label="category"
-                      value={Category}
-                      onChange={(e) => {
-                        setCategory(e.target.value);
-                      }}
+                    id="category"
+                    aria-label="category"
+                    value={Category}
+                    onChange={(e) => {
+                      setCategory(e.target.value);
+                    }}
                   >
                     <Categories></Categories>
                   </select>
@@ -115,7 +113,7 @@ function SubmitForm() {
                   <br />
                 </div>
               </div>
-                  </div>
+            </div>
 
             <div className="row">
               <div className="col-md-12">

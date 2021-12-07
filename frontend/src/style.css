@@ -52,9 +52,9 @@ nav {
   font-size: 30px;
 }
 
-.logo-modal{
-  height:200px;
-  width:auto;
+.logo-modal {
+  height: 200px;
+  width: auto;
 }
 
 .login-container {
@@ -85,31 +85,36 @@ nav {
 }
 
 .table-header {
-  background-color: #97CDE4;
-  color: #F5EFE8;
+  background-color: #97cde4;
+  color: #f5efe8;
 }
 
-.posts{
+.posts {
   font-weight: bold;
 }
 
-.page-item{
+.page-item {
   font-size: 15px;
   font-weight: bold;
 }
 
-.stands-out-button{
-  background-color: #3C7191;
+.stands-out-button {
+  background-color: #3c7191;
   font-size: 20px;
-  color: #F5EFE8;
+  color: #f5efe8;
   border-radius: 12px;
   padding: 10px 20px;
   margin: 5px;
 }
 
-#category{
+#category {
   font-size: 15px;
   font-weight: bold;
-  color: #F5EFE8;
-  background-color: #3C7191;
+  color: #f5efe8;
+  background-color: #3c7191;
+}
+.map {
+  height: 25rem;
+  width: 25rem;
+  text-align: center;
 }

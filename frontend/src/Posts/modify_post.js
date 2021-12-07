@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AddressAutoComplete from "../Other Components/autocomplete";
 import PropTypes from "prop-types";
-import Categories from "../Other Components/Category_request";
+import Categories from "../Other Components/Categories";
 function ModifyPost(props) {
   let [Subject, setSubject] = useState(props.information.Description);
   let [Category, setCategory] = useState(props.information.Category);
@@ -11,7 +11,7 @@ function ModifyPost(props) {
   let [Zipcode, setZipcode] = useState(props.information["Zip Code"]);
   let [Address, setAddress] = useState(props.information["Address"]);
   let [Latitude, setLatitude] = useState(props.information.Latitude);
-  let [GeoState,setGeoState] = useState(props.information["State"]);
+  let [GeoState, setGeoState] = useState(props.information["State"]);
   let [Longitude, setLongitude] = useState(props.information.Longitude);
   //Change is not permitted between Seek Help and Offer Help.
   const Mode = props.information.Mode;
@@ -51,7 +51,7 @@ function ModifyPost(props) {
         Address: Address,
         Latitude: Latitude,
         Longitude: Longitude,
-        State:GeoState
+        State: GeoState,
       }),
     });
     setShow(false);
@@ -99,16 +99,16 @@ function ModifyPost(props) {
           <Modal.Body>
             <div className="row mb-2">
               <select
-                  id="category"
-                  aria-label="category"
-                  value={Category}
-                  onChange={(e) => {
-                    setCategory(e.target.value);
-                  }}
+                id="category"
+                aria-label="category"
+                value={Category}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                }}
               >
                 <Categories></Categories>
               </select>
-              </div>
+            </div>
 
             <div className="row">
               <div className="col-md-12">
@@ -134,7 +134,7 @@ function ModifyPost(props) {
                 <div className="md-form mb-0">
                   <label htmlFor="price">Price (USD per hour/item/job)</label>
                   <input
-                      type="number"
+                    type="number"
                     id="price"
                     name="price"
                     className="form-control"
@@ -153,7 +153,7 @@ function ModifyPost(props) {
                     Date for Subject
                   </label>
                   <input
-                      type="date"
+                    type="date"
                     id="date"
                     name="date"
                     className="form-control"

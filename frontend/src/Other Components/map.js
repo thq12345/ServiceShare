@@ -31,7 +31,7 @@ function Map(props) {
   };
 
   return (
-    <div style={{ height: "50vh", width: "48vh" }}>
+    <div className={"map"}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API }}
         defaultCenter={defaultProps.center}

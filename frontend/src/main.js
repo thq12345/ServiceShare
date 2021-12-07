@@ -7,49 +7,103 @@ import { useNavigate } from "react-router-dom";
 import logo from "./images/logo.png";
 import SeekHelpTable from "./Other Components/SeekHelpTable.js";
 import OfferHelpTable from "./Other Components/OfferHelpTable.js";
-import { data } from "express-session/session/cookie";
 import Login_modal from "./Account_Verification/loginmodal.js";
-import Categories from "./Other Components/Category_request.js";
 
+//From here, seek help means posts that seek help
+//offer help means posts that offer help
 function Main() {
-
   let [Seeks, setSeeks] = useState([]);
-  let [Posts, setPosts] = useState([]);
-  // let [Category_request, setCategory_request] = useState([]);
-  // let [Helpers, setHelpers] = useState([]);
-  // let [Category_help, setCategory_help] = useState([]);
+  let [Offer, setOffer] = useState([]);
   let [MinValue, setMinValue] = useState(0);
   let [MaxValue, setMaxValue] = useState(10000);
   let [Category_help_Select, SetCategory_help_Select] =
     useState("Select Category");
-
-  let [State_selected, setState_selected] =
-      useState("Select States");
-
+  let [State_selected, setState_selected] = useState("Select States");
   let [Category_request_Select, SetCategory_request_Select] =
     useState("Select Category");
   let [ShowHelper, setHelperPage] = useState(false);
   let [Input_Zipcode, setZipCode] = useState("");
   let [SearchItem, setSearchItem] = useState("");
   const navigate = useNavigate();
-  let [SortPostAsc, setPostSortAsc] = useState(1);
+  let [SortPostAsc, setPostAsc] = useState(1);
   let [SortHelperAsc, setHelperAsc] = useState(1);
   let textMinInput = useRef(0);
   let textMaxInput = useRef(100000);
   let zipInput = useRef("");
   let searchInput = useRef("");
 
-  const States=['Alabama','Alaska','American Samoa',
-    'Arizona','Arkansas','California','Colorado','Connecticut',
-    'Delaware','District of Columbia','Federated States of Micronesia',
-    'Florida','Georgia','Guam','Hawaii','Idaho','Illinois','Indiana','Iowa',
-    'Kansas','Kentucky','Louisiana','Maine','Marshall Islands','Maryland','Massachusetts',
-    'Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada',
-    'New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota',
-    'Northern Mariana Islands','Ohio','Oklahoma','Oregon','Palau','Pennsylvania',
-    'Puerto Rico','Rhode Island','South Carolina','South Dakota','Tennessee',
-    'Texas','Utah','Vermont','Virgin Island','Virginia','Washington',
-    'West Virginia','Wisconsin','Wyoming'];
+  const States = [
+    "Alabama",
+    "Alaska",
+    "American Samoa",
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Colorado",
+    "Connecticut",
+    "Delaware",
+    "District of Columbia",
+    "Federated States of Micronesia",
+    "Florida",
+    "Georgia",
+    "Guam",
+    "Hawaii",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Iowa",
+    "Kansas",
+    "Kentucky",
+    "Louisiana",
+    "Maine",
+    "Marshall Islands",
+    "Maryland",
+    "Massachusetts",
+    "Michigan",
+    "Minnesota",
+    "Mississippi",
+    "Missouri",
+    "Montana",
+    "Nebraska",
+    "Nevada",
+    "New Hampshire",
+    "New Jersey",
+    "New Mexico",
+    "New York",
+    "North Carolina",
+    "North Dakota",
+    "Northern Mariana Islands",
+    "Ohio",
+    "Oklahoma",
+    "Oregon",
+    "Palau",
+    "Pennsylvania",
+    "Puerto Rico",
+    "Rhode Island",
+    "South Carolina",
+    "South Dakota",
+    "Tennessee",
+    "Texas",
+    "Utah",
+    "Vermont",
+    "Virgin Island",
+    "Virginia",
+    "Washington",
+    "West Virginia",
+    "Wisconsin",
+    "Wyoming",
+  ];
+
+  const categoryOptions = [
+    "Chore",
+    "Academic",
+    "Cleaning",
+    "House Handy Work",
+    "Baby Sitting",
+    "Moving",
+    "Pet Care",
+    "Shopping",
+  ];
 
   let onClickHandler = () => {
     setMinValue(parseInt(textMinInput.current.value));
@@ -65,17 +119,6 @@ function Main() {
       setZipCode("");
     }
   };
-  //
-  // let onClickPriceHandler = (e) => {
-  //   setMinValue(parseInt(textMinInput.current.value));
-  //   setMaxValue(parseInt(textMaxInput.current.value));
-  //   if(!textMinInput.current.value) {
-  //     setMinValue(0);
-  //   }
-  //   if(!textMaxInput.current.value){
-  //     setMaxValue(10000000);
-  //   }
-  // };
 
   let onSearchHandler = () => {
     setSearchItem(searchInput.current.value);
@@ -105,8 +148,10 @@ function Main() {
       filtered_post = filtered_post.filter((item) => item.Category === select);
     }
 
-    if (State_selected != "Select States"){
-      filtered_post = filtered_post.filter((item) => item.State === State_selected);
+    if (State_selected != "Select States") {
+      filtered_post = filtered_post.filter(
+        (item) => item.State === State_selected
+      );
     }
 
     //Price Range Filter
@@ -118,7 +163,7 @@ function Main() {
     return filtered_post;
   }
 
-  //fetch data (Seek Help)
+  //fetch data (Offer Help)
   useEffect(() => {
     async function runThis() {
       let raw = await fetch(`api/load-all-helpers`, {
@@ -129,24 +174,18 @@ function Main() {
         }),
       });
       let res = await raw.json();
-      let categoryTemp = [];
       let postTemp = [];
       for (const element of res) {
-        categoryTemp.push(element.Category);
+        // categoryTemp.push(element.Category);
         postTemp.push(element);
       }
-      // //remove duplicate category options.
-      // categoryTemp = categoryTemp.filter(function (item, pos) {
-      //   return categoryTemp.indexOf(item) === pos;
-      // });
-      // //load all distinct category into the dropdown bar
-      // setCategory_request(categoryTemp);
-      setPosts(postTemp.slice(0, 250));
+
+      setOffer(postTemp.slice(0, 250));
     }
     runThis().catch(console.dir);
-  }, [Category_request_Select,SortPostAsc]);
+  }, [Category_request_Select, SortPostAsc]);
 
-  //fetch data (Offer Help)
+  //fetch data (Seek Help)
   useEffect(() => {
     async function runThis() {
       let raw = await fetch(`api/load-seeks`, {
@@ -157,53 +196,53 @@ function Main() {
         }),
       });
       let res = await raw.json();
-      let categoryOffers = [];
-      let postTemp = [];
+      let postTemp2 = [];
       for (const element of res) {
-        // categoryOffers.push(element.Category);
-        postTemp.push(element);
+        postTemp2.push(element);
       }
-      // //remove duplicate category options.
-      // categoryOffers = categoryOffers.filter(function (item, pos) {
-      //   return categoryOffers.indexOf(item) === pos;
-      // });
-      // //load all distinct category into the dropdown bar
-      // setCategory_help(categoryOffers);
-      // setHelpers(postTemp);
-      setSeeks(postTemp);
+
+      setSeeks(postTemp2);
     }
     runThis().catch(console.dir);
-  }, [Category_help_Select,SortHelperAsc]);
+  }, [Category_help_Select, SortHelperAsc]);
 
   //all filter components (For the sake of clarity)
   function FilterComponentSeekHelp() {
     return (
       <Col sm={3}>
         <select
-            id="category"
-            aria-label="category"
-            value={Category_request_Select}
-            onChange={(e) => {
-              SetCategory_request_Select(e.target.value);
-            }}
+          id="category"
+          aria-label="category"
+          value={Category_request_Select}
+          onChange={(e) => {
+            SetCategory_request_Select(e.target.value);
+          }}
         >
-          <Categories></Categories>
+          <option key="all" value="Select Category">
+            Select Category
+          </option>
+          {categoryOptions.map((p, i) => (
+            <option key={"categoryoption" + i} value={p}>
+              {p}
+            </option>
+          ))}
+          {/*<Categories />*/}
         </select>
-        <br/>
+        <br />
         <select
-            className="category mt-2"
-            value={States}
-            onChange={(e) => {
-              setState_selected(e.target.value);
-            }}
+          className="category mt-2"
+          value={State_selected}
+          onChange={(e) => {
+            setState_selected(e.target.value);
+          }}
         >
           <option key="all" value="Select States">
             Select States
           </option>
           {States.map((p, i) => (
-              <option key={i} value={p}>
-                {p}
-              </option>
+            <option key={"state" + i} value={p}>
+              {p}
+            </option>
           ))}
         </select>
         {/*<div className="pt-3">*/}
@@ -216,27 +255,27 @@ function Main() {
         {/*    ref={zipInput}*/}
         {/*    placeholder={zipInput.current.value}*/}
         {/*  />*/}
-          <br />
-          <label htmlFor="textmininput">Minimum Ideal Price($):</label>
-          <br />
-          {/*<p>Minimum Ideal Price($):</p>*/}
-          <input
-            type="number"
-            id="textmininput"
-            ref={textMinInput}
-            type="number"
-            placeholder={textMinInput.current.value}
-          />
-          <br />
-          <label htmlFor="textmaxinput">Maximum Ideal Price($):</label>
-          <br />
-          <input
-            type="number"
-            id="textmaxinput"
-            ref={textMaxInput}
-            type="number"
-            placeholder={textMaxInput.current.value}
-          />
+        <br />
+        <label htmlFor="textmininput">Minimum Ideal Price($):</label>
+        <br />
+        {/*<p>Minimum Ideal Price($):</p>*/}
+        <input
+          type="number"
+          id="textmininput"
+          ref={textMinInput}
+          type="number"
+          placeholder={textMinInput.current.value}
+        />
+        <br />
+        <label htmlFor="textmaxinput">Maximum Ideal Price($):</label>
+        <br />
+        <input
+          type="number"
+          id="textmaxinput"
+          ref={textMaxInput}
+          type="number"
+          placeholder={textMaxInput.current.value}
+        />
 
         <div className="pt-1">
           <Button type="button" onClick={onClickHandler}>
@@ -245,10 +284,21 @@ function Main() {
         </div>
 
         <div className="pt-1">
-          <Button variant="outline-info" type="button" onClick={() => setHelperAsc(1)}>Sort price: Ascending &#11014;</Button>
-          <Button variant="outline-info" type="button" onClick={() => setHelperAsc(-1)}>Sort price: Descending &#11015;</Button>
+          <Button
+            variant="outline-info"
+            type="button"
+            onClick={() => setPostAsc(1)}
+          >
+            Sort price: Ascending &#11014;
+          </Button>
+          <Button
+            variant="outline-info"
+            type="button"
+            onClick={() => setPostAsc(-1)}
+          >
+            Sort price: Descending &#11015;
+          </Button>
         </div>
-
       </Col>
     );
   }
@@ -256,67 +306,91 @@ function Main() {
     return (
       <Col sm={3}>
         <select
-            id="category"
-            aria-label="category"
-            value={Category_help_Select}
-            onChange={(e) => {
-              SetCategory_help_Select(e.target.value);
-            }}
+          id="category"
+          aria-label="category"
+          value={Category_help_Select}
+          onChange={(e) => {
+            SetCategory_help_Select(e.target.value);
+          }}
         >
-          <Categories></Categories>
-        </select>
+          <option key="all" value="Select Category">
+            Select Category
+          </option>
+          {categoryOptions.map((p, i) => (
+            <option key={"categoryofferoption" + i} value={p}>
+              {p}
+            </option>
+          ))}
 
+          {/*<Categories />*/}
+        </select>
+        <br />
         <select
-            value={States}
-            className="category mt-2"
-            onChange={(e) => {
-              setState_selected(e.target.value);
-            }}
+          value={State_selected}
+          className="category mt-2"
+          onChange={(e) => {
+            setState_selected(e.target.value);
+          }}
         >
           <option key="all" value="Select States">
             Select States
           </option>
           {States.map((p, i) => (
-              <option key={i} value={p}>
-                {p}
-              </option>
+            <option key={i} value={p}>
+              {p}
+            </option>
           ))}
         </select>
-          <br />
-          <label htmlFor={"minidealpricehelper"}>Minimum Ideal Price($)</label>
-          <br />
-          <input
-            type="number"
-            id={"minidealpricehelper"}
-            ref={textMinInput}
-            placeholder={textMinInput.current.value}
-          />
-          <br />
-          <label htmlFor={"maxidealpricehelper"}>Maximum Ideal Price($)</label>
-          <br />
-          <input
-            type="number"
-            id={"maxidealpricehelper"}
-            ref={textMaxInput}
-            placeholder={textMaxInput.current.value}
-          />
-          <br />
+        <br />
+        <label htmlFor={"minidealpricehelper"}>Minimum Ideal Price($)</label>
+        <br />
+        <input
+          type="number"
+          id={"minidealpricehelper"}
+          ref={textMinInput}
+          placeholder={textMinInput.current.value}
+        />
+        <br />
+        <label htmlFor={"maxidealpricehelper"}>Maximum Ideal Price($)</label>
+        <br />
+        <input
+          type="number"
+          id={"maxidealpricehelper"}
+          ref={textMaxInput}
+          placeholder={textMaxInput.current.value}
+        />
+        <br />
         <div className="pt-1">
           <Button type="button" onClick={onClickHandler}>
             Apply Price Range
           </Button>
         </div>
         <div className="pt-3">
-          <Button variant="outline-info" type="button" onClick={() => setHelperAsc(1)}>Sort price: Ascending &#11014;</Button>
-          <Button variant="outline-info" type="button" onClick={() => setHelperAsc(-1)}>Sort price: Descending &#11015;</Button>
+          <Button
+            variant="outline-info"
+            type="button"
+            onClick={() => setHelperAsc(1)}
+          >
+            Sort price: Ascending &#11014;
+          </Button>
+          <Button
+            variant="outline-info"
+            type="button"
+            onClick={() => setHelperAsc(-1)}
+          >
+            Sort price: Descending &#11015;
+          </Button>
         </div>
       </Col>
     );
   }
 
   //the helper tables with all the offers (Offer help)
-  function OfferTableMain() {
-    let HelperFiltered = filter_on_post(Seeks, Category_help_Select).slice(0,250);
+  function SeekTableMain() {
+    let HelperFiltered = filter_on_post(Seeks, Category_help_Select).slice(
+      0,
+      250
+    );
     return (
       <Container fluid className={"mt-5 table"}>
         <Row>
@@ -333,10 +407,9 @@ function Main() {
   }
 
   //the seek request tables with all requests (Seek Help)
-  function SeekHelpTableMain() {
-
-    let datatemp = filter_on_post(Seeks, Category_request_Select).slice(0,250);
-    console.log('posting seeks');
+  function OfferTableMain() {
+    let datatemp = filter_on_post(Offer, Category_request_Select).slice(0, 250);
+    console.log("posting seeks");
     console.log(datatemp);
 
     return (
@@ -375,10 +448,10 @@ function Main() {
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <Login_modal></Login_modal>
+                {/*<APIModal />*/}
+                <Login_modal />
               </li>
               <li>
-
                 <Button
                   variant="secondary"
                   className="d-flex btn me-auto"
@@ -405,14 +478,14 @@ function Main() {
                 onClick={() => setHelperPage(true)}
                 className="stands-out-button"
               >
-                Seek Help
+                Offer Help
               </button>
               <button
                 type="button"
                 onClick={() => setHelperPage(false)}
                 className="stands-out-button"
               >
-                Offer Help
+                Seek Help
               </button>
             </span>
 
@@ -437,10 +510,10 @@ function Main() {
                 Search
               </Button>
             </div>
-            </div>
+          </div>
         </div>
-        {!ShowHelper ? <SeekHelpTableMain /> : null}
-        {ShowHelper ? <OfferTableMain /> : null}
+        {!ShowHelper ? <OfferTableMain /> : null}
+        {ShowHelper ? <SeekTableMain /> : null}
       </div>
       <footer>Created by Tianhao Qu, Kaiwen Tian</footer>
     </>

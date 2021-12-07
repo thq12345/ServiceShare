@@ -28,7 +28,6 @@ function SeekHelpTable({ data, totalPosts }) {
             <th>Date for task</th>
             <th>State</th>
             <th>More details</th>
-
           </tr>
           {currentPost.map((p, i) => (
             <tr key={i}>

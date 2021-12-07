@@ -150,26 +150,26 @@ function myDB() {
     return result;
   };
 
-  //get all the posts in the database.
-  myDB.getAllHelpOfferPosts = async (bol,res) => {
+  //get all the offer help posts in the database.
+  myDB.getAllHelpOfferPosts = async (bol, res) => {
     console.log("Loading all posts from database.");
     console.log(bol);
-    const post_db = project_database.collection("posts");
-    let result = await post_db.find({}).sort({"Ideal Price":bol}).toArray();
+    const post_db = project_database.collection("helper");
+    let result = await post_db.find({}).sort({ "Ideal Price": bol }).toArray();
     res.json(result);
     console.log("loaded");
-    result=result.slice(0,250);
+    result = result.slice(0, 250);
     return result;
   };
 
-  //get all the helper in the database.
-  myDB.getAllSeekPosts = async (bol,res) => {
+  //get all the seek help posts in the database.
+  myDB.getAllSeekPosts = async (bol, res) => {
     console.log("Loading all helper posts from database.");
     console.log(bol);
-    const post_db = project_database.collection("helper");
-    let result = await post_db.find({}).sort({"Ideal Price":bol}).toArray();
+    const post_db = project_database.collection("posts");
+    let result = await post_db.find({}).sort({ "Ideal Price": bol }).toArray();
     res.json(result);
-    result=result.slice(0,250);
+    result = result.slice(0, 250);
     return result;
   };
 
