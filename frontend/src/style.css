@@ -21,6 +21,13 @@ nav {
   height: 70px;
   font-size: 30px;
 }
+
+.map{
+  height: 25rem;
+  width: 25rem;
+  text-align: center;
+}
+
 #outer-header {
   background-image: url("images/header.png");
   background-repeat: no-repeat;
@@ -98,6 +105,10 @@ nav {
   font-weight: bold;
 }
 
+.header_text_section{
+  background-color: #f5efe8;
+}
+
 .stands-out-button {
   background-color: #3c7191;
   font-size: 20px;
@@ -107,12 +118,23 @@ nav {
   margin: 5px;
 }
 
-#category {
+.moredetailbutton{
+  background-color: #3c7191;
+  font-size: 15px;
+  color: #f5efe8;
+  border-radius: 12px;
+  padding: 3px 10px;
+  margin: 3px;
+}
+
+.category {
   font-size: 15px;
   font-weight: bold;
-  color: #f5efe8;
-  background-color: #3c7191;
+  border-radius: 12px;
+  color: #3c7191;
+  border-width: medium;
 }
+
 .map {
   height: 25rem;
   width: 25rem;

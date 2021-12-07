@@ -10,9 +10,9 @@ function MoreDetails(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <button className={"moredetailbutton"} variant="primary" onClick={handleShow}>
         Details
-      </Button>
+      </button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -24,10 +24,10 @@ function MoreDetails(props) {
           <p>Address: {props.json.Address}</p>
           <p>Scale: {window.devicePixelRatio}</p>
           <p>Location on Map:</p>
-          <Map
+            <Map>
             longitude={props.json.Longitude}
             latitude={props.json.Latitude}
-          />
+            </Map>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
