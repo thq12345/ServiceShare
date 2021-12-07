@@ -211,7 +211,7 @@ function Main() {
     return (
       <Col sm={3}>
         <select
-          id="category"
+          className="category"
           aria-label="category"
           value={Category_request_Select}
           onChange={(e) => {
@@ -245,32 +245,24 @@ function Main() {
             </option>
           ))}
         </select>
-        {/*<div className="pt-3">*/}
-        {/*  /!*<p>Zip Code:</p>*!/*/}
-        {/*  <label htmlFor="zipinput">Zip Code: </label>*/}
-        {/*  <br />*/}
-        {/*  <input*/}
-        {/*    type="text"*/}
-        {/*    id="zipinput"*/}
-        {/*    ref={zipInput}*/}
-        {/*    placeholder={zipInput.current.value}*/}
-        {/*  />*/}
         <br />
-        <label htmlFor="textmininput">Minimum Ideal Price($):</label>
-        <br />
-        {/*<p>Minimum Ideal Price($):</p>*/}
+        <div className={"my-2"}>
+        <label className={"font-weight-bold"} htmlFor="textmininput">Minimum Ideal Price($):</label>
+
         <input
           type="number"
+          className={" ml-2 rounded"}
           id="textmininput"
           ref={textMinInput}
           type="number"
           placeholder={textMinInput.current.value}
         />
         <br />
-        <label htmlFor="textmaxinput">Maximum Ideal Price($):</label>
-        <br />
+        <label className={"font-weight-bold"} htmlFor="textmaxinput">Maximum Ideal Price($):</label>
+
         <input
           type="number"
+          className={" ml-2 rounded"}
           id="textmaxinput"
           ref={textMaxInput}
           type="number"
@@ -278,26 +270,26 @@ function Main() {
         />
 
         <div className="pt-1">
-          <Button type="button" onClick={onClickHandler}>
+          <button type="button" className={"moredetailbutton"} onClick={onClickHandler}>
             Apply Price Range
-          </Button>
+          </button>
         </div>
-
+        </div>
         <div className="pt-1">
-          <Button
-            variant="outline-info"
+          <button
             type="button"
+            className={"category"}
             onClick={() => setPostAsc(1)}
           >
             Sort price: Ascending &#11014;
-          </Button>
-          <Button
-            variant="outline-info"
+          </button>
+          <button
             type="button"
+            className={"category mt-2"}
             onClick={() => setPostAsc(-1)}
           >
             Sort price: Descending &#11015;
-          </Button>
+          </button>
         </div>
       </Col>
     );
@@ -306,7 +298,7 @@ function Main() {
     return (
       <Col sm={3}>
         <select
-          id="category"
+            className="category mt-2"
           aria-label="category"
           value={Category_help_Select}
           onChange={(e) => {
@@ -342,44 +334,45 @@ function Main() {
           ))}
         </select>
         <br />
-        <label htmlFor={"minidealpricehelper"}>Minimum Ideal Price($)</label>
-        <br />
+        <div className={"mt-2"}>
+        <label className={"font-weight-bold mt-0"} htmlFor={"minidealpricehelper"}>Minimum Ideal Price($)</label>
         <input
           type="number"
           id={"minidealpricehelper"}
+          className={" ml-2 rounded"}
           ref={textMinInput}
           placeholder={textMinInput.current.value}
         />
-        <br />
-        <label htmlFor={"maxidealpricehelper"}>Maximum Ideal Price($)</label>
-        <br />
+        <br/>
+        <label className={"font-weight-bold mt-0"} htmlFor={"maxidealpricehelper"}>Maximum Ideal Price($)</label>
         <input
           type="number"
           id={"maxidealpricehelper"}
+          className={" ml-2 rounded"}
           ref={textMaxInput}
           placeholder={textMaxInput.current.value}
         />
-        <br />
-        <div className="pt-1">
-          <Button type="button" onClick={onClickHandler}>
-            Apply Price Range
-          </Button>
+          <div className="pt-1">
+            <button type="button" className={"moredetailbutton"} onClick={onClickHandler}>
+              Apply Price Range
+            </button>
+          </div>
         </div>
+
         <div className="pt-3">
-          <Button
-            variant="outline-info"
-            type="button"
+          <button
+            className={"category"}
             onClick={() => setHelperAsc(1)}
           >
             Sort price: Ascending &#11014;
-          </Button>
-          <Button
-            variant="outline-info"
+          </button>
+          <button
             type="button"
+            className={"category mt-2"}
             onClick={() => setHelperAsc(-1)}
           >
             Sort price: Descending &#11015;
-          </Button>
+          </button>
         </div>
       </Col>
     );
@@ -448,7 +441,6 @@ function Main() {
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li>
-                {/*<APIModal />*/}
                 <Login_modal />
               </li>
               <li>
@@ -469,10 +461,10 @@ function Main() {
         >
           <div className="tag">
             <span>
-              <h1 className="d-inline" style={{ fontSize: "30px" }}>
+              <h2 className="d-inline header_text_section rounded mt-4" style={{ fontSize: "30px" }}>
                 {" "}
                 I am here to...{" "}
-              </h1>
+              </h2>
               <button
                 type="button"
                 onClick={() => setHelperPage(true)}
@@ -490,14 +482,15 @@ function Main() {
             </span>
 
             <div>
-              {/*<input className="d-inline-block ml-5" title="Search Bar" />*/}
-              <label htmlFor={"searchbar"} className={"pt-3 d-inline-block"}>
-                Search Bar
+              <label htmlFor={"searchbar"} className={"pt-3  d-inline-block mr-0"}>
+                <p className={"header_text_section rounded "}>Search Bar</p>
               </label>
               <input
                 className="d-inline-block ml-5"
                 type="text"
-                title="Search Bar"
+                class={"ml-1"}
+                placeholder="Search Bar"
+                // title="Search Bar"
                 id={"searchbar"}
                 ref={searchInput}
                 placeholder={searchInput.current.value}

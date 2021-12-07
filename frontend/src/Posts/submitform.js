@@ -100,7 +100,7 @@ function SubmitForm() {
 
                 <div className="row mt-2 mb-2">
                   <select
-                    id="category"
+                    className="category"
                     aria-label="category"
                     value={Category}
                     onChange={(e) => {
