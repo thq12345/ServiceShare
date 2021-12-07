@@ -49,12 +49,12 @@ https://docs.google.com/presentation/d/1vtvEWsHSOthV0CzSdZ6w8Ft_ErwHLXUKlRoOhvNS
 ### Work Distribution
 
 - Tianhao: login/create account page, help seeker page, category filter, passport.js & google map
-- Kaiwen(Kaitlyn): helper page, zip code filter, UI design enhancements, price filter
+- Kaiwen(Kaitlyn): helper page, state,price filters, sorts, UI design enhancements
 
-### Notes
+### Reference
+jung, michael. (n.d.). African supermarket worker portrait. https://www.canva.com/media/MADaru1zzNg. Canva. Retrieved from Canva.com.
 
-We prefilled the data randomly, therefore some of the address data might not match what the map shows, please ignore. We
-tried many times that user submitted information through our form will be accurate (that map location will match the address).
+### [Color Palette Used](https://pigment.shapefactory.co/?a=71A8C4&b=F5EFE8)
 
 ### MIT License
 
