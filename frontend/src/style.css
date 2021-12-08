@@ -127,11 +127,21 @@ nav {
   margin: 3px;
 }
 
-.category {
+.category{
   font-size: 15px;
   font-weight: bold;
   border-radius: 12px;
-  color: #3c7191;
+  color: #3C7191;
+  background-color: #AFA194 ;
+  border-width: medium;
+}
+
+.sort_button {
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 12px;
+  color: #f5efe8;
+  background-color: #3c7191;
   border-width: medium;
 }
 

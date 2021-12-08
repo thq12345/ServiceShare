@@ -99,7 +99,7 @@ function ModifyPost(props) {
           <Modal.Body>
             <div className="row mb-2">
               <select
-                id="category"
+                className={"sort_button"}
                 aria-label="category"
                 value={Category}
                 onChange={(e) => {

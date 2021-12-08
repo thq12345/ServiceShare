@@ -211,7 +211,7 @@ function Main() {
     return (
       <Col sm={3}>
         <select
-          className="category"
+          className={"category"}
           aria-label="category"
           value={Category_request_Select}
           onChange={(e) => {
@@ -284,14 +284,14 @@ function Main() {
         <div className="pt-1">
           <button
             type="button"
-            className={"category"}
+            className={"sort_button"}
             onClick={() => setPostAsc(1)}
           >
             Sort price: Ascending &#11014;
           </button>
           <button
             type="button"
-            className={"category mt-2"}
+            className={"sort_button mt-2"}
             onClick={() => setPostAsc(-1)}
           >
             Sort price: Descending &#11015;
@@ -381,12 +381,12 @@ function Main() {
         </div>
 
         <div className="pt-3">
-          <button className={"category"} onClick={() => setHelperAsc(1)}>
+          <button className={"sort_button"} onClick={() => setHelperAsc(1)}>
             Sort price: Ascending &#11014;
           </button>
           <button
             type="button"
-            className={"category mt-2"}
+            className={"sort_button mt-2"}
             onClick={() => setHelperAsc(-1)}
           >
             Sort price: Descending &#11015;
