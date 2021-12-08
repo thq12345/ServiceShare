@@ -507,7 +507,7 @@ function Main() {
                 htmlFor={"searchbar"}
                 className={"pt-3  d-inline-block mr-0"}
               >
-                <p className={"header_text_section rounded "}>Search Bar</p>
+                {/*<p className={"header_text_section rounded "}>Search Bar</p>*/}
               </label>
               <input
                 className="d-inline-block ml-1"
@@ -516,7 +516,8 @@ function Main() {
                 // title="Search Bar"
                 id={"searchbar"}
                 ref={searchInput}
-                placeholder={searchInput.current.value}
+                // placeholder={searchInput.current.value}
+                placeholder={"Search here"}
               />
               <Button
                 variant="secondary"

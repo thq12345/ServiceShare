@@ -18,7 +18,12 @@ function MoreDetails(props) {
         Details
       </button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal
+        show={show}
+        id={"moreDetailModal"}
+        onHide={handleClose}
+        aria-labelledby="moreDetailModal"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Details</Modal.Title>
         </Modal.Header>

@@ -64,7 +64,12 @@ function SubmitForm() {
         Submit a New Post
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        id="submitPost"
+        aria-labelledby="submitPost"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Submit a New Post</Modal.Title>
         </Modal.Header>

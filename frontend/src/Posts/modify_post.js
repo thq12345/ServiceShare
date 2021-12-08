@@ -86,7 +86,12 @@ function ModifyPost(props) {
         Edit or Delete Post
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal
+        show={show}
+        id="modifyPost"
+        onHide={handleClose}
+        aria-labelledby={"modifyPost"}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Edit or Delete Post</Modal.Title>
         </Modal.Header>

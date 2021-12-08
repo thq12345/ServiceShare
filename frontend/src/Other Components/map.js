@@ -29,14 +29,13 @@ function Map(props) {
     },
     zoom: 11,
   };
-
+  // document.getElementsByTagName("GoogleMapReact")[0].removeAttribute("class");
   return (
-    <div className={"map"}>
+    <div className={"map"} role="application">
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
-        role="map"
       >
         <CenterRedCirclePinpoint lat={props.latitude} lng={props.longitude} />
       </GoogleMapReact>
