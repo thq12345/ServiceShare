@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 import ModifyPost from "./modify_post.js";
-import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
 import SubmitForm from "./submitform";
 
 function PostForm2() {
-  const navigate = useNavigate();
-
   //all posts that belongs to this user.
   const [Post, setPosts] = useState([]);
 
@@ -98,10 +94,5 @@ function PostForm2() {
     </>
   );
 }
-
-// MyVerticallyCenteredModal.propTypes = {
-//   onHide: PropTypes.func,
-//   show: PropTypes.bool,
-// };
 
 export default PostForm2;

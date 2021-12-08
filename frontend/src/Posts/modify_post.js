@@ -20,17 +20,12 @@ function ModifyPost(props) {
   let subjectChange = (event) => {
     setSubject(event.target.value);
   };
-  let categoryChange = (event) => {
-    setCategory(event.target.value);
-  };
+
   let priceChange = (event) => {
     setPrice(event.target.value);
   };
   let dateChange = (event) => {
     setDate(event.target.value);
-  };
-  let zipcodeChange = (event) => {
-    setZipcode(event.target.value);
   };
 
   //when the user hit the submit button of the form

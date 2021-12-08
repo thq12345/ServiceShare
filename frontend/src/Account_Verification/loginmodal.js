@@ -1,4 +1,4 @@
-import { Button, Modal, ModalBody } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
@@ -65,11 +65,11 @@ function Login_modal() {
     }
   };
 
-  function Create_comp() {
+  function Create() {
     return (
       <form
         // need to change this I guess (css)
-        id="Login Form"
+        id="Create Account"
         onSubmit={handleCreateAccount}
         className={"login-container  justify-content-center align-self-center"}
       >
@@ -101,7 +101,7 @@ function Login_modal() {
         />
         <div className="mt-3">
           <button
-            id="Submit"
+            id="Submitlogin"
             className="btn btn-lg btn-primary btn-block"
             type="Submit"
             value="Submit"
@@ -124,7 +124,7 @@ function Login_modal() {
     );
   }
 
-  function Login_comp() {
+  function Login() {
     return (
       <form
         id="Login Form"
@@ -136,7 +136,7 @@ function Login_modal() {
         <label className="sr-only"> Email Address </label>
         <input
           type="email"
-          id="emailAddress"
+          id="emailAddresslogin"
           className="form-control"
           placeholder="User Name"
           name="username"
@@ -150,7 +150,7 @@ function Login_modal() {
         </label>
         <input
           type="password"
-          id="password"
+          id="passwordlogin"
           placeholder="Password"
           name="password"
           value={user.password}
@@ -198,7 +198,7 @@ function Login_modal() {
               src={logo}
               alt="Service Share Logo"
             />
-            <Login_comp />
+            <Login />
           </div>
         </Modal.Body>
       </Modal>
@@ -213,7 +213,7 @@ function Login_modal() {
               src={logo}
               alt="Service Share Logo"
             />
-            <Create_comp />
+            <Create />
           </div>
         </Modal.Body>
       </Modal>

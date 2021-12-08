@@ -5,7 +5,6 @@ import usePlacesAutocomplete, {
 import useOnclickOutside from "react-cool-onclickoutside";
 import React from "react";
 import PropTypes from "prop-types";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 function AddressAutoComplete(props) {
   const {
@@ -66,14 +65,14 @@ function AddressAutoComplete(props) {
           ) {
             //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
             if (
-              results[0].address_components[i].types[b] ==
+              results[0].address_components[i].types[b] ===
               "administrative_area_level_1"
             ) {
               //this is the object you are looking for
               const state = results[0].address_components[i].long_name;
               props.setGeoState(state);
             } else if (
-              results[0].address_components[i].types[b] == "postal_code"
+              results[0].address_components[i].types[b] === "postal_code"
             ) {
               const zip = results[0].address_components[i].long_name;
               console.log(zip);
@@ -128,8 +127,8 @@ function AddressAutoComplete(props) {
 }
 
 AddressAutoComplete.propTypes = {
-  setGeoState: PropTypes.string,
-  setZip: PropTypes.string,
+  setGeoState: PropTypes.func,
+  setZip: PropTypes.func,
   initialaddress: PropTypes.string,
   setaddress: PropTypes.func,
   setlatitude: PropTypes.func,

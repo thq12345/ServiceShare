@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "./images/logo.png";
 import SeekHelpTable from "./Other Components/SeekHelpTable.js";
 import OfferHelpTable from "./Other Components/OfferHelpTable.js";
-import Login_modal from "./Account_Verification/loginmodal.js";
+import LoginModal from "./Account_Verification/loginmodal.js";
 
 //From here, seek help means posts that seek help
 //offer help means posts that offer help
@@ -148,7 +148,7 @@ function Main() {
       filtered_post = filtered_post.filter((item) => item.Category === select);
     }
 
-    if (State_selected != "Select States") {
+    if (State_selected !== "Select States") {
       filtered_post = filtered_post.filter(
         (item) => item.State === State_selected
       );
@@ -226,11 +226,11 @@ function Main() {
               {p}
             </option>
           ))}
-          {/*<Categories />*/}
         </select>
         <br />
         <select
           className="category mt-2"
+          aria-label={"state1"}
           value={State_selected}
           onChange={(e) => {
             setState_selected(e.target.value);
@@ -247,33 +247,39 @@ function Main() {
         </select>
         <br />
         <div className={"my-2"}>
-        <label className={"font-weight-bold"} htmlFor="textmininput">Minimum Ideal Price($):</label>
+          <label className={"font-weight-bold"} htmlFor="textmininput">
+            Minimum Ideal Price($):
+          </label>
 
-        <input
-          type="number"
-          className={" ml-2 rounded"}
-          id="textmininput"
-          ref={textMinInput}
-          type="number"
-          placeholder={textMinInput.current.value}
-        />
-        <br />
-        <label className={"font-weight-bold"} htmlFor="textmaxinput">Maximum Ideal Price($):</label>
+          <input
+            type="number"
+            className={" ml-2 rounded"}
+            id="textmininput"
+            ref={textMinInput}
+            placeholder={textMinInput.current.value}
+          />
+          <br />
+          <label className={"font-weight-bold"} htmlFor="textmaxinput">
+            Maximum Ideal Price($):
+          </label>
 
-        <input
-          type="number"
-          className={" ml-2 rounded"}
-          id="textmaxinput"
-          ref={textMaxInput}
-          type="number"
-          placeholder={textMaxInput.current.value}
-        />
+          <input
+            type="number"
+            className={" ml-2 rounded"}
+            id="textmaxinput"
+            ref={textMaxInput}
+            placeholder={textMaxInput.current.value}
+          />
 
-        <div className="pt-1">
-          <button type="button" className={"moredetailbutton"} onClick={onClickHandler}>
-            Apply Price Range
-          </button>
-        </div>
+          <div className="pt-1">
+            <button
+              type="button"
+              className={"moredetailbutton"}
+              onClick={onClickHandler}
+            >
+              Apply Price Range
+            </button>
+          </div>
         </div>
         <div className="pt-1">
           <button
@@ -298,7 +304,7 @@ function Main() {
     return (
       <Col sm={3}>
         <select
-            className="category mt-2"
+          className="category mt-2"
           aria-label="category"
           value={Category_help_Select}
           onChange={(e) => {
@@ -319,6 +325,7 @@ function Main() {
         <br />
         <select
           value={State_selected}
+          aria-label={"state2"}
           className="category mt-2"
           onChange={(e) => {
             setState_selected(e.target.value);
@@ -335,35 +342,46 @@ function Main() {
         </select>
         <br />
         <div className={"mt-2"}>
-        <label className={"font-weight-bold mt-0"} htmlFor={"minidealpricehelper"}>Minimum Ideal Price($)</label>
-        <input
-          type="number"
-          id={"minidealpricehelper"}
-          className={" ml-2 rounded"}
-          ref={textMinInput}
-          placeholder={textMinInput.current.value}
-        />
-        <br/>
-        <label className={"font-weight-bold mt-0"} htmlFor={"maxidealpricehelper"}>Maximum Ideal Price($)</label>
-        <input
-          type="number"
-          id={"maxidealpricehelper"}
-          className={" ml-2 rounded"}
-          ref={textMaxInput}
-          placeholder={textMaxInput.current.value}
-        />
+          <label
+            className={"font-weight-bold mt-0"}
+            htmlFor={"minidealpricehelper"}
+          >
+            Minimum Ideal Price($)
+          </label>
+          <input
+            type="number"
+            id={"minidealpricehelper"}
+            className={" ml-2 rounded"}
+            ref={textMinInput}
+            placeholder={textMinInput.current.value}
+          />
+          <br />
+          <label
+            className={"font-weight-bold mt-0"}
+            htmlFor={"maxidealpricehelper"}
+          >
+            Maximum Ideal Price($)
+          </label>
+          <input
+            type="number"
+            id={"maxidealpricehelper"}
+            className={" ml-2 rounded"}
+            ref={textMaxInput}
+            placeholder={textMaxInput.current.value}
+          />
           <div className="pt-1">
-            <button type="button" className={"moredetailbutton"} onClick={onClickHandler}>
+            <button
+              type="button"
+              className={"moredetailbutton"}
+              onClick={onClickHandler}
+            >
               Apply Price Range
             </button>
           </div>
         </div>
 
         <div className="pt-3">
-          <button
-            className={"category"}
-            onClick={() => setHelperAsc(1)}
-          >
+          <button className={"category"} onClick={() => setHelperAsc(1)}>
             Sort price: Ascending &#11014;
           </button>
           <button
@@ -441,7 +459,7 @@ function Main() {
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <Login_modal />
+                <LoginModal />
               </li>
               <li>
                 <Button
@@ -461,10 +479,13 @@ function Main() {
         >
           <div className="tag">
             <span>
-              <h2 className="d-inline header_text_section rounded mt-4" style={{ fontSize: "30px" }}>
+              <h1
+                className="d-inline header_text_section rounded mt-4"
+                style={{ fontSize: "30px" }}
+              >
                 {" "}
                 I am here to...{" "}
-              </h2>
+              </h1>
               <button
                 type="button"
                 onClick={() => setHelperPage(true)}
@@ -482,14 +503,16 @@ function Main() {
             </span>
 
             <div>
-              <label htmlFor={"searchbar"} className={"pt-3  d-inline-block mr-0"}>
+              <label
+                htmlFor={"searchbar"}
+                className={"pt-3  d-inline-block mr-0"}
+              >
                 <p className={"header_text_section rounded "}>Search Bar</p>
               </label>
               <input
-                className="d-inline-block ml-5"
+                className="d-inline-block ml-1"
                 type="text"
-                class={"ml-1"}
-                placeholder="Search Bar"
+                // className={"ml-1"}
                 // title="Search Bar"
                 id={"searchbar"}
                 ref={searchInput}
@@ -508,7 +531,7 @@ function Main() {
         {!ShowHelper ? <OfferTableMain /> : null}
         {ShowHelper ? <SeekTableMain /> : null}
       </div>
-      <footer>Created by Tianhao Qu, Kaiwen Tian</footer>
+      {/*<footer>Created by Tianhao Qu, Kaiwen Tian</footer>*/}
     </>
   );
 }

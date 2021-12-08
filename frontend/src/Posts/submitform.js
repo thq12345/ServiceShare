@@ -27,9 +27,6 @@ function SubmitForm() {
   let dateChange = (event) => {
     setDate(event.target.value);
   };
-  let zipcodeChange = (event) => {
-    setZipcode(event.target.value);
-  };
 
   let modeChange = (event) => {
     setMode(event.target.value);

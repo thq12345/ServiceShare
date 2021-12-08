@@ -28,16 +28,23 @@ function OfferHelpTable({ data, totalPosts }) {
       {row.map((h, i) => (
         <Col key={"card" + i} className="card">
           <div key={"card-body" + i} className="card-body">
-            <h5 key={"card-title" + i} className="posts card-title mt-0">
+            <h2
+              style={{ fontSize: "20px" }}
+              key={"card-title" + i}
+              className="posts card-title mt-0"
+            >
               {h.Category}
-            </h5>
-            <p key={"card-text" + i} className="posts card-text my-0">
+            </h2>
+            <p
+              key={"card-text-description" + i}
+              className="posts card-text my-0"
+            >
               {h.Description}
             </p>
-            <p key={"card-text" + i} className="posts card-text my-1">
+            <p key={"card-text-price" + i} className="posts card-text my-1">
               $ {h["Ideal Price"]}
             </p>
-            <p key={"card-text" + i} className="posts card-text my-1">
+            <p key={"card-text-state" + i} className="posts card-text my-1">
               {h["State"]}
             </p>
             <MoreDetails json={h} />
@@ -54,9 +61,9 @@ function OfferHelpTable({ data, totalPosts }) {
         <ul className={"pagination"}>
           {pageNumbers.map((number) => (
             <li key={number} className={"page-item"}>
-              <a onClick={() => paginate(number)} className="page-link">
+              <button onClick={() => paginate(number)} className="page-link">
                 {number}
-              </a>
+              </button>
             </li>
           ))}
         </ul>

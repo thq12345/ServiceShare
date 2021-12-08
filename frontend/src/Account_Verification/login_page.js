@@ -4,7 +4,6 @@ import logo from "../images/logo.png";
 
 function LoginForm() {
   const [user, setUser] = useState({ username: "", password: "" });
-  const [showcreate, setshowcreate] = useState(false);
   let [current_status, set_status] = useState("");
   let navigate = useNavigate();
 
