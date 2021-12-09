@@ -13,6 +13,7 @@ function ModifyPost(props) {
   let [Latitude, setLatitude] = useState(props.information.Latitude);
   let [GeoState, setGeoState] = useState(props.information["State"]);
   let [Longitude, setLongitude] = useState(props.information.Longitude);
+  let [Error, setError] = useState("");
   //Change is not permitted between Seek Help and Offer Help.
   const Mode = props.information.Mode;
   const id = props.information._id;
@@ -29,50 +30,69 @@ function ModifyPost(props) {
   };
 
   //when the user hit the submit button of the form
-  const handleEdit = async (event) => {
+  const handleEdit = async () => {
     //we also need to add a type checker to ensure numbers are numbers, strings are strings etc.
-    // event.preventDefault();
-    await fetch("/api/edit-post", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        _id: id,
-        Mode: Mode,
-        Description: Subject,
-        Category: Category,
-        "Ideal Price": Price,
-        "Date for task": Date,
-        "Zip Code": Zipcode,
-        Address: Address,
-        Latitude: Latitude,
-        Longitude: Longitude,
-        State: GeoState,
-      }),
-    });
-    setShow(false);
-    window.location.reload(true);
+    //we also need to add a type checker to ensure numbers are numbers, strings are strings etc.
+    if (Category === "Select Category" || isNaN(parseInt(Price))) {
+      if (Category === "Select Category" && isNaN(parseInt(Price))) {
+        setError("Please select a category and input a valid price.");
+      } else if (Category === "Select Category") {
+        setError("Please select a category.");
+      } else if (isNaN(parseInt(Price))) {
+        setError("Price given is invalid. Please try again.");
+      }
+    } else {
+      await fetch("/api/edit-post", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          _id: id,
+          Mode: Mode,
+          Description: Subject,
+          Category: Category,
+          "Ideal Price": Price,
+          "Date for task": Date,
+          "Zip Code": Zipcode,
+          Address: Address,
+          Latitude: Latitude,
+          Longitude: Longitude,
+          State: GeoState,
+        }),
+      });
+      setShow(false);
+      window.location.reload(true);
+    }
   };
 
   //when the user hit the submit button of the form
-  const handleDelete = async (event) => {
+  const handleDelete = async () => {
     //we also need to add a type checker to ensure numbers are numbers, strings are strings etc.
-    // event.preventDefault();
-    await fetch("/api/delete-post", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        _id: id,
-        Mode: Mode,
-        Description: Subject,
-        Category: Category,
-        "Ideal Price": Price,
-        "Date for task": Date,
-        "Zip Code": Zipcode,
-        Address: Address,
-      }),
-    });
-    setShow(false);
-    window.location.reload(true);
+    if (Category === "Select Category" || isNaN(parseInt(Price))) {
+      if (Category === "Select Category" && isNaN(parseInt(Price))) {
+        setError("Please select a category and input a valid price.");
+      } else if (Category === "Select Category") {
+        setError("Please select a category.");
+      } else if (isNaN(parseInt(Price))) {
+        setError("Price given is invalid. Please try again.");
+      }
+    } else {
+      await fetch("/api/delete-post", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          _id: id,
+          Mode: Mode,
+          Description: Subject,
+          Category: Category,
+          "Ideal Price": Price,
+          "Date for task": Date,
+          "Zip Code": Zipcode,
+          Address: Address,
+        }),
+      });
+      setShow(false);
+      window.location.reload(true);
+    }
   };
 
   const [show, setShow] = useState(false);
@@ -98,6 +118,7 @@ function ModifyPost(props) {
         <form id="contact-form" name="contact-form">
           <Modal.Body>
             <div className="row mb-2">
+              <p>{Error}</p>
               <select
                 className={"sort_button"}
                 aria-label="category"
@@ -106,7 +127,7 @@ function ModifyPost(props) {
                   setCategory(e.target.value);
                 }}
               >
-                <Categories></Categories>
+                <Categories />
               </select>
             </div>
 
@@ -173,41 +194,6 @@ function ModifyPost(props) {
               setGeoState={setGeoState}
               setZip={setZipcode}
             />
-            {/*<div className="row">*/}
-            {/*  <div className="col-md-12">*/}
-            {/*    <div className="md-form mb-0">*/}
-            {/*      <input*/}
-            {/*        type="text"*/}
-            {/*        id="address"*/}
-            {/*        name="address"*/}
-            {/*        className="form-control"*/}
-            {/*        value={Address}*/}
-            {/*        onChange={addressChange}*/}
-            {/*      />*/}
-            {/*      <label htmlFor="address" className="">*/}
-            {/*        Address*/}
-            {/*      </label>*/}
-            {/*    </div>*/}
-            {/*  </div>*/}
-            {/*</div>*/}
-
-            {/*<div className="row">*/}
-            {/*  <div className="col-md-12">*/}
-            {/*    <div className="md-form">*/}
-            {/*      <label htmlFor="zipcode">Zip Code</label>*/}
-            {/*      <textarea*/}
-            {/*        type="text"*/}
-            {/*        id="zipcode"*/}
-            {/*        name="zipcode"*/}
-            {/*        rows="1"*/}
-            {/*        value={Zipcode}*/}
-            {/*        onChange={zipcodeChange}*/}
-            {/*        className="form-control md-textarea"*/}
-            {/*      ></textarea>*/}
-            {/*      <br />*/}
-            {/*    </div>*/}
-            {/*  </div>*/}
-            {/*</div>*/}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleEdit}>

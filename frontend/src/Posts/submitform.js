@@ -6,7 +6,7 @@ import Categories from "../Other Components/Categories.js";
 function SubmitForm() {
   let [Subject, setSubject] = useState("");
   let [Category, setCategory] = useState("Select Category");
-  let [Price, setPrice] = useState(0);
+  let [Price, setPrice] = useState("");
   let [Date, setDate] = useState("");
   let [Zipcode, setZipcode] = useState("");
   let [Address, setAddress] = useState("");
@@ -15,44 +15,53 @@ function SubmitForm() {
   let [Longitude, setLongitude] = useState(0);
   let [Mode, setMode] = useState("OfferHelp");
   let [show, setShow] = useState(false);
+  let [Errora, setError] = useState("");
   let subjectChange = (event) => {
     setSubject(event.target.value);
   };
-  // let categoryChange = (event) => {
-  //   setCategory(event.target.value);
-  // };
   let priceChange = (event) => {
-    setPrice(parseInt(event.target.value));
+    setPrice(event.target.value);
   };
   let dateChange = (event) => {
     setDate(event.target.value);
   };
-
   let modeChange = (event) => {
     setMode(event.target.value);
   };
 
   //when the user hit the submit button of the form
   const handleSubmit = async () => {
-    //we also need to add a type checker to ensure numbers are numbers, strings are strings etc.
-    await fetch("/api/submit-form", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        Mode: Mode,
-        Description: Subject,
-        Category: Category,
-        "Ideal Price": Price,
-        "Date for task": Date,
-        "Zip Code": Zipcode,
-        Address: Address,
-        Latitude: Latitude,
-        Longitude: Longitude,
-        State: State,
-      }),
-    });
-    setShow(false);
-    window.location.reload(true);
+    //type checker to ensure numbers are numbers, strings are strings etc.
+    if (Category === "Select Category" || isNaN(parseInt(Price))) {
+      if (Category === "Select Category" && isNaN(parseInt(Price))) {
+        setError("Please select a category and input a valid price.");
+      } else if (Category === "Select Category") {
+        setError("Please select a category.");
+      } else if (isNaN(parseInt(Price))) {
+        setError("Price given is invalid. Please try again.");
+      }
+    } else {
+      try {
+        await fetch("/api/submit-form", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            Mode: Mode,
+            Description: Subject,
+            Category: Category,
+            "Ideal Price": parseInt(Price),
+            "Date for task": Date,
+            "Zip Code": Zipcode,
+            Address: Address,
+            Latitude: Latitude,
+            Longitude: Longitude,
+            State: State,
+          }),
+        });
+        setShow(false);
+        window.location.reload(true);
+      } catch (e) {}
+    }
   };
 
   const handleClose = () => setShow(false);
@@ -78,6 +87,7 @@ function SubmitForm() {
             <div className="row">
               <div className="col-md-12">
                 <div className="md-form">
+                  <p>{Errora}</p>
                   <div className="md-form mb-0">
                     I am posting to...
                     <select
@@ -176,23 +186,6 @@ function SubmitForm() {
               setGeoState={setState}
               setZip={setZipcode}
             />
-
-            {/*<div className="row">*/}
-            {/*  <div className="col-md-12">*/}
-            {/*    <div className="md-form">*/}
-            {/*      <label htmlFor="zipcode">Zip Code</label>*/}
-            {/*      <input*/}
-            {/*        type="text"*/}
-            {/*        id="zipcode"*/}
-            {/*        name="zipcode"*/}
-            {/*        rows="1"*/}
-            {/*        value={Zipcode}*/}
-            {/*        onChange={zipcodeChange}*/}
-            {/*        className="form-control md-textarea"*/}
-            {/*      />*/}
-            {/*    </div>*/}
-            {/*  </div>*/}
-            {/*</div>*/}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleSubmit}>
