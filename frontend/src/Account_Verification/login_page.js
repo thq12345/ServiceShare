@@ -105,7 +105,7 @@ function LoginForm() {
         </div>
         <br />
         <p>
-          Don't have an account? <button>Create Account</button>
+          Don't have an account? <a href="/create-account">Create Account</a>
         </p>
       </form>
     </div>

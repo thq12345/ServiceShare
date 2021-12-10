@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import ModifyPost from "./modify_post.js";
 import logo from "../images/logo.png";
 import SubmitForm from "./submitform";
-
+import MessageReceived from "./MessageBox";
 function PostForm2() {
   //all posts that belongs to this user.
   const [Post, setPosts] = useState([]);
+
+  useEffect(async () => {
+    let status = await fetch("/loginStatus");
+    let loginstatus = await status.json();
+    console.log("Login Status is:", loginstatus);
+  });
 
   useEffect(() => {
     fetch("/api/load-user-posts")
@@ -37,13 +43,14 @@ function PostForm2() {
               <th scope="col">Zip Code</th>
               <th scope="col">Address</th>
               <th scope="col">Post Type</th>
+              <th scope="col">Comments</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody id="post_content">
             {Post.map((p, i) => (
               <tr key={i}>
-                <th>{i}</th>
+                <th>{i + 1}</th>
                 <td>{p.username}</td>
                 <td>{p.Category}</td>
                 <td>{p.Description}</td>
@@ -52,6 +59,9 @@ function PostForm2() {
                 <td>{p["Zip Code"]}</td>
                 <td>{p.Address}</td>
                 <td>{p.Mode}</td>
+                <td>
+                  <MessageReceived postid={p._id} />
+                </td>
                 <td>
                   <ModifyPost information={p} />
                 </td>
@@ -92,44 +102,10 @@ function PostForm2() {
 
       <section className="pt-5 container">
         <LoadPost />
-        {/*<table className="table">*/}
-        {/*  <thead>*/}
-        {/*    <tr>*/}
-        {/*      <th scope="col">#</th>*/}
-        {/*      <th scope="col">Username</th>*/}
-        {/*      <th scope="col">Category</th>*/}
-        {/*      <th scope="col">Description</th>*/}
-        {/*      <th scope="col">Ideal Price</th>*/}
-        {/*      <th scope="col">Date for task</th>*/}
-        {/*      <th scope="col">Zip Code</th>*/}
-        {/*      <th scope="col">Address</th>*/}
-        {/*      <th scope="col">Post Type</th>*/}
-        {/*      <th scope="col">Action</th>*/}
-        {/*    </tr>*/}
-        {/*  </thead>*/}
-        {/*  <tbody id="post_content">*/}
-        {/*    {*/}
-
-        {/*      Post.map((p, i) => (*/}
-        {/*      <tr key={i}>*/}
-        {/*      <th>{i}</th>*/}
-        {/*      <td>{p.username}</td>*/}
-        {/*      <td>{p.Category}</td>*/}
-        {/*      <td>{p.Description}</td>*/}
-        {/*      <td>{p["Ideal Price"]}</td>*/}
-        {/*      <td>{p["Date for task"]}</td>*/}
-        {/*      <td>{p["Zip Code"]}</td>*/}
-        {/*      <td>{p.Address}</td>*/}
-        {/*      <td>{p.Mode}</td>*/}
-        {/*      <td>*/}
-        {/*      <ModifyPost information={p} />*/}
-        {/*      </td>*/}
-        {/*      </tr>*/}
-        {/*      ))*/}
-        {/*    }*/}
-        {/*  </tbody>*/}
-        {/*</table>*/}
       </section>
+      {/*<section className="pt-5 container">*/}
+      {/*  <MessageReceived />*/}
+      {/*</section>*/}
     </>
   );
 }

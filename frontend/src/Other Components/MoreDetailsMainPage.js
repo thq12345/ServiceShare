@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import Map from "./map.js";
 import PropTypes from "prop-types";
+import DirectMessage from "./DirectMessage.js";
 function MoreDetails(props) {
   const [show, setShow] = useState(false);
 
@@ -31,7 +32,6 @@ function MoreDetails(props) {
           <p>Email: {props.json.username}</p>
           <p>Price: {props.json["Ideal Price"]}</p>
           <p>Address: {props.json.Address}</p>
-          <p>Scale: {window.devicePixelRatio}</p>
           <p>Location on Map:</p>
           <Map
             longitude={props.json.Longitude}
@@ -39,6 +39,7 @@ function MoreDetails(props) {
           />
         </Modal.Body>
         <Modal.Footer>
+          <DirectMessage json={props.json} />
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>

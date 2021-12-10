@@ -184,6 +184,56 @@ function myDB() {
     username_global = username;
   };
 
+  myDB.addMessage = async (
+    postid,
+    senderUsername,
+    receiverUsername,
+    message,
+    res
+  ) => {
+    const messagedb = project_database.collection("message");
+    const write_info = {
+      postid: postid,
+      senderUsername: senderUsername,
+      receiverUsername: receiverUsername,
+      message: message,
+    };
+    await messagedb.insertOne(write_info);
+    res.json({ status: true });
+  };
+
+  //User can only delete message they sent to others
+  myDB.deleteMessage = async (messageid) => {
+    const delete_info = { _id: messageid };
+    const messagedb = project_database.collection("message");
+    await messagedb.deleteOne(delete_info);
+  };
+
+  myDB.modifyMessage = async (messageid, modifiedMessage) => {
+    const filter = { _id: ObjectId(messageid) };
+    const update = { message: modifiedMessage };
+    const messagedb = project_database.collection("message");
+    await messagedb.updateOne(filter, update);
+  };
+
+  myDB.retrieveReceivedMessage = async (res) => {
+    const filter = { receiverUsername: username_global };
+    const messagedb = project_database.collection("message");
+    const result = await messagedb.find(filter).toArray();
+    res.json(result);
+  };
+
+  myDB.retrieveSentMessage = async (res) => {
+    const filter = { senderUsername: username_global };
+    const messagedb = project_database.collection("message");
+    const result = await messagedb.find(filter).toArray();
+    res.json(result);
+  };
+
+  myDB.getCurrentUser = async (res) => {
+    res.json({ username: username_global });
+  };
+
   return myDB;
 }
 

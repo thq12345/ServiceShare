@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "./images/logo.png";
 import SeekHelpTable from "./Other Components/SeekHelpTable.js";
 import OfferHelpTable from "./Other Components/OfferHelpTable.js";
-import LoginModal from "./Account_Verification/loginmodal.js";
+// import LoginModal from "./Account_Verification/loginmodal.js";
 
 //From here, seek help means posts that seek help
 //offer help means posts that offer help
@@ -458,9 +458,9 @@ function Main() {
               </li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-              <li>
-                <LoginModal />
-              </li>
+              {/*<li>*/}
+              {/*  <LoginModal />*/}
+              {/*</li>*/}
               <li>
                 <Button
                   variant="secondary"

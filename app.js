@@ -39,8 +39,17 @@ app.use(function (req, res, next) {
   req.session.messages = [];
   next();
 });
+
 app.use(passport.session());
 app.use("/api", indexRouter);
+
+app.get("/loginStatus", (req, res) => {
+  res.json({ user: req.user });
+});
+
+app.get("/logout", function (req, res) {
+  req.logout();
+});
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/frontend/build", "index.html"));

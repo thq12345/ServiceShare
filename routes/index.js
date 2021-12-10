@@ -8,30 +8,12 @@ myDB.establishConnection().catch(console.dir);
 
 //Working example.
 router.post("/register", async (req, res) => {
-  console.log("Received user-input account information...");
+  // console.log("Received user-input account information...");
   // Insert Login Code Here
   const username = req.body.username;
   const password = req.body.password;
   await myDB.create_account(username, password, res).catch(console.dir);
 });
-
-// router.post("/login-auth", async (req, res) => {
-//   console.log("Received user-input account information...");
-//   // Insert Login Code Here
-//   const username = req.body.username;
-//   const password = req.body.password;
-//   await myDB
-//     .process_username_password_input(username, password, res)
-//     .catch(console.dir);
-// });
-// router.post(
-//   "/login-auth",
-//   // passport.authenticate("local", {
-//   //   successRedirect: "/post",
-//   //   failureRedirect: "/login",
-//   //   failureMessage: true,
-//   // })
-// );
 
 router.post("/login-auth", function (req, res, next) {
   passport.authenticate("local", function (err, user) {
@@ -52,35 +34,56 @@ router.post("/login-auth", function (req, res, next) {
 
 //Load all posts for index page regardless of username. (Useful for index page)
 router.post("/load-all-helpers", async (req, res) => {
-  console.log("Retrieving all posts from back end databases... (Backend)");
+  // console.log("Retrieving all posts from back end databases... (Backend)");
   const bol = req.body.bol;
   await myDB.getAllHelpOfferPosts(bol, res).catch(console.dir);
 });
 
 router.post("/load-seeks", async (req, res) => {
-  console.log("Loading logged in helpers...");
+  // console.log("Loading logged in helpers...");
   const bol = req.body.bol;
   await myDB.getAllSeekPosts(bol, res).catch(console.dir);
 });
 
 router.post("/submit-form", async (req, res) => {
-  console.log("Received user-submitted form!");
+  // console.log("Received user-submitted form!");
   await myDB.insert_post(req.body, res).catch(console.dir);
 });
 
 router.get("/load-user-posts", async (req, res) => {
-  console.log("Loading logged in user's posts...");
+  // console.log("Loading logged in user's posts...");
   await myDB.getComments(res).catch(console.dir);
 });
 
 router.post("/edit-post", async (req, res) => {
-  console.log("Editing post request submitted!");
+  // console.log("Editing post request submitted!");
   await myDB.edit_post(req.body, res).catch(console.dir);
 });
 
 router.post("/delete-post", async (req, res) => {
-  console.log("Deleting post request submitted!");
+  // console.log("Deleting post request submitted!");
   await myDB.delete_post(req.body, res).catch(console.dir);
+});
+
+router.post("/submit-message", async (req, res) => {
+  console.log("Submitting new message.");
+  await myDB.addMessage(
+    req.body.postid,
+    req.body.senderUsername,
+    req.body.receiverUsername,
+    req.body.message,
+    res
+  );
+});
+
+router.get("/get-received-message", async (req, res) => {
+  console.log("getting received messages...");
+  await myDB.retrieveReceivedMessage(res);
+});
+
+router.get("/get-sent-message", async (req, res) => {
+  console.log("getting sent messages...");
+  await myDB.retrieveSentMessage(res);
 });
 
 module.exports = router;

@@ -50,7 +50,7 @@ function ModifyPost(props) {
           Mode: Mode,
           Description: Subject,
           Category: Category,
-          "Ideal Price": Price,
+          "Ideal Price": parseInt(Price),
           "Date for task": Date,
           "Zip Code": Zipcode,
           Address: Address,
@@ -196,10 +196,14 @@ function ModifyPost(props) {
             />
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleEdit}>
+            <Button variant="primary" onClick={handleEdit}>
               Confirm Edit
             </Button>
-            <Button variant="primary" onClick={handleDelete}>
+            <Button
+              variant="primary"
+              onClick={handleDelete}
+              style={{ backgroundColor: "#BF181D" }}
+            >
               Confirm Delete
             </Button>
           </Modal.Footer>
