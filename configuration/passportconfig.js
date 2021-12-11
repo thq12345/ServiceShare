@@ -10,7 +10,7 @@ module.exports.setupPassport = () => {
     }
 
     if (user.password === password) {
-      await myDB.setGlobalUser(user.username).catch(console.dir);
+      // await myDB.setGlobalUser(user.username).catch(console.dir);
       return done(null, user);
     } else {
       return done(null, false);

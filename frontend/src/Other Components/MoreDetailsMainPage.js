@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import Map from "./map.js";
 import PropTypes from "prop-types";
-import DirectMessage from "./DirectMessage.js";
+import CommentBox from "./CommentBox.js";
 function MoreDetails(props) {
   const [show, setShow] = useState(false);
 
@@ -39,7 +39,11 @@ function MoreDetails(props) {
           />
         </Modal.Body>
         <Modal.Footer>
-          <DirectMessage json={props.json} />
+          <CommentBox
+            json={props.json}
+            loginStatus={props.loginStatus}
+            loginUsername={props.loginUsername}
+          />
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>

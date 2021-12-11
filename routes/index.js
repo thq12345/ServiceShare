@@ -45,26 +45,31 @@ router.post("/load-seeks", async (req, res) => {
   await myDB.getAllSeekPosts(bol, res).catch(console.dir);
 });
 
+//must be changed 4
 router.post("/submit-form", async (req, res) => {
   // console.log("Received user-submitted form!");
-  await myDB.insert_post(req.body, res).catch(console.dir);
+  await myDB.insert_post(req, res).catch(console.dir);
 });
 
+//must be changed 1
 router.get("/load-user-posts", async (req, res) => {
   // console.log("Loading logged in user's posts...");
-  await myDB.getComments(res).catch(console.dir);
+  await myDB.getComments(req, res).catch(console.dir);
 });
 
+//must be changed 2
 router.post("/edit-post", async (req, res) => {
   // console.log("Editing post request submitted!");
-  await myDB.edit_post(req.body, res).catch(console.dir);
+  await myDB.edit_post(req, res).catch(console.dir);
 });
 
+//must be changed 3
 router.post("/delete-post", async (req, res) => {
   // console.log("Deleting post request submitted!");
-  await myDB.delete_post(req.body, res).catch(console.dir);
+  await myDB.delete_post(req, res).catch(console.dir);
 });
 
+//must be changed 5 (pending)
 router.post("/submit-message", async (req, res) => {
   console.log("Submitting new message.");
   await myDB.addMessage(
@@ -76,14 +81,16 @@ router.post("/submit-message", async (req, res) => {
   );
 });
 
+//must be changed 6
 router.get("/get-received-message", async (req, res) => {
   console.log("getting received messages...");
-  await myDB.retrieveReceivedMessage(res);
+  await myDB.retrieveReceivedMessage(req, res);
 });
 
+//must be changed 7
 router.get("/get-sent-message", async (req, res) => {
   console.log("getting sent messages...");
-  await myDB.retrieveSentMessage(res);
+  await myDB.retrieveSentMessage(req, res);
 });
 
 module.exports = router;

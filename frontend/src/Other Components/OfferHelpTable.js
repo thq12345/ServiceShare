@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MoreDetails from "./MoreDetailsMainPage.js";
 import { Col } from "react-bootstrap";
 
-function OfferHelpTable({ data, totalPosts }) {
+function OfferHelpTable({ data, totalPosts, loginStatus, loginUsername }) {
   const pageNumbers = [];
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
@@ -47,7 +47,11 @@ function OfferHelpTable({ data, totalPosts }) {
             <p key={"card-text-state" + i} className="posts card-text my-1">
               {h["State"]}
             </p>
-            <MoreDetails json={h} />
+            <MoreDetails
+              json={h}
+              loginStatus={loginStatus}
+              loginUsername={loginUsername}
+            />
           </div>
         </Col>
       ))}

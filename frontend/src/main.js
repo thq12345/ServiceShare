@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import logo from "./images/logo.png";
 import SeekHelpTable from "./Other Components/SeekHelpTable.js";
 import OfferHelpTable from "./Other Components/OfferHelpTable.js";
-// import LoginModal from "./Account_Verification/loginmodal.js";
 
 //From here, seek help means posts that seek help
 //offer help means posts that offer help
@@ -31,6 +30,8 @@ function Main() {
   let textMaxInput = useRef(100000);
   let zipInput = useRef("");
   let searchInput = useRef("");
+  let [login, setLogin] = useState(false);
+  let [loginUsername, setLoginUsername] = useState("");
 
   const States = [
     "Alabama",
@@ -127,6 +128,11 @@ function Main() {
     }
   };
 
+  let onLogOutHandler = () => {
+    fetch("/logout");
+    window.location.reload(true);
+  };
+
   //filter on the posts board on the request and helper table
   function filter_on_post(post, select) {
     let filtered_post = post;
@@ -206,6 +212,22 @@ function Main() {
     runThis().catch(console.dir);
   }, [Category_help_Select, SortHelperAsc]);
 
+  useEffect(() => {
+    async function run() {
+      let status = await fetch("/loginStatus");
+      let loginStatus = await status.json();
+      console.log("Login Status is:", loginStatus.user);
+      if (loginStatus.user !== undefined) {
+        setLogin(true);
+        setLoginUsername(loginStatus.user);
+      } else {
+        setLogin(false);
+        setLoginUsername("");
+      }
+    }
+    run();
+  });
+
   //all filter components (For the sake of clarity)
   function FilterComponentSeekHelp() {
     return (
@@ -274,7 +296,7 @@ function Main() {
           <div className="pt-1">
             <button
               type="button"
-              className={"moredetailbutton"}
+              className={"moredetailbutton1"}
               onClick={onClickHandler}
             >
               Apply Price Range
@@ -372,7 +394,7 @@ function Main() {
           <div className="pt-1">
             <button
               type="button"
-              className={"moredetailbutton"}
+              className={"moredetailbutton2"}
               onClick={onClickHandler}
             >
               Apply Price Range
@@ -410,6 +432,8 @@ function Main() {
             <OfferHelpTable
               data={HelperFiltered}
               totalPosts={HelperFiltered.length}
+              loginStatus={login}
+              loginUsername={loginUsername}
             />
           </Col>
         </Row>
@@ -428,11 +452,87 @@ function Main() {
         <Row>
           <FilterComponentSeekHelp />
           <Col sm={8}>
-            <SeekHelpTable data={datatemp} totalPosts={datatemp.length} />
+            <SeekHelpTable
+              data={datatemp}
+              totalPosts={datatemp.length}
+              loginStatus={login}
+              loginUsername={loginUsername}
+            />
           </Col>
         </Row>
       </Container>
     );
+  }
+
+  function DifferentiateLogInStatus() {
+    if (login) {
+      //what the navbar should look like when user IS logged in
+      return (
+        <div className="container-fluid">
+          <ul className="navbar-nav me-auto">
+            <li>
+              <img
+                src={logo}
+                className="nav-item, nav_logo"
+                alt="Service Share Logo"
+              />
+            </li>
+            <li className="nav-item pt-2">
+              <a className="nav-link active" aria-current="page" href="./">
+                Home
+              </a>
+            </li>
+            <li className="nav-item pt-2">
+              <a className="nav-link active" aria-current="page" href="./post">
+                Post
+              </a>
+            </li>
+          </ul>
+          <ul className="nav navbar-nav navbar-right">
+            <li>
+              <Button
+                variant="secondary"
+                className="d-flex btn me-auto"
+                onClick={onLogOutHandler}
+              >
+                <h3>Log Out</h3>
+              </Button>
+            </li>
+          </ul>
+        </div>
+      );
+    } else {
+      //what the navbar should look like when user IS NOT logged in
+      return (
+        <div className="container-fluid">
+          <ul className="navbar-nav me-auto">
+            <li>
+              <img
+                src={logo}
+                className="nav-item, nav_logo"
+                alt="Service Share Logo"
+              />
+            </li>
+            <li className="nav-item pt-2">
+              <a className="nav-link active" aria-current="page" href="./">
+                Home
+              </a>
+            </li>
+          </ul>
+          <ul className="nav navbar-nav navbar-right">
+            <li>
+              <Button
+                variant="secondary"
+                className="d-flex btn me-auto"
+                onClick={() => navigate("/login")}
+              >
+                <h3>Log in</h3>
+              </Button>
+            </li>
+          </ul>
+        </div>
+      );
+    }
   }
 
   return (
@@ -442,36 +542,7 @@ function Main() {
           className="navbar navbar-expand-md navbar-light bg-light sticky-top"
           aria-label={"navbar"}
         >
-          <div className="container-fluid">
-            <ul className="navbar-nav me-auto">
-              <li>
-                <img
-                  src={logo}
-                  className="nav-item, nav_logo"
-                  alt="Service Share Logo"
-                />
-              </li>
-              <li className="nav-item pt-2">
-                <a className="nav-link active" aria-current="page" href="./">
-                  Home
-                </a>
-              </li>
-            </ul>
-            <ul className="nav navbar-nav navbar-right">
-              {/*<li>*/}
-              {/*  <LoginModal />*/}
-              {/*</li>*/}
-              <li>
-                <Button
-                  variant="secondary"
-                  className="d-flex btn me-auto"
-                  onClick={() => navigate("/login")}
-                >
-                  <h3>Log in</h3>
-                </Button>
-              </li>
-            </ul>
-          </div>
+          <DifferentiateLogInStatus />
         </nav>
         <div
           className="d-flex justify-content-center align-content-end"
@@ -532,7 +603,6 @@ function Main() {
         {!ShowHelper ? <OfferTableMain /> : null}
         {ShowHelper ? <SeekTableMain /> : null}
       </div>
-      {/*<footer>Created by Tianhao Qu, Kaiwen Tian</footer>*/}
     </>
   );
 }

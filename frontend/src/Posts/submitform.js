@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AddressAutoComplete from "../Other Components/autocomplete";
-import Categories from "../Other Components/Categories.js";
+// import Categories from "../Other Components/Categories.js";
 
 function SubmitForm() {
   let [Subject, setSubject] = useState("");
@@ -16,6 +16,17 @@ function SubmitForm() {
   let [Mode, setMode] = useState("OfferHelp");
   let [show, setShow] = useState(false);
   let [Errora, setError] = useState("");
+  const categoryOptions = [
+    "Select Category",
+    "Chore",
+    "Academic",
+    "Cleaning",
+    "House Handy Work",
+    "Baby Sitting",
+    "Moving",
+    "Pet Care",
+    "Shopping",
+  ];
   let subjectChange = (event) => {
     setSubject(event.target.value);
   };
@@ -119,7 +130,12 @@ function SubmitForm() {
                       setCategory(e.target.value);
                     }}
                   >
-                    <Categories></Categories>
+                    {/*<Categories></Categories>*/}
+                    {categoryOptions.map((p, i) => (
+                      <option key={"categoryoptions" + i} value={p}>
+                        {p}
+                      </option>
+                    ))}
                   </select>
 
                   <br />

@@ -23,25 +23,24 @@ app.use(express.static(path.join(__dirname, "frontend/build")));
 //passport stuff
 app.use(
   require("express-session")({
-    secret: "secretkey",
+    secret: "secretkeyyy",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
   })
 );
 
 app.use(passport.initialize());
-
-app.use(function (req, res, next) {
-  let msg = req.session.messages || [];
-  res.locals.messages = msg;
-  console.log("Session message", msg);
-  res.locals.hasMessages = !!msg.length;
-  req.session.messages = [];
-  next();
-});
+//
+// app.use(function (req, res, next) {
+//   let msg = req.session.messages || [];
+//   res.locals.messages = msg;
+//   console.log("Session message", msg);
+//   res.locals.hasMessages = !!msg.length;
+//   req.session.messages = [];
+//   next();
+// });
 
 app.use(passport.session());
-app.use("/api", indexRouter);
 
 app.get("/loginStatus", (req, res) => {
   res.json({ user: req.user });
@@ -49,7 +48,11 @@ app.get("/loginStatus", (req, res) => {
 
 app.get("/logout", function (req, res) {
   req.logout();
+  console.log("Current log in user is", req.user);
+  res.json({ status: true });
 });
+
+app.use("/api", indexRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/frontend/build", "index.html"));

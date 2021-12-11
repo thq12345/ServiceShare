@@ -3,24 +3,34 @@ import ModifyPost from "./modify_post.js";
 import logo from "../images/logo.png";
 import SubmitForm from "./submitform";
 import MessageReceived from "./MessageBox";
+import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 function PostForm2() {
   //all posts that belongs to this user.
   const [Post, setPosts] = useState([]);
-
-  useEffect(async () => {
-    let status = await fetch("/loginStatus");
-    let loginstatus = await status.json();
-    console.log("Login Status is:", loginstatus);
-  });
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/api/load-user-posts")
-      .then((res) => res.json())
-      .then((post) => {
-        console.log("Got post", post);
-        setPosts(post);
-      });
+    async function func() {
+      let status = await fetch("/loginStatus");
+      let loginStatus = await status.json();
+      console.log("Login Status is:", loginStatus.user);
+      if (loginStatus.user !== undefined) {
+        fetch("/api/load-user-posts")
+          .then((res) => res.json())
+          .then((post) => {
+            console.log("Got post", post);
+            setPosts(post);
+          });
+      }
+    }
+    func();
   }, []);
+
+  const handleLogOut = async () => {
+    await fetch("/logout");
+    navigate("/");
+  };
 
   function LoadPost() {
     if (Post.length === 0) {
@@ -88,6 +98,17 @@ function PostForm2() {
               <a className="nav-link active" aria-current="page" href="./">
                 Home
               </a>
+            </li>
+          </ul>
+          <ul className="nav navbar-nav navbar-right">
+            <li>
+              <Button
+                variant="secondary"
+                className="d-flex btn me-auto"
+                onClick={handleLogOut}
+              >
+                <h3>Log Out</h3>
+              </Button>
             </li>
           </ul>
         </div>

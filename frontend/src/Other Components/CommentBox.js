@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 
-function DirectMessage(props) {
+function CommentBox(props) {
   let postid = props.json._id;
-  let [username, setusername] = useState("");
   let [message, setmessage] = useState("");
   const [show, setShow] = useState(false);
-
+  let [usable, setUsable] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -17,7 +16,7 @@ function DirectMessage(props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         postid: postid,
-        senderUsername: username,
+        senderUsername: props.loginUsername,
         receiverUsername: props.json.username,
         message: message,
       }),
@@ -26,12 +25,21 @@ function DirectMessage(props) {
     // window.location.reload(true);
   };
 
+  useEffect(() => {
+    if (props.loginStatus) {
+      setUsable(true);
+    } else {
+      setUsable(false);
+    }
+  }, [props.loginStatus]);
+
   return (
     <>
       <Button
         className={"sendmessagebutton"}
         variant="primary"
         onClick={handleShow}
+        disabled={!usable}
       >
         Message
       </Button>
@@ -48,18 +56,6 @@ function DirectMessage(props) {
 
         <Modal.Body>
           <p>Id for this post: {postid}</p>
-          <label>Username</label>
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            value={username}
-            onChange={(event) => setusername(event.target.value)}
-            className="form-control"
-            placeholder={
-              "Username (Please use your email address if you don't have an account. Your message will sync automatically when you create one later)"
-            }
-          />
           <label>Message</label>
           <textarea
             type="text"
@@ -84,4 +80,4 @@ function DirectMessage(props) {
   );
 }
 
-export default DirectMessage;
+export default CommentBox;

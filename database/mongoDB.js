@@ -3,7 +3,7 @@ require("dotenv").config();
 
 function myDB() {
   let project_database;
-  let username_global;
+  // let username_global;
 
   const myDB = {};
 
@@ -25,17 +25,17 @@ function myDB() {
     }
   };
 
-  myDB.insert_post = async (req_json, res) => {
+  myDB.insert_post = async (req, res) => {
     let feedback_database;
-    console.log("Inserting:::", req_json);
-    if (req_json.Mode === "OfferHelp") {
+    // console.log("Inserting:::", req.body);
+    if (req.body.Mode === "OfferHelp") {
       feedback_database = project_database.collection("helper");
-    } else if (req_json.Mode === "SeekHelp") {
+    } else if (req.body.Mode === "SeekHelp") {
       feedback_database = project_database.collection("posts");
     }
 
-    req_json["username"] = username_global;
-    await feedback_database.insertOne(req_json);
+    req.body["username"] = req.user;
+    await feedback_database.insertOne(req.body);
     console.log("Post Successfully Submitted!");
     res.json({ status: true });
   };
@@ -48,20 +48,18 @@ function myDB() {
     const execute = await collection_info.findOne(query);
 
     if (execute != null) {
-      // res.redirect("/account-already-exists");
       res.json({ status: "account-exists" });
     } else {
       myDB
         .insert_username_password(username, password, collection_info)
         .catch(console.dir);
-      username_global = username;
       res.json({ status: "success" });
-      // res.redirect("/login");
     }
   };
 
-  myDB.edit_post = async (json, res) => {
+  myDB.edit_post = async (req, res) => {
     let target_database;
+    let json = req.body;
     if (json.Mode === "SeekHelp") {
       target_database = project_database.collection("posts");
     } else if (json.Mode === "OfferHelp") {
@@ -83,11 +81,12 @@ function myDB() {
     await target_database.updateOne(query, edit);
     console.log("Comment successfully edited!");
     //Attempt to reload comments.
-    myDB.getComments(res).catch(console.dir);
+    myDB.getComments(req, res).catch(console.dir);
   };
 
-  myDB.delete_post = async (json, res) => {
+  myDB.delete_post = async (req, res) => {
     let target_database;
+    let json = req.body;
     if (json.Mode === "SeekHelp") {
       target_database = project_database.collection("posts");
     } else if (json.Mode === "OfferHelp") {
@@ -98,7 +97,7 @@ function myDB() {
     await target_database.deleteOne(query);
     console.log("Entry successfully deleted!");
     //Attempt to reload comments.
-    myDB.getComments(res).catch(console.dir);
+    myDB.getComments(req, res).catch(console.dir);
   };
 
   myDB.insert_username_password = async (
@@ -133,13 +132,13 @@ function myDB() {
   //   }
   // };
 
-  myDB.getComments = async (res) => {
+  myDB.getComments = async (req, res) => {
     console.log("Reload comment has been executed.");
     let query2;
-    if (username_global === "admin@admin") {
+    if (req.user === "admin@admin") {
       query2 = {};
     } else {
-      query2 = { username: username_global };
+      query2 = { username: req.user };
     }
     const helpSeeker_db = project_database.collection("posts");
     const result1 = await helpSeeker_db.find(query2).toArray();
@@ -152,20 +151,20 @@ function myDB() {
 
   //get all the offer help posts in the database.
   myDB.getAllHelpOfferPosts = async (bol, res) => {
-    console.log("Loading all posts from database.");
-    console.log(bol);
+    // console.log("Loading all posts from database.");
+    // console.log(bol);
     const post_db = project_database.collection("helper");
     let result = await post_db.find({}).sort({ "Ideal Price": bol }).toArray();
     res.json(result);
-    console.log("loaded");
+    // console.log("loaded");
     result = result.slice(0, 250);
     return result;
   };
 
   //get all the seek help posts in the database.
   myDB.getAllSeekPosts = async (bol, res) => {
-    console.log("Loading all helper posts from database.");
-    console.log(bol);
+    // console.log("Loading all helper posts from database.");
+    // console.log(bol);
     const post_db = project_database.collection("posts");
     let result = await post_db.find({}).sort({ "Ideal Price": bol }).toArray();
     res.json(result);
@@ -180,9 +179,9 @@ function myDB() {
     return result;
   };
 
-  myDB.setGlobalUser = async (username) => {
-    username_global = username;
-  };
+  // myDB.setGlobalUser = async (username) => {
+  //   username_global = username;
+  // };
 
   myDB.addMessage = async (
     postid,
@@ -216,22 +215,22 @@ function myDB() {
     await messagedb.updateOne(filter, update);
   };
 
-  myDB.retrieveReceivedMessage = async (res) => {
-    const filter = { receiverUsername: username_global };
+  myDB.retrieveReceivedMessage = async (req, res) => {
+    const filter = { receiverUsername: req.user };
     const messagedb = project_database.collection("message");
     const result = await messagedb.find(filter).toArray();
     res.json(result);
   };
 
-  myDB.retrieveSentMessage = async (res) => {
-    const filter = { senderUsername: username_global };
+  myDB.retrieveSentMessage = async (req, res) => {
+    const filter = { senderUsername: req.user };
     const messagedb = project_database.collection("message");
     const result = await messagedb.find(filter).toArray();
     res.json(result);
   };
 
-  myDB.getCurrentUser = async (res) => {
-    res.json({ username: username_global });
+  myDB.getCurrentUser = async (req, res) => {
+    res.json({ username: req.user });
   };
 
   return myDB;

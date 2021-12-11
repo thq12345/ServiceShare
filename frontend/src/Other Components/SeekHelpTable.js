@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MoreDetails from "./MoreDetailsMainPage.js";
 
-function SeekHelpTable({ data, totalPosts }) {
+function SeekHelpTable({ data, totalPosts, loginStatus, loginUsername }) {
   const pageNumbers = [];
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
@@ -37,7 +37,11 @@ function SeekHelpTable({ data, totalPosts }) {
               <th>{p["Date for task"]}</th>
               <th>{p["State"]}</th>
               <td>
-                <MoreDetails json={p} />
+                <MoreDetails
+                  json={p}
+                  loginStatus={loginStatus}
+                  loginUsername={loginUsername}
+                />
               </td>
             </tr>
           ))}

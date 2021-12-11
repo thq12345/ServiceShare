@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AddressAutoComplete from "../Other Components/autocomplete";
 import PropTypes from "prop-types";
-import Categories from "../Other Components/Categories";
+// import Categories from "../Other Components/Categories";
 function ModifyPost(props) {
   let [Subject, setSubject] = useState(props.information.Description);
   let [Category, setCategory] = useState(props.information.Category);
@@ -17,7 +17,16 @@ function ModifyPost(props) {
   //Change is not permitted between Seek Help and Offer Help.
   const Mode = props.information.Mode;
   const id = props.information._id;
-
+  const categoryOptions = [
+    "Chore",
+    "Academic",
+    "Cleaning",
+    "House Handy Work",
+    "Baby Sitting",
+    "Moving",
+    "Pet Care",
+    "Shopping",
+  ];
   let subjectChange = (event) => {
     setSubject(event.target.value);
   };
@@ -29,6 +38,9 @@ function ModifyPost(props) {
     setDate(event.target.value);
   };
 
+  let categoryChange = (event) => {
+    setCategory(event.target.value);
+  };
   //when the user hit the submit button of the form
   const handleEdit = async () => {
     //we also need to add a type checker to ensure numbers are numbers, strings are strings etc.
@@ -64,7 +76,7 @@ function ModifyPost(props) {
     }
   };
 
-  //when the user hit the submit button of the form
+  //when the user hit the delete button of the form
   const handleDelete = async () => {
     //we also need to add a type checker to ensure numbers are numbers, strings are strings etc.
     if (Category === "Select Category" || isNaN(parseInt(Price))) {
@@ -123,11 +135,14 @@ function ModifyPost(props) {
                 className={"sort_button"}
                 aria-label="category"
                 value={Category}
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                }}
+                onChange={categoryChange}
               >
-                <Categories />
+                {/*<Categories />*/}
+                {categoryOptions.map((p, i) => (
+                  <option key={"categoryoption" + i} value={p}>
+                    {p}
+                  </option>
+                ))}
               </select>
             </div>
 

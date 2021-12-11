@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import Map from "../Other Components/map";
-import DirectMessage from "../Other Components/DirectMessage";
 
 function MessageReceived(props) {
   let [message, setMessage] = useState([]);
@@ -10,23 +8,23 @@ function MessageReceived(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  useEffect(async () => {
-    fetch("/api/get-received-message")
-      .then((res) => res.json())
-      .then((post) => {
-        console.log("Got message", post);
-        setMessage(post.filter((item) => item.postid === props.postid));
-      });
-  }, []);
+  useEffect(() => {
+    async function func() {
+      fetch("/api/get-received-message")
+        .then((res) => res.json())
+        .then((post) => {
+          console.log("Got message", post);
+          setMessage(post.filter((item) => item.postid === props.postid));
+        });
+    }
+    func();
+  }, [props.postid]);
 
   if (message.length === 0) {
     return (
-      // <p style={{ fontSize: "30px" }}>
-      //   No message is available for this account😅 Start sending one now!
-      // </p>
       <>
-        <Button variant="secondary" onClick={handleShow}>
-          Details
+        <Button variant="secondary" onClick={handleShow} disabled={true}>
+          No Comment
         </Button>
 
         <Modal
@@ -51,28 +49,9 @@ function MessageReceived(props) {
     );
   } else {
     return (
-      // <table className="table">
-      //   <thead>
-      //     <tr>
-      //       <th scope="col">#</th>
-      //       <th scope="col">From</th>
-      //       <th scope={"col"}>Message</th>
-      //     </tr>
-      //   </thead>
-      //   <tbody id="post_content">
-      //     {message.map((p, i) => (
-      //       <tr key={i}>
-      //         <th>{i}</th>
-      //         <td>{p.senderUsername}</td>
-      //         <td>{p.message}</td>
-      //       </tr>
-      //     ))}
-      //   </tbody>
-      // </table>
-
       <>
         <Button variant="secondary" onClick={handleShow}>
-          Details
+          Comments({message.length})
         </Button>
 
         <Modal
