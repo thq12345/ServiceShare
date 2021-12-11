@@ -99,6 +99,11 @@ function PostForm2() {
                 Home
               </a>
             </li>
+            <li className="nav-item pt-2">
+              <a className="nav-link active" aria-current="page" href="./post">
+                Post
+              </a>
+            </li>
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <li>
