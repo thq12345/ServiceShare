@@ -30,19 +30,11 @@ app.use(
 );
 
 app.use(passport.initialize());
-//
-// app.use(function (req, res, next) {
-//   let msg = req.session.messages || [];
-//   res.locals.messages = msg;
-//   console.log("Session message", msg);
-//   res.locals.hasMessages = !!msg.length;
-//   req.session.messages = [];
-//   next();
-// });
 
 app.use(passport.session());
 
 app.get("/loginStatus", (req, res) => {
+  console.log("Authentication Status", req.isAuthenticated());
   res.json({ user: req.user });
 });
 

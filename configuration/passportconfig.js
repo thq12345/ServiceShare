@@ -20,14 +20,14 @@ module.exports.setupPassport = () => {
   passport.use(Strategy);
 
   passport.serializeUser((user, done) => {
-    console.log("serialize", user);
+    // console.log("serialize", user);
     // process.nextTick(function () {
     done(null, user.username);
     // });
   });
 
   passport.deserializeUser((user, done) => {
-    console.log("deserialize", user);
+    // console.log("deserialize", user);
     done(null, user);
   });
 };
