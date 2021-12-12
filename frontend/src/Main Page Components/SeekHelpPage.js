@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import "../style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import SeekHelpTable from "../Other Components/SeekHelpTable.js";
 import Navbar from "./Navbar.js";
 
@@ -15,9 +14,7 @@ function SeekHelpPage() {
     useState("Select Category");
   let [Input_Zipcode, setZipCode] = useState("");
   let [SearchItem, setSearchItem] = useState("");
-  const navigate = useNavigate();
   let [SortPostAsc, setPostAsc] = useState(1);
-  let [SortHelperAsc, setHelperAsc] = useState(1);
   let textMinInput = useRef(0);
   let textMaxInput = useRef(100000);
   let zipInput = useRef("");
