@@ -1,29 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./style.css";
+import "../style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
+import OfferHelpTable from "../Other Components/OfferHelpTable.js";
+import Navbar from "./Navbar.js";
 import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
-import SeekHelpTable from "./Other Components/SeekHelpTable.js";
-import OfferHelpTable from "./Other Components/OfferHelpTable.js";
-import Navbar from "./Main Page Components/Navbar.js";
 //From here, seek help means posts that seek help
 //offer help means posts that offer help
-function Main() {
+
+function OfferHelpPage() {
   let [Seeks, setSeeks] = useState([]);
-  let [Offer, setOffer] = useState([]);
   let [MinValue, setMinValue] = useState(0);
   let [MaxValue, setMaxValue] = useState(10000);
   let [Category_help_Select, SetCategory_help_Select] =
     useState("Select Category");
   let [State_selected, setState_selected] = useState("Select States");
-  let [Category_request_Select, SetCategory_request_Select] =
-    useState("Select Category");
-  let [ShowHelper, setHelperPage] = useState(false);
   let [Input_Zipcode, setZipCode] = useState("");
   let [SearchItem, setSearchItem] = useState("");
-  const navigate = useNavigate();
-  let [SortPostAsc, setPostAsc] = useState(1);
   let [SortHelperAsc, setHelperAsc] = useState(1);
   let textMinInput = useRef(0);
   let textMaxInput = useRef(100000);
@@ -106,6 +99,8 @@ function Main() {
   ];
 
   let onClickHandler = () => {
+    console.log("Min value inserted", textMinInput.current.value);
+    console.log("Max value inserted", textMaxInput.current.value);
     setMinValue(parseInt(textMinInput.current.value));
     setMaxValue(parseInt(textMaxInput.current.value));
     setZipCode(zipInput.current.value);
@@ -125,14 +120,6 @@ function Main() {
     if (!searchInput.current.value) {
       setSearchItem("");
     }
-  };
-
-  let onClickOfferHelp = () => {
-    navigate("/offerHelp");
-  };
-
-  let onClickSeekHelp = () => {
-    navigate("/seekHelp");
   };
 
   //filter on the posts board on the request and helper table
@@ -171,30 +158,21 @@ function Main() {
     return filtered_post;
   }
 
-  //fetch data (Offer Help)
-  useEffect(() => {
-    async function runThis() {
-      let raw = await fetch(`api/load-all-helpers`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          bol: SortPostAsc,
-        }),
-      });
-      let res = await raw.json();
-      let postTemp = [];
-      for (const element of res) {
-        // categoryTemp.push(element.Category);
-        postTemp.push(element);
-      }
-
-      setOffer(postTemp.slice(0, 250));
-    }
-    runThis().catch(console.dir);
-  }, [Category_request_Select, SortPostAsc]);
-
   //fetch data (Seek Help)
   useEffect(() => {
+    async function run() {
+      let status = await fetch("/loginStatus");
+      let loginStatus = await status.json();
+      console.log("Login Status is:", loginStatus.user);
+      if (loginStatus.user !== undefined) {
+        setLogin(true);
+        setLoginUsername(loginStatus.user);
+      } else {
+        setLogin(false);
+        setLoginUsername("");
+      }
+    }
+
     async function runThis() {
       let raw = await fetch(`api/load-seeks`, {
         method: "POST",
@@ -211,122 +189,35 @@ function Main() {
 
       setSeeks(postTemp2);
     }
+    run();
     runThis().catch(console.dir);
   }, [Category_help_Select, SortHelperAsc]);
 
-  useEffect(() => {
-    async function run() {
-      let status = await fetch("/loginStatus");
-      let loginStatus = await status.json();
-      console.log("Login Status is:", loginStatus.user);
-      if (loginStatus.user !== undefined) {
-        setLogin(true);
-        setLoginUsername(loginStatus.user);
-      } else {
-        setLogin(false);
-        setLoginUsername("");
-      }
-    }
-    run();
-  });
-
-  //all filter components (For the sake of clarity)
-  function FilterComponentSeekHelp() {
-    return (
-      <Col sm={3}>
-        <select
-          className={"category"}
-          aria-label="category"
-          value={Category_request_Select}
-          onChange={(e) => {
-            SetCategory_request_Select(e.target.value);
-          }}
-        >
-          <option key="all" value="Select Category">
-            Select Category
-          </option>
-          {categoryOptions.map((p, i) => (
-            <option key={"categoryoption" + i} value={p}>
-              {p}
-            </option>
-          ))}
-        </select>
-        <br />
-        <select
-          className="category mt-2"
-          aria-label={"state1"}
-          value={State_selected}
-          onChange={(e) => {
-            setState_selected(e.target.value);
-          }}
-        >
-          <option key="all" value="Select States">
-            Select States
-          </option>
-          {States.map((p, i) => (
-            <option key={"state" + i} value={p}>
-              {p}
-            </option>
-          ))}
-        </select>
-        <br />
-        <div className={"my-2"}>
-          <label className={"font-weight-bold"} htmlFor="textmininput">
-            Minimum Ideal Price($):
-          </label>
-
-          <input
-            type="number"
-            className={" ml-2 rounded"}
-            id="textmininput"
-            ref={textMinInput}
-            placeholder={textMinInput.current.value}
-          />
-          <br />
-          <label className={"font-weight-bold"} htmlFor="textmaxinput">
-            Maximum Ideal Price($):
-          </label>
-
-          <input
-            type="number"
-            className={" ml-2 rounded"}
-            id="textmaxinput"
-            ref={textMaxInput}
-            placeholder={textMaxInput.current.value}
-          />
-
-          <div className="pt-1">
-            <button
-              type="button"
-              className={"moredetailbutton1"}
-              onClick={onClickHandler}
-            >
-              Apply Price Range
-            </button>
-          </div>
-        </div>
-        <div className="pt-1">
-          <button
-            type="button"
-            className={"sort_button"}
-            onClick={() => setPostAsc(1)}
-          >
-            Sort price: Ascending &#11014;
-          </button>
-          <button
-            type="button"
-            className={"sort_button mt-2"}
-            onClick={() => setPostAsc(-1)}
-          >
-            Sort price: Descending &#11015;
-          </button>
-        </div>
-      </Col>
-    );
-  }
   function FilterComponentOfferTable() {
     return (
       <Col sm={3}>
+        <div>
+          <label htmlFor={"searchbar"} className={"pt-3  d-inline-block mr-0"}>
+            {/*<p className={"header_text_section rounded "}>Search Bar</p>*/}
+          </label>
+          <input
+            className="d-inline-block ml-1"
+            type="text"
+            // className={"ml-1"}
+            // title="Search Bar"
+            id={"searchbar"}
+            ref={searchInput}
+            // placeholder={searchInput.current.value}
+            placeholder={"Search here"}
+          />
+          <Button
+            variant="secondary"
+            className="btn btn-secondary d-inline-block ml-2"
+            onClick={onSearchHandler}
+          >
+            Search
+          </Button>
+        </div>
         <select
           className="category mt-2"
           aria-label="category"
@@ -443,101 +334,20 @@ function Main() {
     );
   }
 
-  //the seek request tables with all requests (Seek Help)
-  function OfferTableMain() {
-    let datatemp = filter_on_post(Offer, Category_request_Select).slice(0, 250);
-    console.log("posting seeks");
-    console.log(datatemp);
-
-    return (
-      <Container fluid className="mt-5 table">
-        <Row>
-          <FilterComponentSeekHelp />
-          <Col sm={8}>
-            <SeekHelpTable
-              data={datatemp}
-              totalPosts={datatemp.length}
-              loginStatus={login}
-              loginUsername={loginUsername}
-            />
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
-
-  //Title Component
-  function Title() {
-    return (
-      <div
-        className="d-flex justify-content-center align-content-end"
-        id="outer-header"
-      >
-        <div className="tag">
-          <span>
-            <h1
-              className="d-inline header_text_section rounded mt-4"
-              style={{ fontSize: "30px" }}
-            >
-              {" "}
-              I am here to...{" "}
-            </h1>
-            <button
-              type="button"
-              onClick={onClickOfferHelp}
-              className="stands-out-button"
-            >
-              Offer Help
-            </button>
-            <button
-              type="button"
-              onClick={onClickSeekHelp}
-              className="stands-out-button"
-            >
-              Seek Help
-            </button>
-          </span>
-
-          <div>
-            <label
-              htmlFor={"searchbar"}
-              className={"pt-3  d-inline-block mr-0"}
-            >
-              {/*<p className={"header_text_section rounded "}>Search Bar</p>*/}
-            </label>
-            <input
-              className="d-inline-block ml-1"
-              type="text"
-              // className={"ml-1"}
-              // title="Search Bar"
-              id={"searchbar"}
-              ref={searchInput}
-              // placeholder={searchInput.current.value}
-              placeholder={"Search here"}
-            />
-            <Button
-              variant="secondary"
-              className="btn btn-secondary d-inline-block ml-2"
-              onClick={onSearchHandler}
-            >
-              Search
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <>
       <div className="container-fluid">
         <Navbar login={login} />
-        <Title />
-        {/*{!ShowHelper ? <OfferTableMain /> : null}*/}
-        {/*{ShowHelper ? <SeekTableMain /> : null}*/}
+        <br />
+        <h1>Offer Help</h1>
+        <p>
+          If you have time to help someone (while making some money as well),
+          then this is the right place for you!
+        </p>
+        <SeekTableMain />
       </div>
     </>
   );
 }
 
-export default Main;
+export default OfferHelpPage;

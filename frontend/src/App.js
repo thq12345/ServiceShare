@@ -5,7 +5,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Main from "./main.js";
 import Post from "./Posts/Postpage_WithModal.js";
-
+import OfferHelpPage from "./Main Page Components/OfferHelpPage.js";
+import SeekHelpPage from "./Main Page Components/SeekHelpPage.js";
 //Router, basically you add components here.
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Main />} />
           <Route path="/post" element={<Post />} />
+          <Route path="/offerHelp" element={<OfferHelpPage />} />
+          <Route path="/seekHelp" element={<SeekHelpPage />} />
         </Routes>
       </Router>
     </div>

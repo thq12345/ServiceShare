@@ -6,6 +6,7 @@ function CommentBox(props) {
   let [message, setmessage] = useState("");
   const [show, setShow] = useState(false);
   let [usable, setUsable] = useState(false);
+  let [buttonText, setButtonText] = useState("Login to Send Message");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -28,8 +29,10 @@ function CommentBox(props) {
   useEffect(() => {
     if (props.loginStatus) {
       setUsable(true);
+      setButtonText("Send Message");
     } else {
       setUsable(false);
+      setButtonText("Login to Send Message");
     }
   }, [props.loginStatus]);
 
@@ -41,7 +44,7 @@ function CommentBox(props) {
         onClick={handleShow}
         disabled={!usable}
       >
-        Message
+        {buttonText}
       </Button>
 
       <Modal
@@ -55,7 +58,6 @@ function CommentBox(props) {
         </Modal.Header>
 
         <Modal.Body>
-          <p>Id for this post: {postid}</p>
           <label>Message</label>
           <textarea
             type="text"

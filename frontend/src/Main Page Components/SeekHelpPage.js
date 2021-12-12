@@ -1,25 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./style.css";
+import "../style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
-import SeekHelpTable from "./Other Components/SeekHelpTable.js";
-import OfferHelpTable from "./Other Components/OfferHelpTable.js";
-import Navbar from "./Main Page Components/Navbar.js";
-//From here, seek help means posts that seek help
-//offer help means posts that offer help
-function Main() {
-  let [Seeks, setSeeks] = useState([]);
+import SeekHelpTable from "../Other Components/SeekHelpTable.js";
+import Navbar from "./Navbar.js";
+
+function SeekHelpPage() {
   let [Offer, setOffer] = useState([]);
   let [MinValue, setMinValue] = useState(0);
   let [MaxValue, setMaxValue] = useState(10000);
-  let [Category_help_Select, SetCategory_help_Select] =
-    useState("Select Category");
   let [State_selected, setState_selected] = useState("Select States");
   let [Category_request_Select, SetCategory_request_Select] =
     useState("Select Category");
-  let [ShowHelper, setHelperPage] = useState(false);
   let [Input_Zipcode, setZipCode] = useState("");
   let [SearchItem, setSearchItem] = useState("");
   const navigate = useNavigate();
@@ -127,14 +120,6 @@ function Main() {
     }
   };
 
-  let onClickOfferHelp = () => {
-    navigate("/offerHelp");
-  };
-
-  let onClickSeekHelp = () => {
-    navigate("/seekHelp");
-  };
-
   //filter on the posts board on the request and helper table
   function filter_on_post(post, select) {
     let filtered_post = post;
@@ -173,7 +158,20 @@ function Main() {
 
   //fetch data (Offer Help)
   useEffect(() => {
-    async function runThis() {
+    async function run() {
+      let status = await fetch("/loginStatus");
+      let loginStatus = await status.json();
+      console.log("Login Status is:", loginStatus.user);
+      if (loginStatus.user !== undefined) {
+        setLogin(true);
+        setLoginUsername(loginStatus.user);
+      } else {
+        setLogin(false);
+        setLoginUsername("");
+      }
+    }
+
+    async function run2() {
       let raw = await fetch(`api/load-all-helpers`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -190,45 +188,9 @@ function Main() {
 
       setOffer(postTemp.slice(0, 250));
     }
-    runThis().catch(console.dir);
+    run().catch(console.dir);
+    run2().catch(console.dir);
   }, [Category_request_Select, SortPostAsc]);
-
-  //fetch data (Seek Help)
-  useEffect(() => {
-    async function runThis() {
-      let raw = await fetch(`api/load-seeks`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          bol: SortHelperAsc,
-        }),
-      });
-      let res = await raw.json();
-      let postTemp2 = [];
-      for (const element of res) {
-        postTemp2.push(element);
-      }
-
-      setSeeks(postTemp2);
-    }
-    runThis().catch(console.dir);
-  }, [Category_help_Select, SortHelperAsc]);
-
-  useEffect(() => {
-    async function run() {
-      let status = await fetch("/loginStatus");
-      let loginStatus = await status.json();
-      console.log("Login Status is:", loginStatus.user);
-      if (loginStatus.user !== undefined) {
-        setLogin(true);
-        setLoginUsername(loginStatus.user);
-      } else {
-        setLogin(false);
-        setLoginUsername("");
-      }
-    }
-    run();
-  });
 
   //all filter components (For the sake of clarity)
   function FilterComponentSeekHelp() {
@@ -324,124 +286,6 @@ function Main() {
       </Col>
     );
   }
-  function FilterComponentOfferTable() {
-    return (
-      <Col sm={3}>
-        <select
-          className="category mt-2"
-          aria-label="category"
-          value={Category_help_Select}
-          onChange={(e) => {
-            SetCategory_help_Select(e.target.value);
-          }}
-        >
-          <option key="all" value="Select Category">
-            Select Category
-          </option>
-          {categoryOptions.map((p, i) => (
-            <option key={"categoryofferoption" + i} value={p}>
-              {p}
-            </option>
-          ))}
-
-          {/*<Categories />*/}
-        </select>
-        <br />
-        <select
-          value={State_selected}
-          aria-label={"state2"}
-          className="category mt-2"
-          onChange={(e) => {
-            setState_selected(e.target.value);
-          }}
-        >
-          <option key="all" value="Select States">
-            Select States
-          </option>
-          {States.map((p, i) => (
-            <option key={i} value={p}>
-              {p}
-            </option>
-          ))}
-        </select>
-        <br />
-        <div className={"mt-2"}>
-          <label
-            className={"font-weight-bold mt-0"}
-            htmlFor={"minidealpricehelper"}
-          >
-            Minimum Ideal Price($)
-          </label>
-          <input
-            type="number"
-            id={"minidealpricehelper"}
-            className={" ml-2 rounded"}
-            ref={textMinInput}
-            placeholder={textMinInput.current.value}
-          />
-          <br />
-          <label
-            className={"font-weight-bold mt-0"}
-            htmlFor={"maxidealpricehelper"}
-          >
-            Maximum Ideal Price($)
-          </label>
-          <input
-            type="number"
-            id={"maxidealpricehelper"}
-            className={" ml-2 rounded"}
-            ref={textMaxInput}
-            placeholder={textMaxInput.current.value}
-          />
-          <div className="pt-1">
-            <button
-              type="button"
-              className={"moredetailbutton2"}
-              onClick={onClickHandler}
-            >
-              Apply Price Range
-            </button>
-          </div>
-        </div>
-
-        <div className="pt-3">
-          <button className={"sort_button"} onClick={() => setHelperAsc(1)}>
-            Sort price: Ascending &#11014;
-          </button>
-          <button
-            type="button"
-            className={"sort_button mt-2"}
-            onClick={() => setHelperAsc(-1)}
-          >
-            Sort price: Descending &#11015;
-          </button>
-        </div>
-      </Col>
-    );
-  }
-
-  //the helper tables with all the offers (Offer help)
-  function SeekTableMain() {
-    let HelperFiltered = filter_on_post(Seeks, Category_help_Select).slice(
-      0,
-      250
-    );
-    return (
-      <Container fluid className={"mt-5 table"}>
-        <Row>
-          <FilterComponentOfferTable />
-          <Col sm={9}>
-            <OfferHelpTable
-              data={HelperFiltered}
-              totalPosts={HelperFiltered.length}
-              loginStatus={login}
-              loginUsername={loginUsername}
-            />
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
 
   //the seek request tables with all requests (Seek Help)
   function OfferTableMain() {
@@ -466,78 +310,17 @@ function Main() {
     );
   }
 
-  //Title Component
-  function Title() {
-    return (
-      <div
-        className="d-flex justify-content-center align-content-end"
-        id="outer-header"
-      >
-        <div className="tag">
-          <span>
-            <h1
-              className="d-inline header_text_section rounded mt-4"
-              style={{ fontSize: "30px" }}
-            >
-              {" "}
-              I am here to...{" "}
-            </h1>
-            <button
-              type="button"
-              onClick={onClickOfferHelp}
-              className="stands-out-button"
-            >
-              Offer Help
-            </button>
-            <button
-              type="button"
-              onClick={onClickSeekHelp}
-              className="stands-out-button"
-            >
-              Seek Help
-            </button>
-          </span>
-
-          <div>
-            <label
-              htmlFor={"searchbar"}
-              className={"pt-3  d-inline-block mr-0"}
-            >
-              {/*<p className={"header_text_section rounded "}>Search Bar</p>*/}
-            </label>
-            <input
-              className="d-inline-block ml-1"
-              type="text"
-              // className={"ml-1"}
-              // title="Search Bar"
-              id={"searchbar"}
-              ref={searchInput}
-              // placeholder={searchInput.current.value}
-              placeholder={"Search here"}
-            />
-            <Button
-              variant="secondary"
-              className="btn btn-secondary d-inline-block ml-2"
-              onClick={onSearchHandler}
-            >
-              Search
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <>
       <div className="container-fluid">
         <Navbar login={login} />
-        <Title />
-        {/*{!ShowHelper ? <OfferTableMain /> : null}*/}
-        {/*{ShowHelper ? <SeekTableMain /> : null}*/}
+        <br />
+        <h1>Seek Help</h1>
+        <p>If you need someone to get things done, find one here!</p>
+        <OfferTableMain />
       </div>
     </>
   );
 }
 
-export default Main;
+export default SeekHelpPage;

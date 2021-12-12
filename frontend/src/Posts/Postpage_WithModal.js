@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
 import ModifyPost from "./modify_post.js";
-import logo from "../images/logo.png";
 import SubmitForm from "./submitform";
 import MessageReceived from "./MessageBox";
-import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
+import Navbar from "../Main Page Components/Navbar";
 function PostForm2() {
   //all posts that belongs to this user.
   const [Post, setPosts] = useState([]);
-  const navigate = useNavigate();
+  let [login, setLogin] = useState(false);
 
   useEffect(() => {
     async function func() {
       let status = await fetch("/loginStatus");
       let loginStatus = await status.json();
-      console.log("Login Status is:", loginStatus.user);
       if (loginStatus.user !== undefined) {
+        setLogin(true);
         fetch("/api/load-user-posts")
           .then((res) => res.json())
           .then((post) => {
@@ -26,11 +24,6 @@ function PostForm2() {
     }
     func();
   }, []);
-
-  const handleLogOut = async () => {
-    await fetch("/logout");
-    navigate("/");
-  };
 
   function LoadPost() {
     if (Post.length === 0) {
@@ -82,56 +75,20 @@ function PostForm2() {
       );
     }
   }
+
   return (
     <>
-      <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
-        <div className="container-fluid">
-          <ul className="navbar-nav me-auto">
-            <li>
-              <img
-                src={logo}
-                className="nav-item, nav_logo"
-                alt="Service Share Logo"
-              />
-            </li>
-            <li className="nav-item pt-2">
-              <a className="nav-link active" aria-current="page" href="./">
-                Home
-              </a>
-            </li>
-            <li className="nav-item pt-2">
-              <a className="nav-link active" aria-current="page" href="./post">
-                Post
-              </a>
-            </li>
-          </ul>
-          <ul className="nav navbar-nav navbar-right">
-            <li>
-              <Button
-                variant="secondary"
-                className="d-flex btn me-auto"
-                onClick={handleLogOut}
-              >
-                <h3>Log Out</h3>
-              </Button>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <Navbar login={login} />
       <section className="container mb-4">
         <h1 className="h1-responsive font-weight-bold text-center my-4">
           Welcome!
         </h1>
-        <div></div>
         <SubmitForm />
       </section>
 
       <section className="pt-5 container">
         <LoadPost />
       </section>
-      {/*<section className="pt-5 container">*/}
-      {/*  <MessageReceived />*/}
-      {/*</section>*/}
     </>
   );
 }
