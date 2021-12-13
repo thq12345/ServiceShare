@@ -11,17 +11,21 @@ td {
   border: 1px solid black;
 }
 
-h1, h2, h3, th{
+h1, h2, h3, thead{
   font-family: 'Sanchez', serif;
+}
+
+thead{
+  background-color: #558DAC;
+  border-style: solid;
+  color: #f5efe8;
 }
 
 .App {
   background-color: #f5efe8;
 }
 .navbar .dropdown-menu .form-control {
-  /*background-color: #3C7191;*/
   height: 100px;
-  /*color: white;*/
   font-size: 40px;
 }
 nav {

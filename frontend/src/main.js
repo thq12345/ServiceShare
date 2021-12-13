@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
-import SeekHelpTable from "./Other Components/SeekHelpTable.js";
-import OfferHelpTable from "./Other Components/OfferHelpTable.js";
 import Navbar from "./Main Page Components/Navbar.js";
 //From here, seek help means posts that seek help
 //offer help means posts that offer help
