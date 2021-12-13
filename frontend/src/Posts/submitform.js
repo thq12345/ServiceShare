@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AddressAutoComplete from "../Other Components/autocomplete";
-// import Categories from "../Other Components/Categories.js";
 
 function SubmitForm() {
   let [Subject, setSubject] = useState("");

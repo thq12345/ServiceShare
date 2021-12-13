@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 function CommentBox(props) {
   let postid = props.json._id;
@@ -82,4 +83,9 @@ function CommentBox(props) {
   );
 }
 
+CommentBox.propTypes = {
+  json: PropTypes.object,
+  loginUsername: PropTypes.string,
+  loginStatus: PropTypes.bool,
+};
 export default CommentBox;

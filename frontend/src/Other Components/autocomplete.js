@@ -103,7 +103,7 @@ function AddressAutoComplete(props) {
       <div className="col-md-12">
         <div className="md-form mb-0">
           <div ref={registerRef} id="adautocompletediv">
-            <label htmlFor="addressinput">Address Autocomplete</label>
+            <label htmlFor="addressinput">Address</label>
             <input
               value={value}
               className="form-control"

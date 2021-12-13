@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 function MessageReceived(props) {
   let [message, setMessage] = useState([]);
@@ -93,5 +94,9 @@ function MessageReceived(props) {
     );
   }
 }
+
+MessageReceived.propTypes = {
+  postid: PropTypes.string,
+};
 
 export default MessageReceived;
