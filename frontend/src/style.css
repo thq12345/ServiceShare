@@ -16,7 +16,7 @@ h1, h2, h3, thead{
 }
 
 thead{
-  background-color: #558DAC;
+  background-color: #3C7191;
   border-style: solid;
   color: #f5efe8;
 }
@@ -153,9 +153,11 @@ nav {
 .category{
   font-size: 15px;
   font-weight: bold;
+  width: 150px;
+  height: 35px;
   border-radius: 12px;
-  color: #3C7191;
-  background-color: #AFA194;
+  color: #f5efe8;
+  background-color: #3C7191;
   border-width: medium;
 
 }

@@ -120,9 +120,9 @@ function SubmitForm() {
                   </div>
                 </div>
 
-                <div className="row mt-2 mb-2">
+                {/*<div className="row mt-2 mb-2">*/}
                   <select
-                    className="sort_button"
+                    className="category my-3"
                     aria-label="category"
                     value={Category}
                     onChange={(e) => {
@@ -136,9 +136,7 @@ function SubmitForm() {
                       </option>
                     ))}
                   </select>
-
-                  <br />
-                </div>
+                {/*</div>*/}
               </div>
             </div>
 

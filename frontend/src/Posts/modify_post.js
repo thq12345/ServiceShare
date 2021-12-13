@@ -132,7 +132,7 @@ function ModifyPost(props) {
             <div className="row mb-2">
               <p>{Error}</p>
               <select
-                className={"sort_button"}
+                className={"category"}
                 aria-label="category"
                 value={Category}
                 onChange={categoryChange}
