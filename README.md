@@ -44,12 +44,12 @@ https://youtu.be/RLrrcD0vEOE
 
 ### Slides
 
-https://docs.google.com/presentation/d/1vtvEWsHSOthV0CzSdZ6w8Ft_ErwHLXUKlRoOhvNSyiI/edit#slide=id.g102d26d02ac_0_0
+https://docs.google.com/presentation/d/18GP9m6wzrsGELnuoa5IrMiD7KncpiIRBDvvy2evA0cA/edit?usp=sharing
 
 ### Work Distribution
 
 - Tianhao: login/create account page, help seeker page, category filter, passport.js & google map
-- Kaiwen(Kaitlyn): helper page, state,price filters, sorts, UI design enhancements
+- Kaiwen(Kaitlyn): helper page, state,price filters, sorts button, UI design enhancements
 
 ### Reference
 jung, michael. (n.d.). African supermarket worker portrait. https://www.canva.com/media/MADaru1zzNg. Canva. Retrieved from Canva.com.
