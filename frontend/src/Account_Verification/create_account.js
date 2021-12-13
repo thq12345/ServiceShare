@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
+import Navbar from "../Main Page Components/Navbar";
 
 function CreateAccount() {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -38,26 +39,24 @@ function CreateAccount() {
     }
   };
 
+  let [login, setLogin] = useState(false);
+
+  useEffect(() => {
+    async function run() {
+      let status = await fetch("/loginStatus");
+      let loginStatus = await status.json();
+      if (loginStatus.user !== undefined) {
+        setLogin(true);
+      } else {
+        setLogin(false);
+      }
+    }
+    run().catch(console.dir);
+  });
+
   return (
     <div className="text-center  h-100">
-      <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
-        <div className="container-fluid">
-          <ul className="navbar-nav me-auto">
-            <li>
-              <img
-                src={logo}
-                className="nav-item, nav_logo"
-                alt="Service Share Logo"
-              ></img>
-            </li>
-            <li className="nav-item pt-2">
-              <a className="nav-link active" aria-current="page" href="./">
-                Home
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <Navbar login={login} />
       <img
         className="mt-4 mb-4 logo-imagerow align-items-center h-100"
         src={logo}
