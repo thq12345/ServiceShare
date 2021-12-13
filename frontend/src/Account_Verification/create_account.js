@@ -107,7 +107,10 @@ function CreateAccount() {
         </div>
         <br />
         <p>
-          Already have an account? <a href="/login">Log In</a>
+          Already have an account?{" "}
+          <a href="/login" style={{ color: "black" }}>
+            Log In
+          </a>
         </p>
       </form>
     </div>

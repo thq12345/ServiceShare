@@ -20,15 +20,17 @@ function SeekHelpTable({ data, totalPosts, loginStatus, loginUsername }) {
   return (
     <>
       <table className="posts">
-          <thead>
+        <thead>
+          <tr>
             <th>Category</th>
             <th>Task Short Description</th>
             <th>Ideal Price/hr</th>
             <th>Date for task</th>
             <th>State</th>
             <th>More details</th>
-          </thead>
-          <tbody>
+          </tr>
+        </thead>
+        <tbody>
           {currentPost.map((p, i) => (
             <tr key={i}>
               <th>{p.Category}</th>

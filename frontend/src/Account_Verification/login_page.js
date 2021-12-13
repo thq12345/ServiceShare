@@ -105,7 +105,10 @@ function LoginForm() {
         </div>
         <br />
         <p>
-          Don't have an account? <a href="/create-account">Create Account</a>
+          Don't have an account?{" "}
+          <a href="/create-account" style={{ color: "black" }}>
+            Create Account
+          </a>
         </p>
       </form>
     </div>

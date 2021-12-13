@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./Main Page Components/Navbar.js";
@@ -7,15 +7,31 @@ import Navbar from "./Main Page Components/Navbar.js";
 function Main() {
   let [login, setLogin] = useState(false);
 
+  useEffect(() => {
+    async function run() {
+      let status = await fetch("/loginStatus");
+      let loginStatus = await status.json();
+      if (loginStatus.user !== undefined) {
+        setLogin(true);
+      } else {
+        setLogin(false);
+      }
+    }
+    run().catch(console.dir);
+  });
+
   //Title Component
   function Title() {
     return (
-      <div
-        className="d-flex justify-content-center align-content-end"
-      >
+      <div className="d-flex justify-content-center align-content-end">
         <div className={"tag"}>
-          <h3 className={"mt-2"}>Service share is a platform for you to share and offer any kinds of service with people that has opposing needs.</h3>
-          <h3>Feel free to browse and post anything that you want to offer/seek</h3>
+          <h1 className={"mt-2"} style={{ fontSize: "25px" }}>
+            Service share is a platform for you to hire someone to get the job
+            done or to help someone else and get some 💰 as well:)
+          </h1>
+          <h2 className={"mt-2"} style={{ fontSize: "25px" }}>
+            Feel free to browse existing posts and post one if you want!
+          </h2>
         </div>
       </div>
     );

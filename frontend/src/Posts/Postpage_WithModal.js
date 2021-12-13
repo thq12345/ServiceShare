@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ModifyPost from "./modify_post.js";
 import SubmitForm from "./submitform";
-import MessageReceived from "./MessageBox";
+import MessageReceived from "./MessageReceived";
 import Navbar from "../Main Page Components/Navbar";
 function PostForm2() {
   //all posts that belongs to this user.
@@ -22,7 +22,7 @@ function PostForm2() {
           });
       }
     }
-    func();
+    func().catch(console.dir());
   }, []);
 
   function LoadPost() {

@@ -197,8 +197,10 @@ function OfferHelpPage() {
     return (
       <Col sm={3}>
         <div className={"mt-1"}>
-          <label htmlFor={"searchbar"} className={"d-inline-block mr-0"}>
-          </label>
+          <label
+            htmlFor={"searchbar"}
+            className={"d-inline-block mr-0"}
+          ></label>
           <input
             className="d-inline-block ml-1"
             type="text"
@@ -215,42 +217,42 @@ function OfferHelpPage() {
           </Button>
         </div>
         <div className={"mt-1"}>
-        <select
-          className="moredetailbutton"
-          aria-label="category"
-          value={Category_help_Select}
-          onChange={(e) => {
-            SetCategory_help_Select(e.target.value);
-          }}
-        >
-          <option key="all" value="Select Category">
-            Select Category
-          </option>
-          {categoryOptions.map((p, i) => (
-            <option key={"categoryofferoption" + i} value={p}>
-              {p}
+          <select
+            className="moredetailbutton"
+            aria-label="category"
+            value={Category_help_Select}
+            onChange={(e) => {
+              SetCategory_help_Select(e.target.value);
+            }}
+          >
+            <option key="all" value="Select Category">
+              Select Category
             </option>
-          ))}
-        </select>
+            {categoryOptions.map((p, i) => (
+              <option key={"categoryofferoption" + i} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
         </div>
         <div className={"mt-1"}>
-        <select
-          value={State_selected}
-          aria-label={"state2"}
-          className="moredetailbutton"
-          onChange={(e) => {
-            setState_selected(e.target.value);
-          }}
-        >
-          <option key="all" value="Select States">
-            Select States
-          </option>
-          {States.map((p, i) => (
-            <option key={i} value={p}>
-              {p}
+          <select
+            value={State_selected}
+            aria-label={"state2"}
+            className="moredetailbutton"
+            onChange={(e) => {
+              setState_selected(e.target.value);
+            }}
+          >
+            <option key="all" value="Select States">
+              Select States
             </option>
-          ))}
-        </select>
+            {States.map((p, i) => (
+              <option key={i} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
         </div>
         <div className={"mt-1"}>
           <label
@@ -267,10 +269,7 @@ function OfferHelpPage() {
             placeholder={textMinInput.current.value}
           />
           <br />
-          <label
-            className={"font-weight-bold"}
-            htmlFor={"maxidealpricehelper"}
-          >
+          <label className={"font-weight-bold"} htmlFor={"maxidealpricehelper"}>
             Maximum Ideal Price($)
           </label>
           <input
@@ -291,8 +290,16 @@ function OfferHelpPage() {
           </div>
         </div>
         <div className={"mt-1"}>
-          <h4 className={"font-weight-bold d-inline-block mr-2"}>Sort Prices:  </h4>
-          <button className={"sort_button d-inline-block mr-2"} onClick={() => setHelperAsc(-1)}>
+          <h3
+            className={"font-weight-bold d-inline-block mr-2"}
+            style={{ fontSize: "20px" }}
+          >
+            Sort Prices:{" "}
+          </h3>
+          <button
+            className={"sort_button d-inline-block mr-2"}
+            onClick={() => setHelperAsc(-1)}
+          >
             &#11014;
           </button>
           <button
@@ -336,10 +343,10 @@ function OfferHelpPage() {
         <Navbar login={login} />
         <br />
         <h1>Help Offers</h1>
-        <h3>
+        <h2 style={{ fontSize: "25px" }}>
           If you have time to help someone (while making some money as well),
           then this is the right place for you!
-        </h3>
+        </h2>
         <SeekTableMain />
       </div>
     </>

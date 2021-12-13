@@ -195,60 +195,59 @@ function SeekHelpPage() {
     return (
       <Col sm={3}>
         <div className={"mt-1"}>
-          <label htmlFor={"searchbar"} className={"d-inline-block"}>
-          </label>
+          <label htmlFor={"searchbar"} className={"d-inline-block"}></label>
           <input
-              className="d-inline-block"
-              type="text"
-              id={"searchbar"}
-              ref={searchInput}
-              placeholder={"Search here"}
+            className="d-inline-block"
+            type="text"
+            id={"searchbar"}
+            ref={searchInput}
+            placeholder={"Search here"}
           />
           <Button
-              variant="secondary"
-              className="btn btn-secondary d-inline-block ml-2"
-              onClick={onSearchHandler}
+            variant="secondary"
+            className="btn btn-secondary d-inline-block ml-2"
+            onClick={onSearchHandler}
           >
             Search
           </Button>
         </div>
         <div className={"mt-1"}>
-        <select
-          className={"moredetailbutton"}
-          aria-label="category"
-          value={Category_request_Select}
-          onChange={(e) => {
-            SetCategory_request_Select(e.target.value);
-          }}
-        >
-          <option key="all" value="Select Category">
-            Select Category
-          </option>
-          {categoryOptions.map((p, i) => (
-            <option key={"categoryoption" + i} value={p}>
-              {p}
+          <select
+            className={"moredetailbutton"}
+            aria-label="category"
+            value={Category_request_Select}
+            onChange={(e) => {
+              SetCategory_request_Select(e.target.value);
+            }}
+          >
+            <option key="all" value="Select Category">
+              Select Category
             </option>
-          ))}
-        </select>
+            {categoryOptions.map((p, i) => (
+              <option key={"categoryoption" + i} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
         </div>
         <div className={"mt-1"}>
-        <select
-          className="moredetailbutton"
-          aria-label={"state1"}
-          value={State_selected}
-          onChange={(e) => {
-            setState_selected(e.target.value);
-          }}
-        >
-          <option key="all" value="Select States">
-            Select States
-          </option>
-          {States.map((p, i) => (
-            <option key={"state" + i} value={p}>
-              {p}
+          <select
+            className="moredetailbutton"
+            aria-label={"state1"}
+            value={State_selected}
+            onChange={(e) => {
+              setState_selected(e.target.value);
+            }}
+          >
+            <option key="all" value="Select States">
+              Select States
             </option>
-          ))}
-        </select>
+            {States.map((p, i) => (
+              <option key={"state" + i} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
         </div>
         <div className={"mt-1"}>
           <label className={"font-weight-bold"} htmlFor="textmininput">
@@ -285,18 +284,23 @@ function SeekHelpPage() {
           </div>
         </div>
         <div className="mt-1">
-          <h4 className={"font-weight-bold d-inline-block mr-2"}>Sort Prices:  </h4>
-            <button
-                type="button"
-                className={"sort_button d-inline-block mr-2"}
-                onClick={() => setPostAsc(-1)}
-            >
-              &#11014;
+          <h3
+            className={"font-weight-bold d-inline-block mr-2"}
+            style={{ fontSize: "20px" }}
+          >
+            Sort Prices:{" "}
+          </h3>
+          <button
+            type="button"
+            className={"sort_button d-inline-block mr-2"}
+            onClick={() => setPostAsc(-1)}
+          >
+            &#11014;
           </button>
           <button
-              type="button"
-              className={"sort_button d-inline-block"}
-              onClick={() => setPostAsc(1)}
+            type="button"
+            className={"sort_button d-inline-block"}
+            onClick={() => setPostAsc(1)}
           >
             &#11015;
           </button>
@@ -334,7 +338,9 @@ function SeekHelpPage() {
         <Navbar login={login} />
         <br />
         <h1>Help Requests</h1>
-        <h3>If you need someone to get things done, find one here!</h3>
+        <h2 style={{ fontSize: "25px" }}>
+          If you need someone to get things done, find one here!
+        </h2>
         <OfferTableMain />
       </div>
     </>

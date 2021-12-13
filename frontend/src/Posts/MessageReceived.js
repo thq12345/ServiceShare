@@ -13,7 +13,7 @@ function MessageReceived(props) {
       fetch("/api/get-received-message")
         .then((res) => res.json())
         .then((post) => {
-          console.log("Got message", post);
+          // console.log("Got message", post);
           setMessage(post.filter((item) => item.postid === props.postid));
         });
     }
@@ -23,7 +23,7 @@ function MessageReceived(props) {
   if (message.length === 0) {
     return (
       <>
-        <Button variant="secondary" onClick={handleShow} disabled={true}>
+        <Button variant="primary" onClick={handleShow} disabled={true}>
           No Comment
         </Button>
 
@@ -50,7 +50,7 @@ function MessageReceived(props) {
   } else {
     return (
       <>
-        <Button variant="secondary" onClick={handleShow}>
+        <Button variant="primary" onClick={handleShow}>
           Comments({message.length})
         </Button>
 

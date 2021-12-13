@@ -1,5 +1,4 @@
 import logo from "../images/logo.png";
-import Button from "react-bootstrap/Button";
 import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +11,23 @@ function Navbar(props) {
     console.log("Log out from Navbar status", status.status);
     window.location.reload(true);
   };
+
+  let onHomeHandler = () => {
+    navigate("/");
+  };
+
+  let onOfferHandler = () => {
+    navigate("/offerHelp");
+  };
+
+  let onSeekHandler = () => {
+    navigate("/seekHelp");
+  };
+
+  let onPostHandler = () => {
+    navigate("/post");
+  };
+
   if (props.login) {
     //what the navbar should look like when user IS logged in
     return (
@@ -30,64 +46,46 @@ function Navbar(props) {
             </li>
             <li className="nav-item">
               <button
-                  type="button"
-                  // onClick={onClickOfferHelp}
-                  className="stands-out-button"
+                type="button"
+                onClick={onHomeHandler}
+                className="stands-out-button"
               >
-                <a className="nav-link active text-light" aria-current="page" href="./">
-                  <h3>Home</h3>
-                </a>
+                <h3 className={"nav-link active text-light"}>Home</h3>
               </button>
             </li>
             <li>
-                <button
-                    type="button"
-                    className="stands-out-button"
-                >
-                <a
-                    className="nav-link active text-light"
-                    aria-current="page"
-                    href="./offerHelp"
-                >
-                  <h3>Help Offers</h3>
-                    </a>
-            </button>
-              </li>
-              <li>
-            <button
+              <button
                 type="button"
-                // onClick={onClickSeekHelp}
                 className="stands-out-button"
-            >
-                <a
-                    className="nav-link active text-light"
-                    aria-current="page"
-                    href="./seekHelp"
-                >
-                  <h3>Help Requests</h3>
-                </a>
-            </button>
+                onClick={onOfferHandler}
+              >
+                <h3 className={"nav-link active text-light"}>Offer Help</h3>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                className="stands-out-button"
+                onClick={onSeekHandler}
+              >
+                <h3 className={"nav-link active text-light"}>Seek Help</h3>
+              </button>
             </li>
             <li className="nav-item">
               <button
-                  type="button"
-                  className="stands-out-button"
+                type="button"
+                className="stands-out-button"
+                onClick={onPostHandler}
               >
-                <a className="nav-link active text-light" aria-current="page" href="./post">
-                  <h3>Post</h3>
-                </a>
+                <h3 className={"nav-link active text-light"}>Post</h3>
               </button>
             </li>
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <button
-                  className="login_button"
-                  onClick={onLogOutHandler}
-              >
+              <button className="login_button" onClick={onLogOutHandler}>
                 <h3>Log Out</h3>
               </button>
-
             </li>
           </ul>
         </div>
@@ -109,48 +107,32 @@ function Navbar(props) {
                 alt="Service Share Logo"
               />
             </li>
-
             <li className="nav-item">
-
               <button
-                  type="button"
-                  // onClick={onClickOfferHelp}
-                  className="stands-out-button"
+                type="button"
+                onClick={onHomeHandler}
+                className="stands-out-button"
               >
-                <a className="nav-link active  text-light" aria-current="page" href="./">
-                  <h3>Home</h3>
-                </a>
+                <h3 className={"nav-link active text-light"}>Home</h3>
               </button>
             </li>
             <li>
-              <span >
-                <button
-                    type="button"
-                    // onClick={onClickOfferHelp}
-                    className="stands-out-button"
-                >
-                <a
-                      className="nav-link active  text-light"
-                      aria-current="page"
-                      href="./offerHelp"
-                    >
-                  <h3>Help Offers</h3>
-                    </a>
-            </button>
-            <button
+              <button
                 type="button"
-                // onClick={onClickSeekHelp}
-                className="stands-out-button text-light"
-            >
-                <a
-                  className="nav-link active text-light"
-                  aria-current="page"
-                  href="./seekHelp"
-                >
-                  <h3>Help Requests</h3>
-                </a>
-            </button>
-              </span>
+                className="stands-out-button"
+                onClick={onOfferHandler}
+              >
+                <h3 className={"nav-link active text-light"}>Offer Help</h3>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                className="stands-out-button"
+                onClick={onSeekHandler}
+              >
+                <h3 className={"nav-link active text-light"}>Seek Help</h3>
+              </button>
             </li>
           </ul>
           <ul className="nav navbar-nav navbar-right">
