@@ -28,44 +28,66 @@ function Navbar(props) {
                 alt="Service Share Logo"
               />
             </li>
-            <li className="nav-item pt-2">
-              <a className="nav-link active" aria-current="page" href="./">
-                Home
-              </a>
-            </li>
-            <li className="nav-item pt-2">
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="./offerHelp"
+            <li className="nav-item">
+              <button
+                  type="button"
+                  // onClick={onClickOfferHelp}
+                  className="stands-out-button"
               >
-                Offer Help
-              </a>
+                <a className="nav-link active text-light" aria-current="page" href="./">
+                  <h3>Home</h3>
+                </a>
+              </button>
             </li>
-            <li className="nav-item pt-2">
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="./seekHelp"
+            <li>
+                <button
+                    type="button"
+                    className="stands-out-button"
+                >
+                <a
+                    className="nav-link active text-light"
+                    aria-current="page"
+                    href="./offerHelp"
+                >
+                  <h3>Help Offers</h3>
+                    </a>
+            </button>
+              </li>
+              <li>
+            <button
+                type="button"
+                // onClick={onClickSeekHelp}
+                className="stands-out-button"
+            >
+                <a
+                    className="nav-link active text-light"
+                    aria-current="page"
+                    href="./seekHelp"
+                >
+                  <h3>Help Requests</h3>
+                </a>
+            </button>
+            </li>
+            <li className="nav-item">
+              <button
+                  type="button"
+                  className="stands-out-button"
               >
-                Seek Help
-              </a>
-            </li>
-            <li className="nav-item pt-2">
-              <a className="nav-link active" aria-current="page" href="./post">
-                Post
-              </a>
+                <a className="nav-link active text-light" aria-current="page" href="./post">
+                  <h3>Post</h3>
+                </a>
+              </button>
             </li>
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <Button
-                variant="secondary"
-                className="d-flex btn me-auto"
-                onClick={onLogOutHandler}
+              <button
+                  className="login_button"
+                  onClick={onLogOutHandler}
               >
                 <h3>Log Out</h3>
-              </Button>
+              </button>
+
             </li>
           </ul>
         </div>
@@ -87,39 +109,58 @@ function Navbar(props) {
                 alt="Service Share Logo"
               />
             </li>
-            <li className="nav-item pt-2">
-              <a className="nav-link active" aria-current="page" href="./">
-                Home
-              </a>
-            </li>
-            <li className="nav-item pt-2">
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="./offerHelp"
+
+            <li className="nav-item">
+
+              <button
+                  type="button"
+                  // onClick={onClickOfferHelp}
+                  className="stands-out-button"
               >
-                Offer Help
-              </a>
+                <a className="nav-link active  text-light" aria-current="page" href="./">
+                  <h3>Home</h3>
+                </a>
+              </button>
             </li>
-            <li className="nav-item pt-2">
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="./seekHelp"
-              >
-                Seek Help
-              </a>
+            <li>
+              <span >
+                <button
+                    type="button"
+                    // onClick={onClickOfferHelp}
+                    className="stands-out-button"
+                >
+                <a
+                      className="nav-link active  text-light"
+                      aria-current="page"
+                      href="./offerHelp"
+                    >
+                  <h3>Help Offers</h3>
+                    </a>
+            </button>
+            <button
+                type="button"
+                // onClick={onClickSeekHelp}
+                className="stands-out-button text-light"
+            >
+                <a
+                  className="nav-link active text-light"
+                  aria-current="page"
+                  href="./seekHelp"
+                >
+                  <h3>Help Requests</h3>
+                </a>
+            </button>
+              </span>
             </li>
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <Button
-                variant="secondary"
-                className="d-flex btn me-auto"
+              <button
+                className="login_button"
                 onClick={() => navigate("/login")}
               >
                 <h3>Log in</h3>
-              </Button>
+              </button>
             </li>
           </ul>
         </div>

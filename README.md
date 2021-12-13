@@ -57,8 +57,8 @@ jung, michael. (n.d.). African supermarket worker portrait. https://www.canva.co
 ### [Color Palette Used](https://pigment.shapefactory.co/?a=71A8C4&b=F5EFE8)
 
 ### Fonts Used
-- Helvetica (Main Page)
-- Gill sans (Posts)
+- Sanchez (Headers, Nav bars)
+- Cantarell (Posts)
 
 ### MIT License
 

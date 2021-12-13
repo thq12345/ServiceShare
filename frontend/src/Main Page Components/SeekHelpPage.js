@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import SeekHelpTable from "../Other Components/SeekHelpTable.js";
 import Navbar from "./Navbar.js";
+import Button from "react-bootstrap/Button";
 
 function SeekHelpPage() {
   let [Offer, setOffer] = useState([]);
@@ -196,8 +197,27 @@ function SeekHelpPage() {
   function FilterComponentSeekHelp() {
     return (
       <Col sm={3}>
+        <div className={"mt-1"}>
+          <label htmlFor={"searchbar"} className={"d-inline-block"}>
+          </label>
+          <input
+              className="d-inline-block"
+              type="text"
+              id={"searchbar"}
+              ref={searchInput}
+              placeholder={"Search here"}
+          />
+          <Button
+              variant="secondary"
+              className="btn btn-secondary d-inline-block ml-2"
+              onClick={onSearchHandler}
+          >
+            Search
+          </Button>
+        </div>
+        <div className={"mt-1"}>
         <select
-          className={"category"}
+          className={"moredetailbutton"}
           aria-label="category"
           value={Category_request_Select}
           onChange={(e) => {
@@ -213,9 +233,10 @@ function SeekHelpPage() {
             </option>
           ))}
         </select>
-        <br />
+        </div>
+        <div className={"mt-1"}>
         <select
-          className="category mt-2"
+          className="moredetailbutton"
           aria-label={"state1"}
           value={State_selected}
           onChange={(e) => {
@@ -231,15 +252,15 @@ function SeekHelpPage() {
             </option>
           ))}
         </select>
-        <br />
-        <div className={"my-2"}>
+        </div>
+        <div className={"mt-1"}>
           <label className={"font-weight-bold"} htmlFor="textmininput">
             Minimum Ideal Price($):
           </label>
 
           <input
             type="number"
-            className={" ml-2 rounded"}
+            className={"ml-2 rounded"}
             id="textmininput"
             ref={textMinInput}
             placeholder={textMinInput.current.value}
@@ -248,10 +269,9 @@ function SeekHelpPage() {
           <label className={"font-weight-bold"} htmlFor="textmaxinput">
             Maximum Ideal Price($):
           </label>
-
           <input
             type="number"
-            className={" ml-2 rounded"}
+            className={"ml-2 rounded"}
             id="textmaxinput"
             ref={textMaxInput}
             placeholder={textMaxInput.current.value}
@@ -260,27 +280,28 @@ function SeekHelpPage() {
           <div className="pt-1">
             <button
               type="button"
-              className={"moredetailbutton1"}
+              className={"moredetailbutton"}
               onClick={onClickHandler}
             >
               Apply Price Range
             </button>
           </div>
         </div>
-        <div className="pt-1">
-          <button
-            type="button"
-            className={"sort_button"}
-            onClick={() => setPostAsc(1)}
-          >
-            Sort price: Ascending &#11014;
+        <div className="mt-1">
+          <h4 className={"font-weight-bold d-inline-block mr-2"}>Sort Prices:  </h4>
+            <button
+                type="button"
+                className={"sort_button d-inline-block mr-2"}
+                onClick={() => setPostAsc(-1)}
+            >
+              &#11014;
           </button>
           <button
-            type="button"
-            className={"sort_button mt-2"}
-            onClick={() => setPostAsc(-1)}
+              type="button"
+              className={"sort_button d-inline-block"}
+              onClick={() => setPostAsc(1)}
           >
-            Sort price: Descending &#11015;
+            &#11015;
           </button>
         </div>
       </Col>
@@ -297,7 +318,7 @@ function SeekHelpPage() {
       <Container fluid className="mt-5 table">
         <Row>
           <FilterComponentSeekHelp />
-          <Col sm={8}>
+          <Col sm={9}>
             <SeekHelpTable
               data={datatemp}
               totalPosts={datatemp.length}
@@ -315,8 +336,8 @@ function SeekHelpPage() {
       <div className="container-fluid">
         <Navbar login={login} />
         <br />
-        <h1>Seek Help</h1>
-        <p>If you need someone to get things done, find one here!</p>
+        <h1>Help Requests</h1>
+        <h3>If you need someone to get things done, find one here!</h3>
         <OfferTableMain />
       </div>
     </>

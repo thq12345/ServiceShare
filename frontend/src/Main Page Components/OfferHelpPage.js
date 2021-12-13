@@ -196,18 +196,14 @@ function OfferHelpPage() {
   function FilterComponentOfferTable() {
     return (
       <Col sm={3}>
-        <div>
-          <label htmlFor={"searchbar"} className={"pt-3  d-inline-block mr-0"}>
-            {/*<p className={"header_text_section rounded "}>Search Bar</p>*/}
+        <div className={"mt-1"}>
+          <label htmlFor={"searchbar"} className={"d-inline-block mr-0"}>
           </label>
           <input
             className="d-inline-block ml-1"
             type="text"
-            // className={"ml-1"}
-            // title="Search Bar"
             id={"searchbar"}
             ref={searchInput}
-            // placeholder={searchInput.current.value}
             placeholder={"Search here"}
           />
           <Button
@@ -218,8 +214,9 @@ function OfferHelpPage() {
             Search
           </Button>
         </div>
+        <div className={"mt-1"}>
         <select
-          className="category mt-2"
+          className="moredetailbutton"
           aria-label="category"
           value={Category_help_Select}
           onChange={(e) => {
@@ -234,14 +231,13 @@ function OfferHelpPage() {
               {p}
             </option>
           ))}
-
-          {/*<Categories />*/}
         </select>
-        <br />
+        </div>
+        <div className={"mt-1"}>
         <select
           value={State_selected}
           aria-label={"state2"}
-          className="category mt-2"
+          className="moredetailbutton"
           onChange={(e) => {
             setState_selected(e.target.value);
           }}
@@ -255,8 +251,8 @@ function OfferHelpPage() {
             </option>
           ))}
         </select>
-        <br />
-        <div className={"mt-2"}>
+        </div>
+        <div className={"mt-1"}>
           <label
             className={"font-weight-bold mt-0"}
             htmlFor={"minidealpricehelper"}
@@ -266,13 +262,13 @@ function OfferHelpPage() {
           <input
             type="number"
             id={"minidealpricehelper"}
-            className={" ml-2 rounded"}
+            className={"ml-2 rounded"}
             ref={textMinInput}
             placeholder={textMinInput.current.value}
           />
           <br />
           <label
-            className={"font-weight-bold mt-0"}
+            className={"font-weight-bold"}
             htmlFor={"maxidealpricehelper"}
           >
             Maximum Ideal Price($)
@@ -280,31 +276,31 @@ function OfferHelpPage() {
           <input
             type="number"
             id={"maxidealpricehelper"}
-            className={" ml-2 rounded"}
+            className={"ml-2 rounded"}
             ref={textMaxInput}
             placeholder={textMaxInput.current.value}
           />
           <div className="pt-1">
             <button
               type="button"
-              className={"moredetailbutton2"}
+              className={"moredetailbutton"}
               onClick={onClickHandler}
             >
               Apply Price Range
             </button>
           </div>
         </div>
-
-        <div className="pt-3">
-          <button className={"sort_button"} onClick={() => setHelperAsc(1)}>
-            Sort price: Ascending &#11014;
+        <div className={"mt-1"}>
+          <h4 className={"font-weight-bold d-inline-block mr-2"}>Sort Prices:  </h4>
+          <button className={"sort_button d-inline-block mr-2"} onClick={() => setHelperAsc(-1)}>
+            &#11014;
           </button>
           <button
             type="button"
             className={"sort_button mt-2"}
-            onClick={() => setHelperAsc(-1)}
+            onClick={() => setHelperAsc(1)}
           >
-            Sort price: Descending &#11015;
+            &#11015;
           </button>
         </div>
       </Col>
@@ -339,11 +335,11 @@ function OfferHelpPage() {
       <div className="container-fluid">
         <Navbar login={login} />
         <br />
-        <h1>Offer Help</h1>
-        <p>
+        <h1>Help Offers</h1>
+        <h3>
           If you have time to help someone (while making some money as well),
           then this is the right place for you!
-        </p>
+        </h3>
         <SeekTableMain />
       </div>
     </>

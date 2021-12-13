@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+
 html {
-  font-family: Helvetica, Sans-Serif;
+  font-family: 'Cantarell', sans-serif;
   background-color: #f5efe8;
   font-size: 15px;
 }
@@ -8,6 +10,11 @@ th,
 td {
   border: 1px solid black;
 }
+
+h1, h2, h3, th{
+  font-family: 'Sanchez', serif;
+}
+
 .App {
   background-color: #f5efe8;
 }
@@ -28,20 +35,22 @@ nav {
   text-align: center;
 }
 
-#outer-header {
+.page{
   background-image: url("images/header.png");
   background-repeat: no-repeat;
-  height: 70vh;
+  height: 105vh;
   width: 100%;
   background-color: #f4eee9;
   background-position: center;
 }
+
 #head_logo {
   width: 80%;
   height: auto;
   position: relative;
   margin: auto;
 }
+
 .center {
   position: absolute;
   top: 50%;
@@ -50,13 +59,17 @@ nav {
   transform: translate(-50%, -50%);
   display: inline-block;
 }
+
 .tag {
-  height: 30vh;
   position: absolute;
-  bottom: 15vh;
+  bottom: 18vh;
+  left:30%;
+  right:25%;
   color: black;
+  background-color: #F5EFE8;
   font-weight: bold;
   font-size: 30px;
+  border-radius: 25px;
 }
 
 .logo-modal {
@@ -98,6 +111,7 @@ nav {
 
 .posts {
   font-weight: bold;
+  width:95%;
 }
 
 .page-item {
@@ -105,16 +119,21 @@ nav {
   font-weight: bold;
 }
 
-.header_text_section{
-  background-color: #f5efe8;
-}
-
 .stands-out-button {
   background-color: #3c7191;
-  font-size: 20px;
+  font-size: 25px;
   color: #f5efe8;
   border-radius: 12px;
-  padding: 10px 20px;
+  padding: 0px 10px;
+  margin: 5px;
+}
+
+.login_button{
+  background-color: #808080;
+  font-size: 25px;
+  color: #f5efe8;
+  border-radius: 8px;
+  padding: 5px 20px;
   margin: 5px;
 }
 
@@ -123,8 +142,8 @@ nav {
   font-size: 15px;
   color: #f5efe8;
   border-radius: 12px;
-  padding: 3px 10px;
-  margin: 3px;
+  width:180px;
+  padding: 3px 3px;
 }
 
 .category{
@@ -132,8 +151,9 @@ nav {
   font-weight: bold;
   border-radius: 12px;
   color: #3C7191;
-  background-color: #AFA194 ;
+  background-color: #AFA194;
   border-width: medium;
+
 }
 
 .sort_button {
