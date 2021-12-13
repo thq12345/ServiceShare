@@ -152,6 +152,7 @@ nav {
 
 .category{
   font-size: 15px;
+  text-align-last:center;
   font-weight: bold;
   width: 150px;
   height: 35px;

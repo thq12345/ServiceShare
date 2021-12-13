@@ -129,10 +129,9 @@ function ModifyPost(props) {
         </Modal.Header>
         <form id="contact-form" name="contact-form">
           <Modal.Body>
-            <div className="row mb-2">
               <p>{Error}</p>
               <select
-                className={"category"}
+                className={"category mb-2"}
                 aria-label="category"
                 value={Category}
                 onChange={categoryChange}
@@ -144,7 +143,6 @@ function ModifyPost(props) {
                   </option>
                 ))}
               </select>
-            </div>
 
             <div className="row">
               <div className="col-md-12">
