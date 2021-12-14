@@ -40,7 +40,7 @@ https://youtu.be/RLrrcD0vEOE
 
 ### Sample images
 
-![Main Page](https://github.com/thq12345/Project3/blob/BigLeap-v1/frontend/src/images/ServiceShareScreenshot.PNG?raw=true)
+![Main Page](https://github.com/thq12345/Project3/blob/BigLeap-v1/frontend/src/images/frontpage.PNG?raw=true)
 ![Post Page](https://github.com/thq12345/Project3/blob/BigLeap-v1/frontend/src/images/postPage.PNG?raw=true)
 
 ### Slides
