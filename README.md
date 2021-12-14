@@ -1,11 +1,11 @@
 # Service Share
 
-### Author: [Tianhao Qu](https://thq12345.github.io/PersonalHomepage/), [Kaitlyn(Kaiwen) Tian](https://kaitlyntian.github.io/homepage/index.html)
+### Author: [Tianhao Qu](https://thq12345.github.io/PersonalHomepage/), [Kaitlyn(Kaiwen) Tian](https://kaitlyntian.github.io/homepage)
 
 ### Demo
 
 Please use this link:
-https://helpfinder-v2.herokuapp.com/
+https://serviceshare.herokuapp.com/
 
 ### Objective
 
@@ -40,11 +40,12 @@ https://youtu.be/RLrrcD0vEOE
 
 ### Sample images
 
-![Main Page](https://github.com/thq12345/Project3/blob/development/frontend/src/images/ServiceShareScreenshot.PNG?raw=true)
+![Main Page](https://github.com/thq12345/Project3/blob/BigLeap-v1/frontend/src/images/frontpage.PNG?raw=true)
+![Post Page](https://github.com/thq12345/Project3/blob/BigLeap-v1/frontend/src/images/postPage.PNG?raw=true)
 
 ### Slides
 
-https://docs.google.com/presentation/d/18GP9m6wzrsGELnuoa5IrMiD7KncpiIRBDvvy2evA0cA/edit?usp=sharing
+https://docs.google.com/presentation/d/18GP9m6wzrsGELnuoa5IrMiD7KncpiIRBDvvy2evA0cA/edit#slide=id.gec182b6aad_0_8
 
 ### Work Distribution
 

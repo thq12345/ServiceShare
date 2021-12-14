@@ -113,25 +113,6 @@ function myDB() {
     console.log("A Username Password Pair has been inserted successfully.");
   };
 
-  // myDB.process_username_password_input = async (username, password, res) => {
-  //   const collection_info = project_database.collection("username_password");
-  //
-  //   const query = {
-  //     username: username,
-  //   };
-  //   const execute = await collection_info.findOne(query);
-  //   if (execute == null) {
-  //     res.json({ status: false });
-  //   } else {
-  //     if (password == execute.password) {
-  //       username_global = username;
-  //       res.json({ status: true });
-  //     } else {
-  //       res.json({ status: false });
-  //     }
-  //   }
-  // };
-
   myDB.getComments = async (req, res) => {
     console.log("Reload comment has been executed.");
     let query2;
@@ -179,10 +160,6 @@ function myDB() {
     return result;
   };
 
-  // myDB.setGlobalUser = async (username) => {
-  //   username_global = username;
-  // };
-
   myDB.addMessage = async (
     postid,
     senderUsername,
@@ -201,36 +178,11 @@ function myDB() {
     res.json({ status: true });
   };
 
-  //User can only delete message they sent to others
-  myDB.deleteMessage = async (messageid) => {
-    const delete_info = { _id: messageid };
-    const messagedb = project_database.collection("message");
-    await messagedb.deleteOne(delete_info);
-  };
-
-  myDB.modifyMessage = async (messageid, modifiedMessage) => {
-    const filter = { _id: ObjectId(messageid) };
-    const update = { message: modifiedMessage };
-    const messagedb = project_database.collection("message");
-    await messagedb.updateOne(filter, update);
-  };
-
   myDB.retrieveReceivedMessage = async (req, res) => {
     const filter = { receiverUsername: req.user };
     const messagedb = project_database.collection("message");
     const result = await messagedb.find(filter).toArray();
     res.json(result);
-  };
-
-  myDB.retrieveSentMessage = async (req, res) => {
-    const filter = { senderUsername: req.user };
-    const messagedb = project_database.collection("message");
-    const result = await messagedb.find(filter).toArray();
-    res.json(result);
-  };
-
-  myDB.getCurrentUser = async (req, res) => {
-    res.json({ username: req.user });
   };
 
   return myDB;

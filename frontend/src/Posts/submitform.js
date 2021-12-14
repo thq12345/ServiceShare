@@ -26,6 +26,7 @@ function SubmitForm() {
     "Pet Care",
     "Shopping",
   ];
+
   let subjectChange = (event) => {
     setSubject(event.target.value);
   };
@@ -121,21 +122,21 @@ function SubmitForm() {
                 </div>
 
                 {/*<div className="row mt-2 mb-2">*/}
-                  <select
-                    className="category my-3"
-                    aria-label="category"
-                    value={Category}
-                    onChange={(e) => {
-                      setCategory(e.target.value);
-                    }}
-                  >
-                    {/*<Categories></Categories>*/}
-                    {categoryOptions.map((p, i) => (
-                      <option key={"categoryoptions" + i} value={p}>
-                        {p}
-                      </option>
-                    ))}
-                  </select>
+                <select
+                  className="category my-3"
+                  aria-label="category"
+                  value={Category}
+                  onChange={(e) => {
+                    setCategory(e.target.value);
+                  }}
+                >
+                  {/*<Categories></Categories>*/}
+                  {categoryOptions.map((p, i) => (
+                    <option key={"categoryoptions" + i} value={p}>
+                      {p}
+                    </option>
+                  ))}
+                </select>
                 {/*</div>*/}
               </div>
             </div>

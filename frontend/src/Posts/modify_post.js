@@ -129,20 +129,20 @@ function ModifyPost(props) {
         </Modal.Header>
         <form id="contact-form" name="contact-form">
           <Modal.Body>
-              <p>{Error}</p>
-              <select
-                className={"category mb-2"}
-                aria-label="category"
-                value={Category}
-                onChange={categoryChange}
-              >
-                {/*<Categories />*/}
-                {categoryOptions.map((p, i) => (
-                  <option key={"categoryoption" + i} value={p}>
-                    {p}
-                  </option>
-                ))}
-              </select>
+            <p>{Error}</p>
+            <select
+              className={"category mb-2"}
+              aria-label="category"
+              value={Category}
+              onChange={categoryChange}
+            >
+              {/*<Categories />*/}
+              {categoryOptions.map((p, i) => (
+                <option key={"categoryoption" + i} value={p}>
+                  {p}
+                </option>
+              ))}
+            </select>
 
             <div className="row">
               <div className="col-md-12">
