@@ -337,9 +337,10 @@ function SeekHelpPage() {
       <div className="container-fluid">
         <Navbar login={login} />
         <br />
-        <h1>Help Requests</h1>
+        <h1>Help Offers</h1>
         <h2 style={{ fontSize: "25px" }}>
-          If you need someone to get things done, find one here!
+          If you have time to help someone (while making some money as well),
+          then this is the right place for you!
         </h2>
         <OfferTableMain />
       </div>

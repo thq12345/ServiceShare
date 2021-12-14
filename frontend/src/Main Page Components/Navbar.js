@@ -59,7 +59,7 @@ function Navbar(props) {
                 className="stands-out-button"
                 onClick={onOfferHandler}
               >
-                <h3 className={"nav-link active text-light"}>Offer Help</h3>
+                <h3 className={"nav-link active text-light"}>Help Requests</h3>
               </button>
             </li>
             <li>
@@ -68,7 +68,7 @@ function Navbar(props) {
                 className="stands-out-button"
                 onClick={onSeekHandler}
               >
-                <h3 className={"nav-link active text-light"}>Seek Help</h3>
+                <h3 className={"nav-link active text-light"}>Help Offers</h3>
               </button>
             </li>
             <li className="nav-item">
@@ -122,7 +122,7 @@ function Navbar(props) {
                 className="stands-out-button"
                 onClick={onOfferHandler}
               >
-                <h3 className={"nav-link active text-light"}>Offer Help</h3>
+                <h3 className={"nav-link active text-light"}>Help Requests</h3>
               </button>
             </li>
             <li>
@@ -131,7 +131,7 @@ function Navbar(props) {
                 className="stands-out-button"
                 onClick={onSeekHandler}
               >
-                <h3 className={"nav-link active text-light"}>Seek Help</h3>
+                <h3 className={"nav-link active text-light"}>Help Offers</h3>
               </button>
             </li>
           </ul>
