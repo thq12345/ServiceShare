@@ -51,10 +51,11 @@ https://docs.google.com/presentation/d/18GP9m6wzrsGELnuoa5IrMiD7KncpiIRBDvvy2evA
 - Tianhao: login/create account page, help seeker page, category filter, passport.js & google map
 - Kaiwen(Kaitlyn): helper page, state,price filters, sorts button, Pagination, UI design enhancements
 
-### Reference
+### Reference(Image)
 jung, michael. (n.d.). African supermarket worker portrait. https://www.canva.com/media/MADaru1zzNg. Canva. Retrieved from Canva.com.
 
-### [Color Palette Used](https://pigment.shapefactory.co/?a=71A8C4&b=F5EFE8)
+### Reference(Color Palette)
+ShapeFactory. (n.d.). Glacier &amp; White Linen. Pigment by ShapeFactory. Retrieved November 14, 2021, from https://pigment.shapefactory.co/?a=71A8C4&amp;b=F5EFE8. 
 
 ### Fonts Used
 - Sanchez (Headers, Nav bars)
