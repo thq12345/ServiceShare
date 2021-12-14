@@ -183,8 +183,7 @@ function SeekHelpPage() {
         // categoryTemp.push(element.Category);
         postTemp.push(element);
       }
-
-      setOffer(postTemp.slice(0, 250));
+      setOffer(postTemp);
     }
     run().catch(console.dir);
     run2().catch(console.dir);
@@ -311,7 +310,7 @@ function SeekHelpPage() {
 
   //the seek request tables with all requests (Seek Help)
   function OfferTableMain() {
-    let datatemp = filter_on_post(Offer, Category_request_Select).slice(0, 250);
+    let datatemp = filter_on_post(Offer, Category_request_Select);
     console.log("posting seeks");
     console.log(datatemp);
 

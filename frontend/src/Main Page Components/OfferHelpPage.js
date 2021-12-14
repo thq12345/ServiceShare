@@ -186,7 +186,6 @@ function OfferHelpPage() {
       for (const element of res) {
         postTemp2.push(element);
       }
-
       setSeeks(postTemp2);
     }
     run();
@@ -316,10 +315,7 @@ function OfferHelpPage() {
 
   //the helper tables with all the offers (Offer help)
   function SeekTableMain() {
-    let HelperFiltered = filter_on_post(Seeks, Category_help_Select).slice(
-      0,
-      250
-    );
+    let HelperFiltered = filter_on_post(Seeks, Category_help_Select);
     return (
       <Container fluid className={"mt-5 table"}>
         <Row>

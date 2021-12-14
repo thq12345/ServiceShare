@@ -4,7 +4,7 @@ import MoreDetails from "./MoreDetailsMainPage.js";
 function SeekHelpTable({ data, totalPosts, loginStatus, loginUsername }) {
   const pageNumbers = [];
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
+  const [postsPerPage] = useState(20);
 
   //change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);

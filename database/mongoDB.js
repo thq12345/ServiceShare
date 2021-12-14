@@ -138,7 +138,6 @@ function myDB() {
     let result = await post_db.find({}).sort({ "Ideal Price": bol }).toArray();
     res.json(result);
     // console.log("loaded");
-    result = result.slice(0, 250);
     return result;
   };
 
@@ -149,7 +148,6 @@ function myDB() {
     const post_db = project_database.collection("posts");
     let result = await post_db.find({}).sort({ "Ideal Price": bol }).toArray();
     res.json(result);
-    result = result.slice(0, 250);
     return result;
   };
 
