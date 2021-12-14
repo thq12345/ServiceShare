@@ -49,7 +49,7 @@ https://docs.google.com/presentation/d/18GP9m6wzrsGELnuoa5IrMiD7KncpiIRBDvvy2evA
 ### Work Distribution
 
 - Tianhao: login/create account page, help seeker page, category filter, passport.js & google map
-- Kaiwen(Kaitlyn): helper page, state,price filters, sorts button, UI design enhancements
+- Kaiwen(Kaitlyn): helper page, state,price filters, sorts button, Pagination, UI design enhancements
 
 ### Reference
 jung, michael. (n.d.). African supermarket worker portrait. https://www.canva.com/media/MADaru1zzNg. Canva. Retrieved from Canva.com.

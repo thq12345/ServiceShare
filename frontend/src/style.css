@@ -11,6 +11,12 @@ td {
   border: 1px solid black;
 }
 
+input:focus {
+  background-color: yellow;
+  border: 5px solid black;
+  transition: ease-in-out, width .35s ease-in-out;
+}
+
 h1, h2, h3, thead{
   font-family: 'Sanchez', serif;
 }
