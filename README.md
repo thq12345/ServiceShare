@@ -36,7 +36,8 @@ and read your work requests, as well as offer your flexibility and expertise on 
 
 ### Youtube Video
 
-https://youtu.be/RLrrcD0vEOE
+- [Public Demo](https://youtu.be/RLrrcD0vEOE)
+- [Usability video](https://youtu.be/Kwz_Eq5FnAI)
 
 ### Sample images
 
