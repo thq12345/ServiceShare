@@ -40,8 +40,8 @@ and read your work requests, as well as offer your flexibility and expertise on 
 
 ### Youtube Video
 
-- [Public Demo](https://youtu.be/RLrrcD0vEOE)
-- [Usability video](https://youtu.be/Kwz_Eq5FnAI)
+- [Public Demo](https://www.youtube.com/watch?v=HAtCUqL9GaA&ab_channel=kaitlyntian)
+- [Usability video](https://www.youtube.com/watch?v=Kwz_Eq5FnAI&ab_channel=kaitlyntian)
 
 ### Sample images
 
