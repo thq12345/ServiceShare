@@ -36,7 +36,7 @@ and read your work requests, as well as offer your flexibility and expertise on 
 
 ### Youtube Video
 
-https://youtu.be/RLrrcD0vEOE
+https://www.youtube.com/watch?v=HAtCUqL9GaA&ab_channel=kaitlyntian
 
 ### Sample images
 
