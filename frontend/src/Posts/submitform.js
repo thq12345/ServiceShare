@@ -101,7 +101,7 @@ function SubmitForm() {
                   <div className="md-form mb-0">
                     I am posting to...
                     <select
-                      id="categorySelect"
+                      className={"ml-2 category"}
                       aria-label="categorySelect"
                       value={Mode}
                       onChange={modeChange}
