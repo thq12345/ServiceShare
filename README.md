@@ -7,6 +7,10 @@
 Please use this link:
 https://serviceshare.herokuapp.com/
 
+### Usability Study
+- Tianhao’s Usability Report: https://docs.google.com/document/d/1ebOhx1pdr77UFK-m_2ytlo63IGGM8h0VLxxEhSLBdSA/edit
+- Kaiwen’s Usability Report: https://docs.google.com/document/d/1n_YACj_7DwUgPoWgBuP7n6ma-PlV4s1OBLhoCSIsAHE/edit?usp=sharing
+
 ### Objective
 
 This website is to build a platform for people to offer and seek freelance work for litterally everything! You can post
