@@ -1,4 +1,4 @@
-# Service Share
+# ServiceShare
 
 ### Author: [Tianhao Qu](https://thq12345.github.io/PersonalHomepage/), [Kaitlyn(Kaiwen) Tian](https://kaitlyntian.github.io/homepage)
 
