@@ -8,6 +8,7 @@ Please use this link:
 https://serviceshare.herokuapp.com/
 
 ### Usability Study
+
 - Tianhao’s Usability Report: https://docs.google.com/document/d/1ebOhx1pdr77UFK-m_2ytlo63IGGM8h0VLxxEhSLBdSA/edit
 - Kaiwen’s Usability Report: https://docs.google.com/document/d/1n_YACj_7DwUgPoWgBuP7n6ma-PlV4s1OBLhoCSIsAHE/edit?usp=sharing
 
@@ -58,12 +59,15 @@ https://docs.google.com/presentation/d/18GP9m6wzrsGELnuoa5IrMiD7KncpiIRBDvvy2evA
 - Kaiwen(Kaitlyn): helper page, state,price filters, sorts button, Pagination, UI design enhancements
 
 ### Reference(Image)
+
 jung, michael. (n.d.). African supermarket worker portrait. https://www.canva.com/media/MADaru1zzNg. Canva. Retrieved from Canva.com.
 
 ### Reference(Color Palette)
-ShapeFactory. (n.d.). Glacier &amp; White Linen. Pigment by ShapeFactory. Retrieved November 14, 2021, from https://pigment.shapefactory.co/?a=71A8C4&amp;b=F5EFE8. 
+
+ShapeFactory. (n.d.). Glacier &amp; White Linen. Pigment by ShapeFactory. Retrieved November 14, 2021, from https://pigment.shapefactory.co/?a=71A8C4&amp;b=F5EFE8.
 
 ### Fonts Used
+
 - Sanchez (Headers, Nav bars)
 - Cantarell (Posts)
 

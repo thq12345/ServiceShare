@@ -27,32 +27,13 @@ function MessageReceived(props) {
         <Button variant="primary" onClick={handleShow} disabled={true}>
           No Comment
         </Button>
-
-        <Modal
-          show={show}
-          id={"moreDetailModal"}
-          onHide={handleClose}
-          aria-labelledby="moreDetailModal"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Details</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>No comment is available for this post.</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
       </>
     );
   } else {
     return (
       <>
         <Button variant="primary" onClick={handleShow}>
-          Comments({message.length})
+          Comments ({message.length})
         </Button>
 
         <Modal
@@ -73,7 +54,7 @@ function MessageReceived(props) {
                   <th scope={"col"}>Message</th>
                 </tr>
               </thead>
-              <tbody id="post_content">
+              <tbody id="message_content">
                 {message.map((p, i) => (
                   <tr key={i}>
                     <th>{i + 1}</th>

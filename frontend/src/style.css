@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans");
 
 html {
-  font-family: 'Cantarell', sans-serif;
+  font-family: "Cantarell", sans-serif;
   background-color: #f5efe8;
   font-size: 15px;
 }
@@ -14,15 +14,18 @@ td {
 input:focus {
   background-color: yellow;
   border: 5px solid black;
-  transition: ease-in-out, width .35s ease-in-out;
+  transition: ease-in-out, width 0.35s ease-in-out;
 }
 
-h1, h2, h3, thead{
-  font-family: 'Sanchez', serif;
+h1,
+h2,
+h3,
+thead {
+  font-family: "Sanchez", serif;
 }
 
-thead{
-  background-color: #3C7191;
+thead {
+  background-color: #3c7191;
   border-style: solid;
   color: #f5efe8;
 }
@@ -39,13 +42,13 @@ nav {
   font-size: 30px;
 }
 
-.map{
+.map {
   height: 25rem;
   width: 25rem;
   text-align: center;
 }
 
-.page{
+.page {
   background-image: url("images/header.png");
   background-repeat: no-repeat;
   height: 105vh;
@@ -73,10 +76,10 @@ nav {
 .tag {
   position: absolute;
   bottom: 18vh;
-  left:30%;
-  right:25%;
+  left: 30%;
+  right: 25%;
   color: black;
-  background-color: #F5EFE8;
+  background-color: #f5efe8;
   font-weight: bold;
   font-size: 30px;
   border-radius: 25px;
@@ -121,7 +124,7 @@ nav {
 
 .posts {
   font-weight: bold;
-  width:95%;
+  width: 95%;
 }
 
 .page-item {
@@ -138,7 +141,7 @@ nav {
   margin: 5px;
 }
 
-.login_button{
+.login_button {
   background-color: #808080;
   font-size: 25px;
   color: #f5efe8;
@@ -147,26 +150,25 @@ nav {
   margin: 5px;
 }
 
-.moredetailbutton{
+.moredetailbutton {
   background-color: #3c7191;
   font-size: 15px;
   color: #f5efe8;
   border-radius: 12px;
-  width:180px;
+  width: 180px;
   padding: 3px 3px;
 }
 
-.category{
+.category {
   font-size: 15px;
-  text-align-last:center;
+  text-align-last: center;
   font-weight: bold;
   width: 150px;
   height: 35px;
   border-radius: 12px;
   color: #f5efe8;
-  background-color: #3C7191;
+  background-color: #3c7191;
   border-width: medium;
-
 }
 
 .sort_button {
@@ -183,4 +185,3 @@ nav {
   width: 25rem;
   text-align: center;
 }
-

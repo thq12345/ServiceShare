@@ -59,7 +59,7 @@ function CommentBox(props) {
         </Modal.Header>
 
         <Modal.Body>
-          <label>Message</label>
+          <label hidden={true}>Message</label>
           <textarea
             type="text"
             id="subject"

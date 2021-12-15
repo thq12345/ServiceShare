@@ -112,10 +112,10 @@ function SubmitForm() {
                         value="OfferHelp"
                         onChange={modeChange}
                       >
-                        OfferHelp
+                        Offer Help
                       </option>
                       <option key="seek" value="SeekHelp" onChange={modeChange}>
-                        SeekHelp
+                        Seek Help
                       </option>
                     </select>
                   </div>
@@ -130,7 +130,6 @@ function SubmitForm() {
                     setCategory(e.target.value);
                   }}
                 >
-                  {/*<Categories></Categories>*/}
                   {categoryOptions.map((p, i) => (
                     <option key={"categoryoptions" + i} value={p}>
                       {p}
