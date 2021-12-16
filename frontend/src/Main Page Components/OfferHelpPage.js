@@ -291,6 +291,9 @@ function OfferHelpPage() {
         <div className={"mt-1"}>
           <h3
             className={"font-weight-bold d-inline-block mr-2"}
+// MICHAEL CHANG 👉 TIANHAO QU - CODE REVIEW
+// Can use a separate .css file as an alternative way to style your components/pages. Helps keep reusability.
+// https://stackoverflow.com/questions/60464799/why-to-use-separate-css-files-for-components-in-react-js
             style={{ fontSize: "20px" }}
           >
             Sort Prices:{" "}
