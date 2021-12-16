@@ -75,7 +75,7 @@ function CreateAccount() {
           type="email"
           id="emailAddress"
           className="form-control"
-          placeholder="User Name"
+          placeholder="Email Address"
           name="username"
           value={user.username}
           onChange={usernameChange}
