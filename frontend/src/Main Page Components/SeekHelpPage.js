@@ -210,6 +210,11 @@ function SeekHelpPage() {
             Search
           </Button>
         </div>
+  
+  // MICHAEL CHANG 👉 TIANHAO QU - CODE REVIEW
+  // Cool use of aria-label for accessability. Was reading more into this because of your usage and I think it may be possible to use a aria-labelledby attribute.
+  // Example #3 or #7 to group selections/filters the users are looking for. Great job!
+  // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute#examples
         <div className={"mt-1"}>
           <select
             className={"moredetailbutton"}
