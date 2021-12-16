@@ -40,7 +40,7 @@ function Main() {
   return (
     <>
       <div className="container-fluid page">
-        <Navbar login={login} />
+        <Navbar login={login} /> this should be in app.js
         <Title />
       </div>
     </>
