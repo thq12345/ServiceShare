@@ -129,6 +129,8 @@ function OfferHelpPage() {
     if (select === "Select Category" && Input_Zipcode != null) {
       filtered_post = post;
     }
+    // MICHAEL CHANG 👉 TIANHAO QU - CODE REVIEW
+    // Best practice to keep camel case vs. python underscore conventions. Very minor, but just noticed so thought I'd mention
     if (Input_Zipcode !== "") {
       filtered_post = filtered_post.filter((item) =>
         item["Zip Code"].toString().includes(Input_Zipcode)
