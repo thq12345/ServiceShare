@@ -119,6 +119,7 @@ function SeekHelpPage() {
   };
 
   //filter on the posts board on the request and helper table
+  //Nice filter
   function filter_on_post(post, select) {
     let filtered_post = post;
     //Category Filter
