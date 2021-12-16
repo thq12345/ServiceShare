@@ -15,7 +15,7 @@ https://serviceshare.herokuapp.com/
 ### Objective
 
 This website is to build a platform for people to offer and seek freelance work for litterally everything! You can post
-and read your work requests, as well as offer your flexibility and expertise on where you can help the others.
+and read your work requests, as well as offer your flexibility and expertise on where you can help the others. <
 
 ### Instruction to build:
 
