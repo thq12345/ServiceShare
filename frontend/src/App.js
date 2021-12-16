@@ -13,7 +13,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/create-account" element={<CreateAccount />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login />} /> //you can access the login page even if you're loged in
           <Route path="/" element={<Main />} />
           <Route path="/post" element={<Post />} />
         </Routes>
