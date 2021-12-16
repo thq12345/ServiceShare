@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import MoreDetails from "./MoreDetailsMainPage.js";
+import PropTypes from "prop-types";
 
 function SeekHelpTable({ data, totalPosts, loginStatus, loginUsername }) {
   const pageNumbers = [];
