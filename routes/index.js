@@ -15,6 +15,9 @@ router.post("/register", async (req, res) => {
   await myDB.create_account(username, password, res).catch(console.dir);
 });
 
+
+// MICHAEL CHANG 👉 TIANHAO QU - CODE REVIEW
+// Cool use of passport to authenticate users!!! This is something I definitely need to work into our project next time!
 router.post("/login-auth", function (req, res, next) {
   passport.authenticate("local", function (err, user) {
     if (err) {
