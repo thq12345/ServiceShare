@@ -7,6 +7,8 @@ import Main from "./main.js";
 import Post from "./Posts/Postpage_WithModal.js";
 import OfferHelpPage from "./Main Page Components/OfferHelpPage.js";
 import SeekHelpPage from "./Main Page Components/SeekHelpPage.js";
+import Navbar from "../Main Page Components/Navbar";
+
 //Router, basically you add components here.
 function App() {
   return (
