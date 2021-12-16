@@ -36,7 +36,7 @@ function Navbar(props) {
         aria-label={"navbar"}
       >
         <div className="container-fluid">
-          <ul className="navbar-nav me-auto">
+          <ul className="navbar-nav me-auto"> //I don't think navbar should be a ul
             <li>
               <img
                 src={logo}
