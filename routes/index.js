@@ -11,6 +11,9 @@ router.post("/register", async (req, res) => {
   console.log("Received user-input account information...");
   // Insert Login Code Here
   const username = req.body.username;
+  
+  // Code Review (by Shushu Chen): maybe you could add encryption
+  // for password to enhance security
   const password = req.body.password;
   await myDB.create_account(username, password, res).catch(console.dir);
 });
