@@ -21,7 +21,7 @@ and read your work requests, as well as offer your flexibility and expertise on 
 3. cd frontend => yarn install => yarn start
 4. you then can find this project running on **http://localhost:3000/**
 
-### Technologies we used:
+### Technologies used:
 
 - Node+Express
 - React & React Router
