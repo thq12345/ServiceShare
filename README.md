@@ -42,10 +42,6 @@ and read your work requests, as well as offer your flexibility and expertise on 
 ![Main Page](https://github.com/thq12345/Project3/blob/default/frontend/src/images/frontpage.PNG?raw=true)
 ![Post Page](https://github.com/thq12345/Project3/blob/default/frontend/src/images/postPage.PNG?raw=true)
 
-### Slides
-
-https://docs.google.com/presentation/d/18GP9m6wzrsGELnuoa5IrMiD7KncpiIRBDvvy2evA0cA/edit#slide=id.gec182b6aad_0_8
-
 ### Reference(Image)
 
 jung, michael. (n.d.). African supermarket worker portrait. https://www.canva.com/media/MADaru1zzNg. Canva. Retrieved from Canva.com.
